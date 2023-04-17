@@ -1,21 +1,37 @@
 import { Product, FooterBanner, HeroBanner, Footer } from "../components";
+import defImg from "../assets/imgs/defImg.webp";
+import { addCartIcon } from "../assets/icons";
+import PopularProducts from "../components/PopularProducts";
+
 
 const Home = () => {
+  const demoProducts = [
+    {
+      _id: 1,
+      name: "Lorem Ipsum HQ",
+      defImg,
+      price: "99€",
+    },
+    {
+      _id: 2,
+      name: "Lorem Ipsum HQ",
+      defImg,
+      price: "199€",
+    },
+    {
+      _id: 3,
+      name: "Lorem Ipsum HQ",
+      defImg,
+      price: "9€",
+    },
+  ];
   return (
     <>
       <HeroBanner />
-
-      {/* PRODUCTS HEADER  */}
-      <div>
-        <h2>Best Selling Products</h2>
-        <p>Speakers of many variations</p>
-      </div>
-
-      {/* PRODUCTS */}
-      <div>{["product 1", "product 2"].map((product) => product)}</div>
       
-      <FooterBanner/>
-     
+      <PopularProducts productsList={demoProducts} />
+
+      <FooterBanner />
     </>
   );
 };
