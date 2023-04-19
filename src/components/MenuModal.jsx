@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const MenuModal = ({ isMenuModalOn }) => {
 
@@ -12,23 +12,23 @@ const MenuModal = ({ isMenuModalOn }) => {
     {/* Hidden NavLinks */}
     <ul className="flex w-full flex-col items-center gap-12">
       <li className="w-[60%] pb-6 text-center">
-        <Link className="hover:text-gray-300" to={"/shop"}>
+        <NavLink className="hover:text-gray-300" to={"/store"}>
           Store
-        </Link>
+        </NavLink>
       </li>
       <li className="w-[60%] pb-6 text-center">
-        <Link className="hover:text-gray-300" to={"/#"}>
+        <NavLink className="hover:text-gray-300" to={"/#"}>
           About Us
-        </Link>
+        </NavLink>
       </li>
     </ul>
       {/* Login Signup  profile Logout */}
     <ul className="flex w-[70%] mx-auto items-center gap-12 border-t-2 pt-7 ">
       <li className="w-[60%]  text-center">
-        <Link to={"/login"}>Login</Link>
+        <NavLink to={"/login"}>Login</NavLink>
       </li>
       <li className="w-[60%] text-center">
-        <Link to={"/signup"}>Sign Up</Link>
+        <NavLink to={"/signup"}>Sign Up</NavLink>
       </li>
     </ul>
   </nav>

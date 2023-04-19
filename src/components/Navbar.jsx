@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import {
   cartIcon,
   logoIcon,
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [isMenuModalOn, setIsMenuModalOn] = useState(false);
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
 
+ 
   const toggleMenuModal = (e) => {
     e.preventDefault();
     setIsMenuModalOn((prevState) => !prevState);
@@ -25,24 +26,27 @@ const Navbar = () => {
     setIsSearchBarOn((prevState) => !prevState);
   };
 
+  
+
   return (
     <nav className="flex h-16 w-screen items-center justify-between bg-black px-5 py-6 font-semibold text-white">
       {/* Left Side */}
-      <Link to={"/"} className="mx-2 h-10 w-10 flex-1 ">
-        <img src={logoIcon} className="h-full invert hover:invert-[70%]" />
+     
+      <Link to={"/"} className="mx-2 h-10 w-10 flex-1">
+        <img src={logoIcon} className={`h-full invert hover:invert-[70%] `} />
       </Link>
-
+      
       {/* Center  */}
       <ul className="mx-4 hidden flex-1 items-center justify-center gap-8 lg:flex">
         <li>
-          <Link className="hover:text-gray-300" to={"/shop"}>
+          <NavLink className="hover:text-gray-300 px-2 pb-1" to={"/store"}>
             Store
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link className="hover:text-gray-300" to={"/#"}>
+          <NavLink className="hover:text-gray-300 px-2 pb-1" to={"/about-us"}>
             About Us
-          </Link>
+          </NavLink>
         </li>
       </ul>
 
@@ -88,14 +92,14 @@ const Navbar = () => {
             </button>
           </li>
           <li className="hidden lg:inline-block">
-            <Link className=" hover:text-gray-300 " to={"/login"}>
+            <NavLink className=" hover:text-gray-300 px-1 pb-1" to={"/login"}>
               Login
-            </Link>
+            </NavLink>
           </li>
           <li className="hidden lg:inline-block">
-            <Link className=" hover:text-gray-300" to={"/signup"}>
+            <NavLink className=" hover:text-gray-300 px-1 pb-1" to={"/signup"}>
               Sign Up
-            </Link>
+            </NavLink>
           </li>
         </ul>
       )}
