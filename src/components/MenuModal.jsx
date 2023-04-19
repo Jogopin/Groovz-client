@@ -17,7 +17,7 @@ const MenuModal = ({ isMenuModalOn }) => {
         </NavLink>
       </li>
       <li className="w-[60%] pb-6 text-center">
-        <NavLink className="hover:text-gray-300" to={"/#"}>
+        <NavLink className="hover:text-gray-300" to={"/about-us"}>
           About Us
         </NavLink>
       </li>

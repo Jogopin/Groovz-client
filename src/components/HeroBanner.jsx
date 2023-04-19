@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import defImg from "../assets/imgs/defImg.webp";
 const HeroBanner = () => {
   return (
-    <section className="flex w-full flex-col  space-y-5 rounded-2xl  bg-gray-300 md:flex-row-reverse md:items-center md:justify-center">
+    <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
       {/* IMAGE */}
       <div className="flex flex-col items-center ">
         <img src={defImg} alt="headphones" className="z-20 mr-0" />
