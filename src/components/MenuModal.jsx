@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-const MenuModal = ({ isMenuModalOn }) => {
+const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
 
     if(!isMenuModalOn) return(<></>)
     
@@ -12,12 +12,12 @@ const MenuModal = ({ isMenuModalOn }) => {
     {/* Hidden NavLinks */}
     <ul className="flex w-full flex-col items-center gap-12">
       <li className="w-[60%] pb-6 text-center">
-        <NavLink className="hover:text-gray-300" to={"/store"}>
+        <NavLink className="px-1 pb-1" to={"/store"} onClick={toggleMenuModal}>
           Store
         </NavLink>
       </li>
       <li className="w-[60%] pb-6 text-center">
-        <NavLink className="hover:text-gray-300" to={"/about-us"}>
+        <NavLink className="px-1 pb-1" to={"/about-us"} onClick={toggleMenuModal}>
           About Us
         </NavLink>
       </li>
@@ -25,10 +25,10 @@ const MenuModal = ({ isMenuModalOn }) => {
       {/* Login Signup  profile Logout */}
     <ul className="flex w-[70%] mx-auto items-center gap-12 border-t-2 pt-7 ">
       <li className="w-[60%]  text-center">
-        <NavLink to={"/login"}>Login</NavLink>
+        <NavLink to={"/login"} className="px-1 pb-1" onClick={toggleMenuModal}>Login</NavLink>
       </li>
       <li className="w-[60%] text-center">
-        <NavLink to={"/signup"}>Sign Up</NavLink>
+        <NavLink to={"/signup"} className="px-1 pb-1"  onClick={toggleMenuModal}>Sign Up</NavLink>
       </li>
     </ul>
   </nav>

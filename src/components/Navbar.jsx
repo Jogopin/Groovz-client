@@ -17,7 +17,7 @@ const Navbar = () => {
 
  
   const toggleMenuModal = (e) => {
-    e.preventDefault();
+    
     setIsMenuModalOn((prevState) => !prevState);
   };
 
@@ -104,7 +104,7 @@ const Navbar = () => {
         </ul>
       )}
 
-      <MenuModal isMenuModalOn={isMenuModalOn} />
+      <MenuModal isMenuModalOn={isMenuModalOn} toggleMenuModal={toggleMenuModal} />
     </nav>
   );
 };
