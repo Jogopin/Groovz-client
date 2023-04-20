@@ -4,4 +4,6 @@ import logoIcon from "./logoIcon.png";
 import menuIcon from "./menuIcon.png"
 import xIcon from "./xIcon.png"
 import addCartIcon from "./addCartIcon.png"
-export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon } 
+import lessThanIcon from "./lessThanIcon.png"
+import moreThanIcon from "./moreThanIcon.png"
+export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon, lessThanIcon, moreThanIcon } 
