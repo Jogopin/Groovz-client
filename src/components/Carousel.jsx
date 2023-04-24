@@ -16,39 +16,47 @@ const Carousel = ({ imagesList }) => {
     setCurrentIndex(newIndex);
   };
 
-  const goToImage = (imgIndex)=>{
-    setCurrentIndex(imgIndex)
-  }
+  const goToImage = (imgIndex) => {
+    setCurrentIndex(imgIndex);
+  };
 
   return (
-    <div className="group relative h-96 w-full  m-auto aspect-square">
+    <div className="group  m-auto  w-full lg:flex lg:max-h-fit lg:flex-col ">
       <div
         style={{ backgroundImage: `url(${imagesList[currentIndex]})` }}
-        className="h-full w-full rounded-lg bg-zinc-300  bg-contain bg-center bg-no-repeat duration-500"
-      ></div>
-      {/* left arrow */}
-      <div
-        onClick={prevSlide}
-        className="absolute left-5 top-[50%] lg:hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-zinc-400 p-2 text-2xl lg:group-hover:block"
+        className="h-96 aspect-square relative w-full rounded-lg bg-zinc-300 bg-contain  bg-center bg-no-repeat duration-500 lg:aspect-square"
       >
-        <img className="h-8 w-8" src={lessThanIcon} />
-      </div>
-      {/* right arrow */}
-      <div
-        onClick={nextSlide}
-        className="absolute right-5 top-[50%] lg:hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 text-2xl lg:group-hover:block"
-      >
-        <img className="h-8 w-8" src={moreThanIcon} />
+        {/* left arrow */}
+        <div
+          onClick={prevSlide}
+          className="absolute  left-5 top-[50%] -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-zinc-400 p-2 lg:hidden lg:group-hover:block"
+        >
+          <img className="h-8 w-8" src={lessThanIcon} />
+        </div>
+        {/* right arrow */}
+        <div
+          onClick={nextSlide}
+          className="absolute right-5 top-[50%] -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 lg:hidden  lg:group-hover:block"
+        >
+          <img className="h-8 w-8" src={moreThanIcon} />
+        </div>
       </div>
       {/* small imgs */}
-      <div className="top-4 hidden md:flex justify-center  py-2">
+      <div className="mx-4 hidden py-2 md:flex   md:justify-center">
         {imagesList.map((img, imgIndex) => (
-          <div  className={`${imgIndex===currentIndex ? `bg-red-700`: `bg-zinc-300`} m-2 cursor-pointer rounded-md `} key={imgIndex} onClick={()=>{goToImage(imgIndex)}}>
+          <div
+            className={`${
+              imgIndex === currentIndex ? `bg-red-700` : `bg-zinc-300`
+            } m-2 cursor-pointer rounded-md `}
+            key={imgIndex}
+            onClick={() => {
+              goToImage(imgIndex);
+            }}
+          >
             <img className="w-20" src={img} />
           </div>
         ))}
       </div>
-      Carousel
     </div>
   );
 };
