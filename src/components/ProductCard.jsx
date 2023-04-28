@@ -1,7 +1,7 @@
 import React from "react";
 import { addCartIcon } from "../assets/icons";
 
-const Product = ({product}) => {
+const ProductCard = ({product}) => {
 
 
   return (
@@ -13,16 +13,16 @@ const Product = ({product}) => {
         <img className="h-full" src={product.images[0]} />     
       </div>
       <div className="flex w-full items-center justify-between text-zinc-800">
-        <button className="easi-in h-12 w-12 duration-200 hover:scale-125">
+        <button className="ease-in h-12 w-12 md:h-8 md:w-8 duration-200 hover:scale-125">
           <img src={addCartIcon} />
         </button>
         <div className="text-right">
-          <h3 className="text-xl font-semibold ">{product.name}</h3>
-          <p className=" text-2xl font-bold">{product.price}€</p>
+          <h3 className="text-lg font-semibold ">{product.name}</h3>
+          <p className=" text-xl font-bold">{product.price}€</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Product;
+export default ProductCard;

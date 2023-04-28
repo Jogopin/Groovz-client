@@ -28,7 +28,7 @@ const RatingReviewInput = () => {
             />
           </label>
         ))}
-        <span className="ml-2 font-semibold">{rating ? rating : null}</span>
+        {/* <span className="ml-2 font-semibold">{rating ? rating : null}</span> */}
       </div>
       <label>
         <textarea
@@ -42,7 +42,7 @@ const RatingReviewInput = () => {
           }}
         />
       </label>
-      <button className="h-14 w-2/4 md:w-1/4 btn-primary">Submit</button>
+      <button className="h-14 w-2/4 md:w-1/4 lg:w-[10rem] btn-primary">Submit</button>
     </form>
   );
 };

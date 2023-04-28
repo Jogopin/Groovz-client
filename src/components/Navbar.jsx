@@ -29,7 +29,7 @@ const Navbar = () => {
   
 
   return (
-    <nav className="flex h-16 w-screen items-center justify-between bg-black px-5 py-6 font-semibold text-white">
+    <nav className="flex h-16 w-screen items-center justify-between bg-zinc-800 px-5 py-6 font-semibold text-white">
       {/* Left Side */}
      
       <Link to={"/"} className="mx-2 h-10 w-10 flex-1">

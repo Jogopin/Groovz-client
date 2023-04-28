@@ -4,6 +4,7 @@ import defImg from "../assets/imgs/defImg.webp"
 import defImgRed from "../assets/imgs/defImgRed.png"
 import { addCartIcon } from '../assets/icons'
 import RatingDisplay from './RatingDisplay'
+import RatingReviewInput from './RatingReviewInput'
 
 const imagesList = [defImg,defImgRed]
 
@@ -32,7 +33,7 @@ const ProductDetails = () => {
             <span className="text-md w-14 font-bold">0</span>
             <button className="w-14 h-full text-lg font-bold text-red-700 hover:bg-zinc-400 hover:rounded-r-md">+</button>
           </div>
-          <button className="flex h-14 w-3/4 items-center justify-evenly rounded-md bg-red-700 font-semibold text-white">
+          <button className="flex h-14 w-3/4 items-center justify-evenly btn-primary">
             <img src={addCartIcon} className="w-8 invert" />
             Add to the cart
           </button>

@@ -14,7 +14,7 @@ const HeroBanner = () => {
 
       {/* TEXT */}
       <div className="pb-10 pl-10 ">
-        <span className="text-xl font-bold uppercase tracking-tight text-red-600">
+        <span className="text-xl font-bold uppercase tracking-tight text-red-700">
           Lorem ipsum
         </span>
         <h1 className="-ml-1 mb-2 text-7xl font-bold tracking-tight">
@@ -23,8 +23,8 @@ const HeroBanner = () => {
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
 
         <Link to="/product/ID">
-          <button className="mt-5 rounded-[30px] bg-black px-8 py-4 font-bold text-white hover:bg-red-600">
-            SHOP
+          <button className="mt-5 rounded-[30px] bg-zinc-800 px-8 py-4 font-bold text-white hover:bg-red-700">
+           SHOP
           </button>
         </Link>
       </div>
