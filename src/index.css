@@ -14,3 +14,7 @@
 .active-white{
     @apply  border-zinc-200 border-b-2;
 }
+
+.btn-primary{
+    @apply bg-red-700 font-semibold text-white rounded-md;
+}
