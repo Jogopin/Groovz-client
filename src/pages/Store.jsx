@@ -1,7 +1,6 @@
 import React from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom"
-import ProductList from "./ProductsList";
-import demoProducts from "../assets/data/demoProducts";
+import { Link, Outlet, Route, Routes, useLocation } from "react-router-dom"
+
 
 
 const Store = () => {
@@ -23,10 +22,8 @@ const Store = () => {
           </li>
         </ul>
       </nav>
-      <Routes>
-        <Route path="/headphones" element={<ProductList productsList={demoProducts}/>} />
-        <Route path="/speakers" element={<ProductList productsList={demoProducts}/>} />
-      </Routes>
+      <Outlet/>
+      
       
     </div>
   );};
