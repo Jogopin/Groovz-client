@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { FooterBanner, HeroBanner } from "../components";
+import { Link, Route, Routes, useLocation } from "react-router-dom"
+import ProductList from "./ProductsList";
+import demoProducts from "../assets/data/demoProducts";
 
 
 const Store = () => {
@@ -23,9 +24,10 @@ const Store = () => {
         </ul>
       </nav>
       <Routes>
-        <Route path="/headphones" element={<div>headphones</div>} />
-        <Route path="/speakers" element={<div>speakers</div>} />
+        <Route path="/headphones" element={<ProductList productsList={demoProducts}/>} />
+        <Route path="/speakers" element={<ProductList productsList={demoProducts}/>} />
       </Routes>
+      
     </div>
   );};
 
