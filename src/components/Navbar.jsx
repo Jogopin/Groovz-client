@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link, NavLink, useLocation } from "react-router-dom";
 import {
@@ -10,11 +10,13 @@ import {
 } from "../assets/icons";
 import MenuModal from "./MenuModal";
 import SearchBar from "./SearchBar";
+import { AuthContext } from "../context/auth.context";
 
 const Navbar = () => {
   const [isMenuModalOn, setIsMenuModalOn] = useState(false);
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
-
+  
+  const {isLoggedIn,user,logOutUser} = useContext(AuthContext)
  
   const toggleMenuModal = (e) => {
     
@@ -31,20 +33,20 @@ const Navbar = () => {
   return (
     <nav className="flex h-16 w-screen items-center justify-between bg-zinc-800 px-5 py-6 font-semibold text-white">
       {/* Left Side */}
-     
+
       <Link to={"/"} className="mx-2 h-10 w-10 flex-1">
         <img src={logoIcon} className={`h-full invert hover:invert-[70%] `} />
       </Link>
-      
+
       {/* Center  */}
       <ul className="mx-4 hidden flex-1 items-center justify-center gap-8 lg:flex">
         <li>
-          <NavLink className="hover:text-gray-300 px-2 pb-1" to={"/store"}>
+          <NavLink className="px-2 pb-1 hover:text-gray-300" to={"/store"}>
             Store
           </NavLink>
         </li>
         <li>
-          <NavLink className="hover:text-gray-300 px-2 pb-1" to={"/about-us"}>
+          <NavLink className="px-2 pb-1 hover:text-gray-300" to={"/about-us"}>
             About Us
           </NavLink>
         </li>
@@ -91,20 +93,52 @@ const Navbar = () => {
               />
             </button>
           </li>
-          <li className="hidden lg:inline-block">
-            <NavLink className=" hover:text-gray-300 px-1 pb-1" to={"/login"}>
-              Login
-            </NavLink>
-          </li>
-          <li className="hidden lg:inline-block">
-            <NavLink className=" hover:text-gray-300 px-1 pb-1" to={"/signup"}>
-              Sign Up
-            </NavLink>
-          </li>
+          {isLoggedIn ? (
+            <>
+            <li className="hidden lg:inline-block">
+                <NavLink
+                  className=" px-1 pb-1 hover:text-gray-300"
+                  to={"/profile"}
+                >
+                  {user.username}
+                </NavLink>
+              </li>
+              <li className="hidden lg:inline-block">
+                <button
+                  className=" px-1 pb-1 hover:text-gray-300"
+                  onClick={logOutUser}
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="hidden lg:inline-block">
+                <NavLink
+                  className=" px-1 pb-1 hover:text-gray-300"
+                  to={"/login"}
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li className="hidden lg:inline-block">
+                <NavLink
+                  className=" px-1 pb-1 hover:text-gray-300"
+                  to={"/signup"}
+                >
+                  Sign Up
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       )}
 
-      <MenuModal isMenuModalOn={isMenuModalOn} toggleMenuModal={toggleMenuModal} />
+      <MenuModal
+        isMenuModalOn={isMenuModalOn}
+        toggleMenuModal={toggleMenuModal}
+      />
     </nav>
   );
 };
