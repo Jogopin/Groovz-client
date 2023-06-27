@@ -4,6 +4,7 @@ export default function InputLabelText({
   id,
   name,
   inputRef,
+  type,
 }) {
   return (
     <div className="flex items-center">
@@ -16,6 +17,7 @@ export default function InputLabelText({
         className="w-52 rounded-md border-2 border-zinc-800 px-2 py-1"
         id={id}
         name={name}
+        type={type}
       />
     </div>
   );
