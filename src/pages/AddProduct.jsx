@@ -173,7 +173,12 @@ export default function AddProduct() {
         </div>
 
         <input type="file" onChange={handleFileUpload}/>
-
+        {imageUrlList.map((item, i) => (
+          <div key={i}>
+            <img src={item.url} alt="uploaded" />
+            <p>{item.name}</p>
+          </div>
+        ))}
         <div className="m-auto flex gap-4">
           <button className="btn-primary m-auto px-4 py-2">Add Product</button>
           <button
