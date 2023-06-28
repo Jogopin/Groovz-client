@@ -13,7 +13,7 @@ export default function AddProduct() {
   const discount = useRef(null);
   const stock = useRef(null);
   const category = useRef(null);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrlList, setImageUrlsList] = useState([]);
 
   const resetForm=()=>{
     name.current.value = null
@@ -23,20 +23,22 @@ export default function AddProduct() {
     discount.current.value  = null
     stock.current.value = null
     category.current.value = null
-    setImageUrl("")
+    setImageUrlsList([])
   }
  
   const handleFileUpload = (e)=>{
     //console.log("The file to be uploaded is: ,"e.target.files[0])
-
+    const file = e.target.files[0]    
     const uploadData = new FormData()
 
-    uploadData.append("imageUrl",e.target.files[0])
+    uploadData.append("imageUrl",file)
 
     service.uploadImage(uploadData)
     .then(response =>{
       console.log("response is, ",response)
-      setImageUrl(response.fileUrl)
+      setImageUrlsList((prevState) => [...prevState,{url:response.fileUrl, name:file.name}])
+      console.log("file",file)
+      console.log("file.name",file.name)
       
     })
     .catch(error=>{
@@ -55,7 +57,8 @@ export default function AddProduct() {
          discount : discount.current.value ? discount.current.value : 0,
          stock : stock.current.value,
          category : category.current.value,
-         images:[imageUrl] 
+         
+         images : imageUrlList.map(item => item.url) 
     }
 
     
@@ -81,14 +84,16 @@ export default function AddProduct() {
  
   return (
     <div className="flex">
-      <form onSubmit={handleSubmit} className="mx-auto my-10 flex flex-col items-start gap-4 ">
+      <form
+        onSubmit={handleSubmit}
+        className="mx-auto my-10 flex flex-col items-start gap-4 "
+      >
         <InputLabelText
           id="name"
           label="Name"
           name="name"
           inputRef={name}
           placeholder={"Product's name"}
-
         />
         <InputLabelText
           id="reference"
@@ -163,7 +168,6 @@ export default function AddProduct() {
             placeholder="Discount (%)"
             className="w-36   rounded-md border-2 border-zinc-800 p-2"
             type="number"
-        
           />
           <span className="px-2 font-semibold">%</span>
         </div>
@@ -171,12 +175,7 @@ export default function AddProduct() {
         <input type="file" onChange={handleFileUpload}/>
 
         <div className="m-auto flex gap-4">
-          <button
-            
-            className="btn-primary m-auto px-4 py-2"
-          >
-            Add Product
-          </button>
+          <button className="btn-primary m-auto px-4 py-2">Add Product</button>
           <button
             onClick={handleCancel}
             className="btn-primary m-auto px-4 py-2"
