@@ -35,7 +35,7 @@ const Signup = () => {
   }
   return (
     <>
-      <form className="m-8 flex flex-col items-center gap-8">
+      <form onSubmit={handleSubmit} className="m-8 flex flex-col items-center gap-8">
         <InputLabelText
           id="username"
           label="Username"
@@ -60,7 +60,7 @@ const Signup = () => {
           placeholder="your email"
           type={"email"}
         />
-        <button onClick={handleSubmit} className="btn-primary px-4 py-2">
+        <button  className="btn-primary px-4 py-2">
           Sign up
         </button>
       </form>
