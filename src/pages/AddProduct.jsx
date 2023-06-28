@@ -1,8 +1,11 @@
-import { useRef } from "react";
-import InputLabelText from "../components/InputLabelText";
+import { useRef, useState } from "react";
 import axios from "axios";
+import InputLabelText from "../components/InputLabelText";
+import service from "../api/service";
+
 
 export default function AddProduct() {
+
   const name = useRef(null);
   const reference = useRef(null);
   const description = useRef(null);
@@ -10,6 +13,7 @@ export default function AddProduct() {
   const discount = useRef(null);
   const stock = useRef(null);
   const category = useRef(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const resetForm=()=>{
     name.current.value = null
@@ -19,9 +23,27 @@ export default function AddProduct() {
     discount.current.value  = null
     stock.current.value = null
     category.current.value = null
+    setImageUrl("")
   }
  
+  const handleFileUpload = (e)=>{
+    //console.log("The file to be uploaded is: ,"e.target.files[0])
 
+    const uploadData = new FormData()
+
+    uploadData.append("imageUrl",e.target.files[0])
+
+    service.uploadImage(uploadData)
+    .then(response =>{
+      console.log("response is, ",response)
+      setImageUrl(response.fileUrl)
+      
+    })
+    .catch(error=>{
+      console.log("Error while uploading the file: ",error)
+    })
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -32,7 +54,8 @@ export default function AddProduct() {
          price : price.current.value,
          discount : discount.current.value ? discount.current.value : 0,
          stock : stock.current.value,
-         category : category.current.value, 
+         category : category.current.value,
+         images:[imageUrl] 
     }
 
     
@@ -48,10 +71,12 @@ export default function AddProduct() {
                 
       })
   };
+
   const handleCancel = (e) => {
     e.preventDefault()
     resetForm()
   };
+
 
  
   return (
@@ -142,6 +167,9 @@ export default function AddProduct() {
           />
           <span className="px-2 font-semibold">%</span>
         </div>
+
+        <input type="file" onChange={handleFileUpload}/>
+
         <div className="m-auto flex gap-4">
           <button
             
