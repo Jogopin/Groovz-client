@@ -4,7 +4,8 @@ export default function InputLabelText({
   id,
   name,
   inputRef,
-  type,
+  type = "text", //default value is set to "text"
+  required = true,
 }) {
   return (
     <div className="flex items-center">
@@ -18,6 +19,7 @@ export default function InputLabelText({
         id={id}
         name={name}
         type={type}
+        required={required}
       />
     </div>
   );
