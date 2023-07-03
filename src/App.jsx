@@ -8,6 +8,7 @@ import Product from "./pages/Product";
 import ProductsList from "./pages/ProductsList";
 import demoProducts from "./assets/data/demoProducts";
 import AboutUs from "./pages/AboutUs";
+import AddProduct from "./pages/AddProduct";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
             />
             <Route path=":productId" element={<Product />} />
           </Route>
+          {/* Admin routes */}
+          <Route path="/add-product" element={<AddProduct/>}/>
         </Routes>
       </div>
 
