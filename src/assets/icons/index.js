@@ -8,4 +8,5 @@ import lessThanIcon from "./lessThanIcon.png"
 import moreThanIcon from "./moreThanIcon.png"
 import githubIcon from "./githubIcon.png"
 import linkedinIcon from "./linkedinIcon.png"
-export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon, lessThanIcon, moreThanIcon, githubIcon, linkedinIcon } 
+import plusIcon from "./plusIcon.png"
+export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon, lessThanIcon, moreThanIcon, githubIcon, linkedinIcon,plusIcon } 
