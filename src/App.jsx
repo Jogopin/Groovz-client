@@ -14,7 +14,7 @@ import AddProduct from "./pages/AddProduct";
 
 function App() {
 
-  const [productsList, setProductsList ] = useState(null)
+  const [productsList, setProductsList ] = useState([])
 
   // fetch all products from API
   useEffect(()=>{
@@ -27,6 +27,8 @@ function App() {
     })
   },[])
 
+  const headphonesList = productsList.filter(item=>item.category==="headphones")
+  const speakersList = productsList.filter(item=>item.category==="speakers")
   return (
     <div className="App flex min-h-screen flex-col">
       <Navbar />
@@ -43,11 +45,11 @@ function App() {
             <Route
               path="headphones"
               index
-              element={<ProductsList productsList={productsList} />}
+              element={<ProductsList productsList={headphonesList} />}
             />
             <Route
               path="speakers"
-              element={<ProductsList productsList={demoProducts} />}
+              element={<ProductsList productsList={speakersList} />}
             />
             <Route path=":productId" element={<Product />} />
           </Route>
