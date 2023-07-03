@@ -4,7 +4,9 @@ import defImgRed from "../assets/imgs/defImgRed.png"
 import PopularProducts from "../components/PopularProducts";
 
 
-const Home = () => {
+const Home = ({productsList}) => {
+
+  const heroProduct = productsList.filter(item=>item.isHeroProduct===true)
   const demoProducts = [
     {
       _id: 1,
@@ -28,7 +30,7 @@ const Home = () => {
   ];
   return (
     <>
-      <HeroBanner />
+      <HeroBanner heroProduct={heroProduct[0]}/>
 
       <PopularProducts productsList={demoProducts} />
 
