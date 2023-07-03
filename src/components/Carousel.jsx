@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { lessThanIcon, moreThanIcon } from "../assets/icons";
 
-const Carousel = ({ imagesList }) => {
+const Carousel = ({ imagesList=[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
