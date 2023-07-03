@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Product from "./pages/Product";
 import ProductsList from "./pages/ProductsList";
 import demoProducts from "./assets/data/demoProducts";
+import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           {/* HOMEPAGE */}
           <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs/>}/>
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
