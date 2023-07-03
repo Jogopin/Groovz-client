@@ -139,6 +139,7 @@ export default function AddProduct() {
             placeholder="Price "
             className="w-24 rounded-md border-2 border-zinc-800 p-2"
             type="number"
+            step="0.01"
             required
           />
           <span className="px-2 font-semibold">€</span>
