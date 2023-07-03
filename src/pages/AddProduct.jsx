@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import InputLabelText from "../components/InputLabelText";
 import service from "../api/service";
+import { plusIcon } from "../assets/icons";
 
 
 export default function AddProduct() {
@@ -37,9 +38,7 @@ export default function AddProduct() {
     .then(response =>{
       console.log("response is, ",response)
       setImageUrlsList((prevState) => [...prevState,{url:response.fileUrl, name:file.name}])
-      console.log("file",file)
-      console.log("file.name",file.name)
-      
+            
     })
     .catch(error=>{
       console.log("Error while uploading the file: ",error)
@@ -172,13 +171,23 @@ export default function AddProduct() {
           <span className="px-2 font-semibold">%</span>
         </div>
 
-        <input type="file" onChange={handleFileUpload}/>
-        {imageUrlList.map((item, i) => (
-          <div key={i}>
-            <img src={item.url} alt="uploaded" />
-            <p>{item.name}</p>
+        <div className="flex w-full p-2 flex-wrap justify-center gap-2 rounded-xl border-black border-2 bg-zinc-100 shadow-inner">
+          <div >
+            <label className="flex h-32 w-32 items-center justify-center rounded-2xl  bg-zinc-300 duration-300 ease-in-out hover:scale-105 hover:drop-shadow-lg">
+              <input type="file" onChange={handleFileUpload} hidden />
+              <img className="h-max" src={plusIcon} />
+            </label>
+            <p className="w-full truncate text-center font-semibold">Add Image</p>
           </div>
-        ))}
+
+          {imageUrlList.map((item, i) => (
+            <div className="w-32" key={i}>
+              <img className="w-full" src={item.url} alt="uploaded" />
+              <p className="w-full truncate text-center font-semibold ">{item.name}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="m-auto flex gap-4">
           <button className="btn-primary m-auto px-4 py-2">Add Product</button>
           <button
