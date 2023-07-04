@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductDetails from '../components/ProductDetails'
 import RatingReviewInput from '../components/RatingReviewInput'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { AuthContext } from '../context/auth.context'
+import ReviewsDisplay from '../components/ReviewsDisplay'
 
 const Product = () => {
   const {productId} = useParams()
   const [productData, setProductData] = useState(null)
-  
+  const {isLoggedIn,user}=useContext(AuthContext)
 
   useEffect(()=>{
     axios.get(`${import.meta.env.VITE_API_URL}/products/${productId}`)
@@ -20,7 +22,8 @@ const Product = () => {
   return (
     <>
         <ProductDetails productData={productData} />
-        <RatingReviewInput/>
+        <RatingReviewInput productId={productId} user={user} isLoggedIn={isLoggedIn}/>
+        <ReviewsDisplay productId={productId}/>
     </>
   )
 }
