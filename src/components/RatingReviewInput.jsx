@@ -1,15 +1,47 @@
 import React, { useState } from "react";
 import generateStarsArray from "../utils/generateStarsArray";
 import Star from "./Star";
+import axios from "axios";
 
-const RatingReviewInput = () => {
+
+const RatingReviewInput = ({productId,user,isLoggedIn}) => {
   const [hover, setHover] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+ 
 
   const starsArray = generateStarsArray(rating);
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(!isLoggedIn){
+      console.log("Error, only users can post reviews")
+      return
+    }
+    if( rating===0 ) {
+      console.log("Error, please select a rating 1-5")
+      return
+    }
+    
+    const reviewData = {
+      user:user._id,
+      product:productId,
+      rating,
+      reviewText
+    }
+
+    axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData)
+    .then(response=>{
+        console.log("newReview",response.data)
+    })
+    .catch((error)=>{
+      console.log(`Error posting a new review`,error)
+    })
+  }
   return (
-    <form className="flex flex-col gap-8 m-4 items-center">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-8 m-4 items-center">
+
+    {/* rating input */}
       <div className="flex gap-0.5">
         {starsArray.map((star, i) => (
           <label
@@ -30,6 +62,8 @@ const RatingReviewInput = () => {
         ))}
         {/* <span className="ml-2 font-semibold">{rating ? rating : null}</span> */}
       </div>
+
+      {/* reviewText input */}
       <label>
         <textarea
           placeholder="Enter your review"
