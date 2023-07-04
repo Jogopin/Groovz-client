@@ -4,17 +4,17 @@ import generateStarsArray from "../utils/generateStarsArray";
 
 
 
-const RatingDisplay = ({starAverage=2.5}) => {
+const RatingDisplay = ({rating=2.5}) => {
 
   
-  const starArr = generateStarsArray(starAverage)
+  const starArr = generateStarsArray(rating)
 
   return (
     <div className="flex gap-0.5">
       {starArr.map((starValue, i) => (
         <Star key={i} starValue={starValue}/>
       ))}
-      <span className="ml-2 font-semibold">{starAverage}</span>
+      <span className="ml-2 font-semibold">{rating}</span>
     </div>
   );
 };

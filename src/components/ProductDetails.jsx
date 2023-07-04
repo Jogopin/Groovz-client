@@ -21,7 +21,7 @@ const ProductDetails = ({productData}) => {
       <div className="p-4 text-zinc-800 flex flex-col gap-2">
         <h2 className="py-2 text-3xl font-semibold">{productData.name}</h2>
         {/* rating */}
-        <RatingDisplay starAverage={3.7}/>
+        <RatingDisplay rating={3.7}/>
 
         <h4 className="text-xl font-semibold">Details</h4>
         <p>{productData.description}</p>
