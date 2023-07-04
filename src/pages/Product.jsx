@@ -21,11 +21,17 @@ const Product = () => {
 
   return (
     <>
-        <ProductDetails productData={productData} />
-        <RatingReviewInput productId={productId} user={user} isLoggedIn={isLoggedIn}/>
-        <ReviewsDisplay productId={productId}/>
+      <ProductDetails productData={productData} />
+      <div className='mx-auto flex  flex-col lg:flex-row justify-center lg:max-w-5xl mt-16 gap-4' >
+        <RatingReviewInput
+          productId={productId}
+          user={user}
+          isLoggedIn={isLoggedIn}
+        />
+        <ReviewsDisplay productId={productId} />
+      </div>
     </>
-  )
+  );
 }
 
 export default Product
