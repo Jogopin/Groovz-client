@@ -2,7 +2,7 @@ import React from 'react'
 import Carousel from './Carousel'
 import { addCartIcon } from '../assets/icons'
 import RatingDisplay from './RatingDisplay'
-import RatingReviewInput from './RatingReviewInput'
+
 
 
 
