@@ -4,9 +4,9 @@ import { Link, Outlet, Route, Routes, useLocation } from "react-router-dom"
 
 
 const Store = () => {
+  const location = useLocation();
 
     const linkIsActive = (route)=>{
-        const location = useLocation();
         return location.pathname === route ? 'active-white' : '';
       }
       
@@ -22,6 +22,7 @@ const Store = () => {
           </li>
         </ul>
       </nav>
+      {location.pathname === "/store" && <div className="flex justify-center items-center"> Still under construction </div>}
       <Outlet/>
       
       
