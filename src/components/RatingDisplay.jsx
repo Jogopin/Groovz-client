@@ -4,7 +4,7 @@ import generateStarsArray from "../utils/generateStarsArray";
 
 
 
-const RatingDisplay = ({rating=2.5}) => {
+const RatingDisplay = ({rating=0}) => {
 
   
   const starArr = generateStarsArray(rating)
