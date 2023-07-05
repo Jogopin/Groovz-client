@@ -32,7 +32,7 @@ const Product = () => {
   },[productId])
 
 
-  const rating = useMemo(() => reviewsList ? (reviewsList.reduce((acc,curr)=>(acc+curr.rating),0) / reviewsList.length) : null,[reviewsList])
+  const rating = useMemo(() => reviewsList && reviewsList.length > 0 ? (reviewsList.reduce((acc,curr)=>(acc+curr.rating),0) / reviewsList.length) : null,[reviewsList])
  
   return (
     <>
