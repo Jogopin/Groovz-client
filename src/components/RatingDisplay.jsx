@@ -14,7 +14,7 @@ const RatingDisplay = ({rating=  0}) => {
       {starArr.map((starValue, i) => (
         <Star key={i} starValue={starValue}/>
       ))}
-      <span className="ml-2 font-semibold">{rating ? rating : "0 Reviews"}</span>
+      
     </div>
   );
 };

@@ -14,25 +14,36 @@ const ProductDetails = ({productData,rating}) => {
     return "loading"
   }
   return (
-    <div className="flex flex-col lg:flex-row lg:max-w-5xl mx-auto  mt-16">
+    <div className="mx-auto mt-16 flex flex-col lg:max-w-5xl  lg:flex-row">
       {/* Left */}
       <Carousel imagesList={productData.images} />
       {/* Right */}
-      <div className="p-4 text-zinc-800 flex flex-col gap-2">
+      <div className="flex flex-col gap-2 p-4 text-zinc-800">
         <h2 className="py-2 text-3xl font-semibold">{productData.name}</h2>
         {/* rating */}
-        <RatingDisplay rating={rating}/>
+        <div className='flex'>
+          <RatingDisplay rating={rating} />
+          <span className="ml-2 font-semibold">
+            {rating  ? rating : "0 Reviews"}
+          </span>
+        </div>
 
         <h4 className="text-xl font-semibold">Details</h4>
         <p>{productData.description}</p>
-        <h2 className="text-3xl my-2 md:my-8 font-bold text-right text-red-700">{productData.price}€</h2>
-        <div className="flex flex-col md:flex-row gap-4 w-3/4 my-2 items-center self-center lg:mt-8">
+        <h2 className="my-2 text-right text-3xl font-bold text-red-700 md:my-8">
+          {productData.price}€
+        </h2>
+        <div className="my-2 flex w-3/4 flex-col items-center gap-4 self-center md:flex-row lg:mt-8">
           <div className="flex h-14 w-3/4 items-center justify-around rounded-md bg-zinc-300 text-center">
-            <button className="w-14 h-full text-lg font-bold text-red-700 hover:bg-zinc-400 hover:rounded-l-md">-</button>
+            <button className="h-full w-14 text-lg font-bold text-red-700 hover:rounded-l-md hover:bg-zinc-400">
+              -
+            </button>
             <span className="text-md w-14 font-bold">0</span>
-            <button className="w-14 h-full text-lg font-bold text-red-700 hover:bg-zinc-400 hover:rounded-r-md">+</button>
+            <button className="h-full w-14 text-lg font-bold text-red-700 hover:rounded-r-md hover:bg-zinc-400">
+              +
+            </button>
           </div>
-          <button className="flex h-14 w-3/4 items-center justify-evenly btn-primary">
+          <button className="btn-primary flex h-14 w-3/4 items-center justify-evenly">
             <img src={addCartIcon} className="w-8 invert" />
             Add to the cart
           </button>
