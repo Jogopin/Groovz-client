@@ -10,6 +10,7 @@ const Product = () => {
   const { productId } = useParams();
   const [productData, setProductData] = useState(null);
   const [reviewsList, setReviewsList] = useState(null);
+  const [numOfReviewsDisplayed, setNumOfReviewsDisplayed]= useState(3)
 
   const { isLoggedIn, user } = useContext(AuthContext);
 
@@ -30,6 +31,12 @@ const Product = () => {
         console.log("Error: getting the list of reviews", error);
       });
   }, [productId]);
+  
+  const reviewsDisplayed = reviewsList? reviewsList.slice(0, numOfReviewsDisplayed) : null
+  const canShowMore = reviewsList && reviewsList.length > numOfReviewsDisplayed
+  const handleShowMore = () => { 
+    setNumOfReviewsDisplayed(prev => prev + 3);
+  };
 
   const rating = useMemo(
     () =>
@@ -40,16 +47,24 @@ const Product = () => {
     [reviewsList]
   );
 
+  
+
   return (
     <>
       <ProductDetails productData={productData} rating={rating} />
-      <div className="mx-auto mt-16  flex flex-col justify-center gap-4 lg:max-w-5xl lg:flex-row">
+
+      <div className="mx-auto mt-16  flex flex-col justify-center gap-4 lg:max-w-5xl lg:flex-rowd">
+        
+        <ReviewsDisplay 
+          reviewsList={reviewsDisplayed} 
+          showMoreReviews={handleShowMore} 
+          canShowMore={canShowMore}
+        />
         <RatingReviewInput
           productId={productId}
           user={user}
           isLoggedIn={isLoggedIn}
         />
-        <ReviewsDisplay reviewsList={reviewsList} />
       </div>
     </>
   );

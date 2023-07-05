@@ -2,25 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import RatingDisplay from "./RatingDisplay";
 
-export default function ReviewsDisplay ({reviewsList}){
+export default function ReviewsDisplay ({reviewsList, showMoreReviews, canShowMore}){
 
     
     
     
     if(!reviewsList){
-        return "Loading"
+        return <>Loading</>
+    }else if (reviewsList.length===0){
+        return <></>
     }
 
-    return(
-        
-        <div className="mx-auto flex flex-col sm:flex-row justify-center flex-wrap  lg:max-w-5xl mt-16 gap-5">
-            {reviewsList.map(review=>(
-                <div className="md:w-1/4 px-2 flex flex-col   items-center gap-4" key={review._id}>
-                    <span className="font-semibold text-lg">{review.user.username}</span>
-                    <RatingDisplay rating={review.rating}/>
-                    <p className="line-clamp-4 text-zinc-500 text-center">{review.reviewText}</p>
-                </div>
-            ))}
+    return (
+      <div className="flex flex-col items-center">
+        <div className="mx-auto mt-16 flex flex-col flex-wrap justify-center  gap-5  sm:flex-row lg:max-w-5xl">
+          {reviewsList.map((review) => (
+            <div
+              className="flex flex-col items-center gap-4   px-2 md:w-1/4"
+              key={review._id}
+            >
+              <span className="text-lg font-semibold">
+                {review.user.username}
+              </span>
+              <RatingDisplay rating={review.rating} />
+              <p className="line-clamp-4 text-center text-zinc-500">
+                {review.reviewText}
+              </p>
+            </div>
+          ))}
         </div>
-    )
+        {canShowMore && ( 
+          <button className="border-2  m-2 p-2 rounded-md" onClick={showMoreReviews}>
+            Show more reviews
+          </button>
+        )}
+      </div>
+    );
 }
