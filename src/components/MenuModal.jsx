@@ -10,7 +10,7 @@ const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
 
 
   return (
-    <nav className="fixed right-0 top-0 z-40 flex h-[500px] w-[330px] flex-col justify-between rounded-md bg-zinc-800 pb-10 pt-16 text-white lg:hidden">
+    <nav className="fixed right-0 top-0 z-30 flex h-[500px] w-[330px] flex-col justify-between rounded-md bg-zinc-800 pb-10 pt-16 text-white lg:hidden">
       {/* Hidden NavLinks */}
       <ul className="flex w-full flex-col items-center gap-12">
         <li className="w-[60%] pb-6 text-center">

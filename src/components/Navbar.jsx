@@ -1,25 +1,22 @@
 import React, { useContext, useState } from "react";
 
 import { Link, NavLink, useLocation } from "react-router-dom";
-import {
-  logoIcon,
-  menuIcon,
-  searchIcon,
-  xIcon,
-} from "../assets/icons";
+import { logoIcon, menuIcon, searchIcon, xIcon } from "../assets/icons";
 import MenuModal from "./MenuModal";
 import SearchBar from "./SearchBar";
 import { AuthContext } from "../context/auth.context";
 import Cart from "./Cart";
 
+
 const Navbar = () => {
   const [isMenuModalOn, setIsMenuModalOn] = useState(false);
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
   
-  const {isLoggedIn,user,logOutUser} = useContext(AuthContext)
- 
+
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
+  
   const toggleMenuModal = (e) => {
-    
     setIsMenuModalOn((prevState) => !prevState);
   };
 
@@ -28,9 +25,8 @@ const Navbar = () => {
     setIsSearchBarOn((prevState) => !prevState);
   };
 
-  
-
   return (
+    
     <nav className="flex h-16 w-full items-center justify-between bg-zinc-800 px-5 py-6 font-semibold text-white">
       {/* Left Side */}
 
@@ -78,9 +74,9 @@ const Navbar = () => {
             </button>
           </li>
           <li>
-            <Cart/>
+            <Cart />
           </li>
-          <li className="z-50 flex h-7 w-7 lg:hidden">
+          <li className="z-40 flex h-7 w-7 lg:hidden">
             <button onClick={toggleMenuModal} className="m-auto h-6 w-6">
               <img
                 src={isMenuModalOn ? xIcon : menuIcon}
@@ -88,9 +84,10 @@ const Navbar = () => {
               />
             </button>
           </li>
+          
           {isLoggedIn ? (
             <>
-            <li className="hidden lg:inline-block">
+              <li className="hidden lg:inline-block">
                 <NavLink
                   className=" px-1 pb-1 hover:text-gray-300"
                   to={"/profile"}
@@ -135,6 +132,8 @@ const Navbar = () => {
         toggleMenuModal={toggleMenuModal}
       />
     </nav>
+  
+     
   );
 };
 
