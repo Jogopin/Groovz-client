@@ -11,7 +11,7 @@ const HeroBanner = ({heroProduct}) => {
     <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
       {/* IMAGE */}
       <div className="flex flex-col items-center ">
-        <img src={heroProduct.images[0]} alt="headphones" className="z-20 mr-0" />
+        <img src={heroProduct.images[0]} alt="headphones" className="mr-0" />
         <p className="-mt-5 mb-8 hidden  font-bold text-blueGray sm:block">
           the best headphones in the market
         </p>

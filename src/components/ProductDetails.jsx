@@ -46,7 +46,7 @@ const ProductDetails = ({ productData, rating }) => {
             </button>
           </div>
           {/* Add to cart button */}
-          <button className="btn-primary flex h-14 w-48 items-center justify-evenly">
+          <button className="btn-primary flex h-14  items-center justify-evenly">
             <img src={addCartIcon} className="w-8 invert" />
             <span>Add to the cart</span>
           </button>
