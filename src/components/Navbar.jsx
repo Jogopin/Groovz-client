@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 
 import { Link, NavLink, useLocation } from "react-router-dom";
 import {
-  cartIcon,
   logoIcon,
   menuIcon,
   searchIcon,
@@ -11,6 +10,7 @@ import {
 import MenuModal from "./MenuModal";
 import SearchBar from "./SearchBar";
 import { AuthContext } from "../context/auth.context";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const [isMenuModalOn, setIsMenuModalOn] = useState(false);
@@ -31,7 +31,7 @@ const Navbar = () => {
   
 
   return (
-    <nav className="flex h-16 w-screen items-center justify-between bg-zinc-800 px-5 py-6 font-semibold text-white">
+    <nav className="flex h-16 w-full items-center justify-between bg-zinc-800 px-5 py-6 font-semibold text-white">
       {/* Left Side */}
 
       <Link to={"/"} className="mx-2 h-10 w-10 flex-1">
@@ -78,12 +78,7 @@ const Navbar = () => {
             </button>
           </li>
           <li>
-            <button className="flex h-7 w-7">
-              <img
-                src={cartIcon}
-                className="object-contain invert hover:invert-[70%]"
-              />
-            </button>
+            <Cart/>
           </li>
           <li className="z-50 flex h-7 w-7 lg:hidden">
             <button onClick={toggleMenuModal} className="m-auto h-6 w-6">

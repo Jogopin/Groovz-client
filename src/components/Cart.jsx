@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import { cartIcon } from "../assets/icons";
 
 const Cart = () => {
   return (
-    <div>Cart</div>
-  )
-}
+    <>
+    <button className="flex h-7 w-7">
+      <img
+        src={cartIcon}
+        className="object-contain invert hover:invert-[70%]"
+      />
+    </button>
+    {/* <div className="">
+      cart box
+    </div> */}
+    </>
+  );
+};
 
-export default Cart
+export default Cart;
