@@ -16,5 +16,15 @@
 }
 
 .btn-primary{
-    @apply bg-red-700 font-semibold text-white rounded-md;
+    @apply bg-red-700 font-semibold text-white rounded-md p-3;
 }
+.btn-secondary{
+    @apply bg-zinc-600 font-semibold text-white rounded-md p-3;
+}
+::selection{
+    color: white;
+    background: #b91c1c;
+}
+/* :focus{
+   border-color: #b91c1c;
+} */
