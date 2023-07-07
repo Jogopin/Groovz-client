@@ -2,7 +2,8 @@ import { useContext } from "react"
 import { CartContext } from "../context/cart.context"
 
 export const useCart = ()=>{
-    const {cartProducts}  = useContext(CartContext)
+    const {cartProducts,addToCart,clearCart}  = useContext(CartContext)
+
     if(cartProducts === undefined){
         throw new Error("useCart must be used within a CartProvider")
     }
@@ -10,5 +11,5 @@ export const useCart = ()=>{
         (curr.price * curr.quantity) + acc
     ),0)
 
-    return {cartProducts,totalPrice}
+    return {cartProducts,totalPrice,addToCart,clearCart}
 } 
