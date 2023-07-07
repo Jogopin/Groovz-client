@@ -1,33 +1,18 @@
 import React, { useState } from "react";
 import { cartIcon, xIcon } from "../assets/icons";
-import defImg from "../assets/imgs/defImg.webp";
-import defImgRed from "../assets/imgs/defImgRed.png";
+import { useCart } from "../hooks/useCart";
 
 
-const cartProducts = [
-  {
-    _id: 1,
-    name: "Lorem Ipsum HQ",
-    price: "99",
-    images: [defImg, defImgRed],
-    quantity: 1,
-  },
-  {
-    _id: 2,
-    name: "Lorem Ipsum HQ bla bla bla black",
-    price: "199",
-    images: [defImg, defImgRed],
-    quantity: 2,
-  },
- 
-];
+
 const totalPrice = 500;
 
 const Cart = () => {
+  const {cartProducts} = useCart()
   const [isCartDisplayed, setIsCartDisplayed] = useState(false);
   const toggleCart = (e)=>{
     setIsCartDisplayed((prevState=> !prevState))
   }
+  
   return (
     <>
       <button onClick={toggleCart} className="flex h-7 w-7 ">
@@ -44,7 +29,7 @@ const Cart = () => {
               <img src={xIcon} className="h-full invert hover:invert-[70%] " />
             </button>
           
-
+          {/* Products in the cart */}
           <ul className="flex max-h-[65%] flex-col gap-6 py-8">
             {cartProducts.map((item) => (
               <li
@@ -65,14 +50,14 @@ const Cart = () => {
                       Qty: {item.quantity}
                     </span>
                   </div>
-                  <button className="w-8 text-lg font-extrabold text-red-600">
+                  <button  className="w-8 text-lg font-extrabold text-red-600">
                     X
                   </button>
                 </section>
               </li>
             ))}
           </ul>
-
+          {/* Total Price */}
           <h2 className="w-[80%] self-center border-y-2 py-4 text-center">
             Total: {totalPrice}€
           </h2>
