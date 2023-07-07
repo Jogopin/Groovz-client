@@ -4,7 +4,7 @@ import defImg from "../assets/imgs/defImg.webp";
 import defImgRed from "../assets/imgs/defImgRed.png";
 
 
-const productsInCart = [
+const cartProducts = [
   {
     _id: 1,
     name: "Lorem Ipsum HQ",
@@ -46,7 +46,7 @@ const Cart = () => {
           
 
           <ul className="flex max-h-[65%] flex-col gap-6 py-8">
-            {productsInCart.map((item) => (
+            {cartProducts.map((item) => (
               <li
                 className="flex items-center justify-between px-8 "
                 key={item._id}
