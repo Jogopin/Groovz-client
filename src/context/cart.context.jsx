@@ -26,6 +26,7 @@ export function CartProviderWrapper({ children }) {
 
       if (newQuantity > MAX_QUANTITY) {
         newQuantity = MAX_QUANTITY;
+        console.log("max 5 units in the cart");
       }
 
       const productToCartUpdated = { ...productInCart, quantity: newQuantity };
@@ -37,9 +38,39 @@ export function CartProviderWrapper({ children }) {
       });
     }
   };
-  const clearCart = () => {
-    setCart([]);
+
+  const removeProductFromCart = (productRef) => {
+    const indexOfProduct = cartProducts.findIndex(
+      (product) => product.reference === productRef
+    );
+    const productInCart = cartProducts[indexOfProduct];
+
+    if (productInCart.quantity <= 1) {
+      setCartProducts((prevState) => {
+        return prevState.filter((item) => item.reference !== productRef);
+      });
+    } else {
+      const productUpdated = {
+        ...productInCart,
+        quantity: productInCart.quantity - 1,
+      };
+
+      setCartProducts((prevState) => {
+        const newCart = [...prevState];
+        newCart[indexOfProduct] = productUpdated;
+        return newCart;
+      });
+    }
   };
+
+  const clearCart = () => {
+    setCartProducts([]);
+  };
+
+  const totalPrice = cartProducts.reduce(
+    (acc, curr) => curr.price * curr.quantity + acc,
+    0
+  );
 
   return (
     <CartContext.Provider
@@ -47,6 +78,8 @@ export function CartProviderWrapper({ children }) {
         cartProducts,
         addToCart,
         clearCart,
+        removeProductFromCart,
+        totalPrice
       }}
     >
       {children}

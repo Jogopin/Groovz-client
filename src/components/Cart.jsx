@@ -3,11 +3,13 @@ import { cartIcon, xIcon } from "../assets/icons";
 import { useCart } from "../hooks/useCart";
 
 const Cart = () => {
-  const { cartProducts, totalPrice } = useCart();
+  const { cartProducts, totalPrice, removeProductFromCart } = useCart();
   const [isCartDisplayed, setIsCartDisplayed] = useState(false);
   const toggleCart = (e) => {
     setIsCartDisplayed((prevState) => !prevState);
   };
+
+  
 
   return (
     <>
@@ -47,7 +49,8 @@ const Cart = () => {
                       Qty: {item.quantity}
                     </span>
                   </div>
-                  <button className="w-8 text-lg font-extrabold text-red-600">
+                  {/* remove one item */}
+                  <button onClick={()=>{removeProductFromCart(item.reference)}}  className="w-8 text-lg font-extrabold text-red-600">
                     X
                   </button>
                 </section>
