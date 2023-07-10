@@ -3,7 +3,7 @@ import { cartIcon, xIcon } from "../assets/icons";
 import { useCart } from "../hooks/useCart";
 
 const Cart = () => {
-  const { cartProducts, totalPrice, removeProductFromCart } = useCart();
+  const { cartProducts, totalPrice, removeProductFromCart,clearCart } = useCart();
   const [isCartDisplayed, setIsCartDisplayed] = useState(false);
   const toggleCart = (e) => {
     setIsCartDisplayed((prevState) => !prevState);
@@ -64,7 +64,7 @@ const Cart = () => {
 
           <div className="flex-cold my-12 flex w-80 justify-evenly gap-4 self-center">
             <button className="btn-primary">Check Out</button>
-            <button className="btn-secondary">Clean Cart</button>
+            <button onClick={clearCart} className="btn-secondary">Clear Cart</button>
           </div>
         </aside>
       )}
