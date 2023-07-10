@@ -14,9 +14,7 @@ const ProductDetails = ({ productData, rating }) => {
   }
   const handleAddToCart =()=>{
     if(quantity===0) return
-        
-    const productToCart = {...productData,quantity}
-    addToCart(productToCart)
+    addToCart(productData,quantity)
   }
   const handleClickMinus =()=>{
     if(quantity===0) return

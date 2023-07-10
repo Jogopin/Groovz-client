@@ -8,7 +8,9 @@ const MAX_QUANTITY = 5;
 export function CartProviderWrapper({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
 
-  const addToCart = (productToCart) => {
+  const addToCart = (productToCart,quantity=1) => {
+    
+    
     // check if the product is already in the cart
     const indexOfProduct = cartProducts.findIndex(
       (product) => product.reference === productToCart.reference
@@ -17,12 +19,13 @@ export function CartProviderWrapper({ children }) {
     // if the product is not in the cart
     if (indexOfProduct < 0) {
       setCartProducts((prevState) => {
-        return [...prevState, productToCart];
+        return [...prevState, {...productToCart,quantity}];
       });
+      
       // if the product is in the cart
     } else {
       const productInCart = cartProducts[indexOfProduct];
-      let newQuantity = productInCart.quantity + productToCart.quantity;
+      let newQuantity = productInCart.quantity + quantity;
 
       if (newQuantity > MAX_QUANTITY) {
         newQuantity = MAX_QUANTITY;
