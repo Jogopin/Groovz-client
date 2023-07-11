@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { cartIcon, xIcon } from "../assets/icons";
 import { useCart } from "../hooks/useCart";
+import axios from "axios";
 
 const Cart = () => {
   const { cartProducts, totalPrice, removeProductFromCart,clearCart } = useCart();
@@ -9,7 +10,21 @@ const Cart = () => {
     setIsCartDisplayed((prevState) => !prevState);
   };
 
-  
+  const handleCheckOut = ()=>{
+
+    const productsToCheckout = cartProducts.map(item=>{
+      return{reference:item.reference,quantity:item.quantity}
+    })
+
+    axios.post(`${import.meta.env.VITE_API_URL}/checkout`,{productsToCheckout})
+      .then(response=>{
+        const url = response.data
+        window.location.href = url
+      })
+      .catch(error=>{
+        console.error("error",error.response.data)
+      })
+  }  
 
   return (
     <>
@@ -63,7 +78,7 @@ const Cart = () => {
           </h2>
 
           <div className="flex-cold my-12 flex w-80 justify-evenly gap-4 self-center">
-            <button className="btn-primary">Check Out</button>
+            <button onClick={handleCheckOut} className="btn-primary">Check Out</button>
             <button onClick={clearCart} className="btn-secondary">Clear Cart</button>
           </div>
         </aside>
