@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { clearTokenHeaders, setTokenInHeaders } from "../services/api";
 
 const AuthContext = createContext()
 
@@ -11,9 +12,11 @@ function AuthProviderWrapper(props){
 
     const storeToken = (token)=>{
         localStorage.setItem("authToken",token)
+        setTokenInHeaders(token)
     }
     const removeToken =()=>{
         localStorage.removeItem("authToken")
+        clearTokenHeaders()
     }
     
 
