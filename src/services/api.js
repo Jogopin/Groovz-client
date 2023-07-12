@@ -27,14 +27,15 @@ export const uploadImage = async (file) => {
         errorHandler(error);
     }
 };
+export const getProducts = async ()=>{
 
+    try{
+        const response = await publicAPI.get("/products")
+        return response.data
 
-export default{
-    publicAPI,
-    privateAPI,
-    setToken,
-    removeToken,
-    uploadImage,
+    }catch(error){
+        errorHandler(error)
+    }
 }
 
 
