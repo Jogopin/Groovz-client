@@ -1,25 +1,25 @@
 import axios from "axios";
 
-const publicAPI = axios.create({
+export const publicAPI = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 })
-const privateAPI = axios.create({
+export const privateAPI = axios.create({
     baseURL: import.meta.env.VITE_API_URL
 })
 
-const setToken = token =>{
+export const setTokenInHeaders = token =>{
     privateAPI.defaults.headers.common['Authorization']=`Bearer ${token}`
 }
 
-const removeToken = ()=>{
+export const clearTokenHeaders = ()=>{
     delete publicAPI.defaults.headers.common['Authorization'];
 }
 
-const errorHandler = (error)=>{
+export const errorHandler = (error)=>{
     throw error;
 }
 
-const uploadImage = async (file) => {
+export const uploadImage = async (file) => {
     try {
         const response = await publicAPI.post("/upload", file);
         return response.data;
@@ -36,3 +36,5 @@ export default{
     removeToken,
     uploadImage,
 }
+
+
