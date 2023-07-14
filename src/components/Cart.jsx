@@ -1,30 +1,16 @@
 import React, { useState } from "react";
 import { cartIcon, xIcon } from "../assets/icons";
 import { useCart } from "../hooks/useCart";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartProducts, totalPrice, removeProductFromCart,clearCart } = useCart();
+  const { cartProducts, totalPrice, removeProductFromCart, clearCart } =
+    useCart();
   const [isCartDisplayed, setIsCartDisplayed] = useState(false);
+
   const toggleCart = (e) => {
     setIsCartDisplayed((prevState) => !prevState);
   };
-
-  const handleCheckOut = ()=>{
-
-    const productsToCheckout = cartProducts.map(item=>{
-      return{reference:item.reference,quantity:item.quantity}
-    })
-
-    axios.post(`${import.meta.env.VITE_API_URL}/checkout`,{productsToCheckout})
-      .then(response=>{
-        const url = response.data
-        window.location.href = url
-      })
-      .catch(error=>{
-        console.error("error",error.response.data)
-      })
-  }  
 
   return (
     <>
@@ -65,7 +51,12 @@ const Cart = () => {
                     </span>
                   </div>
                   {/* remove one item */}
-                  <button onClick={()=>{removeProductFromCart(item.reference)}}  className="w-8 text-lg font-extrabold text-red-600">
+                  <button
+                    onClick={() => {
+                      removeProductFromCart(item.reference);
+                    }}
+                    className="w-8 text-lg font-extrabold text-red-600"
+                  >
                     X
                   </button>
                 </section>
@@ -78,8 +69,10 @@ const Cart = () => {
           </h2>
 
           <div className="flex-cold my-12 flex w-80 justify-evenly gap-4 self-center">
-            <button onClick={handleCheckOut} className="btn-primary">Check Out</button>
-            <button onClick={clearCart} className="btn-secondary">Clear Cart</button>
+            <Link to={"/checkout"} onClick={toggleCart} className="btn-primary">Go to Checkout</Link>
+            <button onClick={clearCart} className="btn-secondary">
+              Clear Cart
+            </button>
           </div>
         </aside>
       )}
