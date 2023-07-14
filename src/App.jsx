@@ -6,11 +6,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Product from "./pages/Product";
 import ProductsList from "./pages/ProductsList";
-import demoProducts from "./assets/data/demoProducts";
+
 import AboutUs from "./pages/AboutUs";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import AddProduct from "./pages/AddProduct";
+import Checkout from "./pages/Checkout";
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
             />
             <Route path=":productId" element={<Product />} />
           </Route>
+          <Route path="/checkout" element={<Checkout/>}/>
           {/* Admin routes */}
           <Route path="/add-product" element={<AddProduct/>}/>
         </Routes>
