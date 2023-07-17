@@ -31,6 +31,11 @@ const Cart = () => {
 
           {/* Products in the cart */}
           <ul className="flex max-h-[65%] flex-col gap-6 py-8">
+            {cartProducts.length === 0 ? (
+              <h2 className="self-center py-4 text-center">
+                0 items in the Cart
+              </h2>
+            ) : null}
             {cartProducts.map((item) => (
               <li
                 className="flex items-center justify-between px-8 "
@@ -69,7 +74,9 @@ const Cart = () => {
           </h2>
 
           <div className="flex-cold my-12 flex w-80 justify-evenly gap-4 self-center">
-            <Link to={"/checkout"} onClick={toggleCart} className="btn-primary">Go to Checkout</Link>
+            <Link to={"/checkout"} onClick={toggleCart} className="btn-primary">
+              Go to Checkout
+            </Link>
             <button onClick={clearCart} className="btn-secondary">
               Clear Cart
             </button>
