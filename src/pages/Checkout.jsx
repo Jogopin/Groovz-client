@@ -12,6 +12,15 @@ export default function Checkout() {
     const [email,setEmail] = useState("")
     const [isSaveAddressChecked,setIsSaveAddressChecked] = useState(true)
     const {user} = useContext(AuthContext)
+    const [canCheckout,setCanCheckout] = useState(false)
+    
+    const checkoutValidator = ()=>{
+      if (firstName && lastName && address && email && cartProducts.length>0){
+        setCanCheckout(true)
+      }else{
+        setCanCheckout(false)
+      }
+    }
     
   useEffect(() => {
     if (!user) {
@@ -30,6 +39,10 @@ export default function Checkout() {
         console.log("error getting the userDetails", error);
       });
   }, [user]);
+
+  useEffect(()=>{
+    checkoutValidator()
+  },[firstName, lastName, address, email, cartProducts])
 
   const saveAddressInDB = ()=>{
     if(!isSaveAddressChecked){
@@ -64,6 +77,7 @@ export default function Checkout() {
       })
       .catch((error) => {
         console.error("error", error.response.data);
+        return
       });
   };
 
@@ -101,7 +115,7 @@ export default function Checkout() {
       <div className="border-2">
         <h2>Summary</h2>
         <h3>Total: {totalPrice}€</h3>
-        <button className="btn-primary" onClick={handleCheckOut}>Checkout</button>
+        <button className={`btn-primary`} onClick={handleCheckOut} disabled={!canCheckout}>Checkout</button>
       </div>
     </div>
   );
