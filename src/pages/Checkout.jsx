@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useCart } from "../hooks/useCart";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
+import { privateAPI } from "../services/api";
 
 export default function Checkout() {
   const { cartProducts,totalPrice } = useCart();
@@ -9,11 +10,45 @@ export default function Checkout() {
     const [lastName, setLastName] = useState("")
     const [address, setAddress] = useState("")
     const [email,setEmail] = useState("")
+    const [isSaveAddressChecked,setIsSaveAddressChecked] = useState(true)
     const {user} = useContext(AuthContext)
     
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    privateAPI
+      .get(`/auth/user/${user._id}`)
+      .then((response) => {
+        const userDetails = response.data;
+        setFirstName(userDetails.firstName ?? "" )
+        setLastName(userDetails.lastName ?? "" )
+        setAddress(userDetails.address ?? "" )
+        setEmail(userDetails.email)
+      })
+      .catch((error) => {
+        console.log("error getting the userDetails", error);
+      });
+  }, [user]);
 
+  const saveAddressInDB = ()=>{
+    if(!isSaveAddressChecked){
+      return
+    }
+    privateAPI.put(`/auth/user/${user._id}`,{firstName,lastName,address})
+      .then(response=>{
+        console.log(response.data)
+      })
+      .catch(error=>{
+        console.log("error updating the userDetails",error)
+      })
+    
+
+  }
 
   const handleCheckOut = () => {
+    
+    saveAddressInDB()
     const productsToCheckout = cartProducts.map((item) => {
       return { reference: item.reference, quantity: item.quantity };
     });
@@ -55,10 +90,10 @@ export default function Checkout() {
           <input value={firstName} onChange={(e)=>setFirstName(e.target.value)} type="text" placeholder="First name" required/>
           <input value={lastName} onChange={(e)=>setLastName(e.target.value)}  type="text" placeholder="Last name" required/>
           <input value={address} onChange={(e)=>setAddress(e.target.value)}  type="text" placeholder="Shipping Address" required/>
-          <input value={email} onChange={(e)=>setEmail(e.target.value)}  type="email" placeholder="email" required/>
+          <input value={email} onChange={(e)=>setEmail(e.target.value)}  type="email" placeholder="email" required disabled={user ? true:false}/>
           <label>
-                {"save address "} 
-            <input type="checkbox"/>
+                {"Remember my details "} 
+            <input type="checkbox" checked={isSaveAddressChecked} onChange={()=>setIsSaveAddressChecked(prev=>!prev)}/>
           </label>
         </div>
       </div>
