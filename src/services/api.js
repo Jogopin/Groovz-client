@@ -12,7 +12,7 @@ export const setTokenInHeaders = token =>{
 }
 
 export const clearTokenHeaders = ()=>{
-    delete publicAPI.defaults.headers.common['Authorization'];
+    delete privateAPI.defaults.headers.common['Authorization'];
 }
 
 export const errorHandler = (error)=>{
