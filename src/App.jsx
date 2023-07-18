@@ -6,30 +6,20 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Product from "./pages/Product";
 import ProductsList from "./pages/ProductsList";
-
 import AboutUs from "./pages/AboutUs";
-import { useEffect, useState } from "react";
-
 import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
+import useProducts from "./hooks/useProducts";
 
 function App() {
+  const { productsList,addProductAndUpdateState } = useProducts();
 
-  const [productsList, setProductsList ] = useState([])
-
-  // fetch all products from API
-  useEffect(()=>{
-    axios.get(`${import.meta.env.VITE_API_URL}/products`)
-    .then((response)=>{
-      setProductsList(response.data)
-    })
-    .catch((error)=>{
-      console.log(`Error getting the list of products, `,error)
-    })
-  },[])
-
-  const headphonesList = productsList.filter(item=>item.category==="headphones")
-  const speakersList = productsList.filter(item=>item.category==="speakers")
+  const headphonesList = productsList.filter(
+    (item) => item.category === "headphones"
+  );
+  const speakersList = productsList.filter(
+    (item) => item.category === "speakers"
+  );
   return (
     <div className="App flex min-h-screen flex-col">
       <Navbar />
@@ -37,7 +27,7 @@ function App() {
         <Routes>
           {/* HOMEPAGE */}
           <Route path="/" element={<Home productsList={productsList} />} />
-          <Route path="/about-us" element={<AboutUs/>}/>
+          <Route path="/about-us" element={<AboutUs />} />
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -54,9 +44,9 @@ function App() {
             />
             <Route path=":productId" element={<Product />} />
           </Route>
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/checkout" element={<Checkout />} />
           {/* Admin routes */}
-          <Route path="/add-product" element={<AddProduct/>}/>
+          <Route path="/add-product" element={<AddProduct addProductAndUpdateState={addProductAndUpdateState}/>} />
         </Routes>
       </div>
 
