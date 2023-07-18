@@ -10,6 +10,7 @@ import AboutUs from "./pages/AboutUs";
 import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
 import useProducts from "./hooks/useProducts";
+import Success from "./pages/Success";
 
 function App() {
   const { productsList,addProductAndUpdateState } = useProducts();
@@ -45,6 +46,8 @@ function App() {
             <Route path=":productId" element={<Product />} />
           </Route>
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/success" element={<Success />} />
+
           {/* Admin routes */}
           <Route path="/add-product" element={<AddProduct addProductAndUpdateState={addProductAndUpdateState}/>} />
         </Routes>
