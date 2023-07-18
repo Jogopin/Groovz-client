@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
-import axios from "axios";
 import InputLabelText from "../components/InputLabelText";
 import { plusIcon } from "../assets/icons";
 import { uploadImage } from "../services/api";
 
-export default function AddProduct() {
+export default function AddProduct({addProductAndUpdateState}) {
   const name = useRef(null);
   const reference = useRef(null);
   const description = useRef(null);
@@ -25,27 +24,25 @@ export default function AddProduct() {
     setImageUrlsList([]);
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     // console.log("The file to be uploaded is: ,"e.target.files[0])
     const file = e.target.files[0];
     const uploadData = new FormData();
 
     uploadData.append("imageUrl", file);
+    try{
+      const response = await uploadImage(uploadData)
+      setImageUrlsList((prevState) => [
+        ...prevState,
+        { url: response.fileUrl, name: file.name },
+      ]);
 
-    uploadImage(uploadData)
-      .then((response) => {
-        console.log("response is, ", response);
-        setImageUrlsList((prevState) => [
-          ...prevState,
-          { url: response.fileUrl, name: file.name },
-        ]);
-      })
-      .catch((error) => {
-        console.log("Error while uploading the file: ", error);
-      });
+    }catch(error){
+      console.log("Error while uploading the file: ", error);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newProduct = {
@@ -60,15 +57,12 @@ export default function AddProduct() {
       images: imageUrlList.map((item) => item.url),
     };
 
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/products`, newProduct)
-      .then((response) => {
-        console.log("new product created", response.data);
-        resetForm();
-      })
-      .catch((error) => {
-        console.log("error creating a product, ", error.response.data.message);
-      });
+    try{
+      await addProductAndUpdateState(newProduct)
+      console.log("new product created");
+    }catch(error){
+      console.log("error creating a product");
+    }
   };
 
   const handleCancel = (e) => {
