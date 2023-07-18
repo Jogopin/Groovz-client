@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext();
 
@@ -6,7 +6,24 @@ export const CartContext = createContext();
 const MAX_QUANTITY = 5;
 
 export function CartProviderWrapper({ children }) {
-  const [cartProducts, setCartProducts] = useState([]);
+  // Initialized the state checking in the local storage
+  const [cartProducts, setCartProducts] = useState(() => {
+    try {
+      const savedCartProducts = localStorage.getItem("cartProducts");
+      return savedCartProducts ? JSON.parse(savedCartProducts) : [];
+    } catch (error) {
+      console.error('Failed to retrieve cart data from local storage:', error);
+      return [];
+    }
+  });
+  // when cartProducts changes, localStorage is updated
+  useEffect(()=>{
+    try{
+      localStorage.setItem("cartProducts",JSON.stringify(cartProducts))
+    }catch(error){
+      console.error('Failed to save cart data to local storage:', error)
+    }
+  },[cartProducts])
 
   const addToCart = (productToCart,quantity=1) => {
     
@@ -22,14 +39,14 @@ export function CartProviderWrapper({ children }) {
         return [...prevState, {...productToCart,quantity}];
       });
       
-      // if the product is in the cart
+    // if the product is in the cart
     } else {
       const productInCart = cartProducts[indexOfProduct];
       let newQuantity = productInCart.quantity + quantity;
 
       if (newQuantity > MAX_QUANTITY) {
         newQuantity = MAX_QUANTITY;
-        console.log("max 5 units in the cart");
+        console.log(`max ${MAX_QUANTITY} units in the cart`);
       }
 
       const productToCartUpdated = { ...productInCart, quantity: newQuantity };
@@ -66,7 +83,7 @@ export function CartProviderWrapper({ children }) {
     }
   };
 
-  const clearCart = () => {
+  const clearCart = () => {    
     setCartProducts([]);
   };
 
