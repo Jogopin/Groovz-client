@@ -35,8 +35,8 @@ export const uploadImage = (file) => callApi(() => publicAPI.post("/upload", fil
 export const getProducts = () => callApi(() => publicAPI.get("/products"));
 export const getProductData = (productId) => callApi(() => publicAPI.get(`/products/${productId}`));
 export const getReviewsFromProduct = (productId) => callApi(() => publicAPI.get(`/reviews/${productId}`));
-export const postReview = (reviewObj) => callApi(() => privateAPI.post("/reviews", reviewObj));
+export const postReview = ({user,product,rating,reviewText}) => callApi(() => privateAPI.post("/reviews", {user,product,rating,reviewText}));
 export const updateUserDetails = ({ userId, firstName, lastName, address }) => callApi(() => privateAPI.put(`/auth/user/${userId}`, { firstName, lastName, address }));
 export const getUserDetails = (userId) => callApi(() => privateAPI.get(`/auth/user/${userId}`));
 export const startCheckout = ({ productsToCheckout, customerData }) => callApi(() => publicAPI.post("/checkout", { productsToCheckout, customerData }));
-export const createProduct = (productData) => callApi(() => privateAPI.post("/products", productData));
+export const createProduct = ({name,reference,description,price,discount,stock,category,images}) => callApi(() => privateAPI.post("/products", {name,reference,description,price,discount,stock,category,images}));
