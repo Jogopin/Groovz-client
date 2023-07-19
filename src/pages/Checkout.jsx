@@ -1,122 +1,224 @@
-import axios from "axios";
 import { useCart } from "../hooks/useCart";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import { privateAPI } from "../services/api";
+import {
+  getUserDetails,
+  startCheckout,
+  updateUserDetails,
+} from "../services/api";
+import InputLabelText from "../components/InputLabelText";
 
 export default function Checkout() {
-  const { cartProducts,totalPrice } = useCart();
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [address, setAddress] = useState("")
-    const [email,setEmail] = useState("")
-    const [isSaveAddressChecked,setIsSaveAddressChecked] = useState(true)
-    const {user} = useContext(AuthContext)
-    const [canCheckout,setCanCheckout] = useState(false)
-    
-    const checkoutValidator = ()=>{
-      if (firstName && lastName && address && email && cartProducts.length>0){
-        setCanCheckout(true)
-      }else{
-        setCanCheckout(false)
-      }
+  const { cartProducts, totalPrice } = useCart();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [email, setEmail] = useState("");
+  const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(true);
+  const { user } = useContext(AuthContext);
+  const [canCheckout, setCanCheckout] = useState(false);
+
+  const checkoutValidator = () => {
+    if (firstName && lastName && address && email && cartProducts.length > 0) {
+      setCanCheckout(true);
+    } else {
+      setCanCheckout(false);
     }
-    
+  };
+
   useEffect(() => {
     if (!user) {
       return;
     }
-    privateAPI
-      .get(`/auth/user/${user._id}`)
-      .then((response) => {
-        const userDetails = response.data;
-        setFirstName(userDetails.firstName ?? "" )
-        setLastName(userDetails.lastName ?? "" )
-        setAddress(userDetails.address ?? "" )
-        setEmail(userDetails.email)
-      })
-      .catch((error) => {
-        console.log("error getting the userDetails", error);
-      });
+    (async () => {
+      try {
+        const userDetails = await getUserDetails(user._id);
+        setFirstName(userDetails.firstName ?? "");
+        setLastName(userDetails.lastName ?? "");
+        setAddress(userDetails.address ?? "");
+        setEmail(userDetails.email);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, [user]);
 
-  useEffect(()=>{
-    checkoutValidator()
-  },[firstName, lastName, address, email, cartProducts])
+  useEffect(() => {
+    checkoutValidator();
+  }, [firstName, lastName, address, email, cartProducts]);
 
-  const saveAddressInDB = ()=>{
-    if(!isSaveAddressChecked){
-      return
+  const saveAddressInDB = async () => {
+    if (!isSaveAddressChecked) {
+      return;
     }
-    privateAPI.put(`/auth/user/${user._id}`,{firstName,lastName,address})
-      .then(response=>{
-        console.log(response.data)
-      })
-      .catch(error=>{
-        console.log("error updating the userDetails",error)
-      })
-    
+    try {
+      const userData = {
+        userId: user._id,
+        firstName,
+        lastName,
+        address,
+      };
+      await updateUserDetails(userData);
+    } catch (error) {
+      console.log("error in updateUserPersonalDetails", error);
+    }
+  };
 
-  }
-
-  const handleCheckOut = () => {
-    
-    saveAddressInDB()
+  const handleCheckOut = async () => {
     const productsToCheckout = cartProducts.map((item) => {
       return { reference: item.reference, quantity: item.quantity };
     });
     const customerData = {
-        firstName,lastName,address,email,userId: user? user._id:null
+      firstName,
+      lastName,
+      address,
+      email,
+      userId: user ? user._id : null,
+    };
+
+    try {
+      await saveAddressInDB();
+      const url = await startCheckout({ productsToCheckout, customerData });
+      window.location.href = url;
+    } catch (error) {
+      console.log(error);
     }
-    
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/checkout`, { productsToCheckout,customerData })
-      .then((response) => {
-        const url = response.data;
-        window.location.href = url;
-      })
-      .catch((error) => {
-        console.error("error", error.response.data);
-        return
-      });
   };
 
   return (
-    <div className="flex justify-center">
-      <div>
-        {/* Cart */}
-        <div className="border-2 ">
-          <h2>Your Cart</h2>
-          <div>
-            {cartProducts.map((prod) => (
-              <div key={prod._id} className="flex">
-              <img src={prod.images[0]} className="w-36"/>
-                <h3>{prod.name}</h3>
-                <h3>{prod.price}</h3>
-                <span>{prod.quantity}</span>
+    <>
+      <div className="container mx-auto p-4">
+        <div className="flex flex-col gap-4 md:flex-row">
+          {/* Cart & Details */}
+          <div className="md:w-3/4">
+            {/* Cart */}
+            <section className="mb-4 overflow-auto rounded-lg bg-white p-2 shadow-md md:p-6">
+              <h2 className="mb-4 text-lg font-semibold">Shopping Cart</h2>
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    <th className="text-left font-semibold">Product</th>
+                    <th className="text-left font-semibold">Price</th>
+                    <th className="text-center font-semibold">Quantity</th>
+                    <th className="text-right font-semibold">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartProducts.map((prod) => (
+                    <tr key={prod._id}>
+                      <td className="py-4">
+                        <div className="flex flex-col  items-center sm:flex-row">
+                          <img
+                            className="mr-4 h-16 w-16"
+                            src={prod.images[0]}
+                            alt="Product image"
+                          />
+                          <span className="truncate font-semibold">
+                            {prod.name}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="py-4">€{prod.price.toFixed(2)}</td>
+                      <td className="py-4">
+                        {/* Quantity Control */}
+                        <div className="flex items-center justify-center">
+                          <button className="ml-3 rounded-md border px-4 py-2">
+                            -
+                          </button>
+                          <span className="w-8 text-center">
+                            {prod.quantity}
+                          </span>
+                          <button className="mr-2 rounded-md border px-4 py-2">
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="py-4 text-right">
+                        €{(prod.price * prod.quantity).toFixed(2)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+            {/* Customer Details */}
+            <section className="mb-4 rounded-lg bg-white p-6 shadow-md">
+              <h2 className="mb-4 text-lg font-semibold">Your Details</h2>
+              <div className="flex flex-wrap justify-evenly">
+                <div className="flex w-full">
+                  <InputLabelText
+                    label={"Name"}
+                    id={"Name"}
+                    name={"firstName"}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="John"
+                  />
+                  <InputLabelText
+                    label={"Last Name"}
+                    id={"last-name"}
+                    name={"lastName"}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Doe"
+                  />
+                </div>
+                <InputLabelText
+                  label={"Shipping address"}
+                  id={"address-input"}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="Street, City, Country"
+                />
+                <InputLabelText
+                  label={"Email"}
+                  value={email}
+                  name={"email"}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="johnDoe@example.com"
+                  disabled={user ? true : false}
+                />
               </div>
-            ))}
+              <label className="mx-2 my-4 block text-right text-xs font-medium text-gray-700 ">
+                {"Remember my details "}
+                <input
+                  type="checkbox"
+                  checked={isSaveAddressChecked}
+                  onChange={() => setIsSaveAddressChecked((prev) => !prev)}
+                  className="accent-red-700"
+                />
+              </label>
+            </section>
           </div>
-        </div>
-        {/* Customer Details */}
-        <div className="border-2">
-          <h2>Your Details</h2>
-          <input value={firstName} onChange={(e)=>setFirstName(e.target.value)} type="text" placeholder="First name" required/>
-          <input value={lastName} onChange={(e)=>setLastName(e.target.value)}  type="text" placeholder="Last name" required/>
-          <input value={address} onChange={(e)=>setAddress(e.target.value)}  type="text" placeholder="Shipping Address" required/>
-          <input value={email} onChange={(e)=>setEmail(e.target.value)}  type="email" placeholder="email" required disabled={user ? true:false}/>
-          <label>
-                {"Remember my details "} 
-            <input type="checkbox" checked={isSaveAddressChecked} onChange={()=>setIsSaveAddressChecked(prev=>!prev)}/>
-          </label>
+          {/* Summary */}
+          <section className="md:w-1/4 ">
+            <div className="rounded-lg bg-white p-6 shadow-md">
+              <h2 className="mb-4 text-lg font-semibold">Summary</h2>
+              <div className="mb-2 flex justify-between">
+                <span>Subtotal</span>
+                <span>€{totalPrice}</span>
+              </div>
+              <div className="mb-2 flex justify-between">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <hr className="my-2" />
+              <div className="mb-2 flex justify-between">
+                <span className="font-semibold">Total</span>
+                <span className="font-semibold">€{totalPrice}</span>
+              </div>
+              <button
+                className="btn-primary mt-4 w-full"
+                onClick={handleCheckOut}
+                disabled={!canCheckout}
+              >
+                Checkout
+              </button>
+            </div>
+          </section>
         </div>
       </div>
-      {/* Summary */}
-      <div className="border-2">
-        <h2>Summary</h2>
-        <h3>Total: {totalPrice}€</h3>
-        <button className={`btn-primary`} onClick={handleCheckOut} disabled={!canCheckout}>Checkout</button>
-      </div>
-    </div>
+    </>
   );
 }
