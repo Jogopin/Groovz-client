@@ -2,25 +2,31 @@ export default function InputLabelText({
   placeholder,
   label,
   id,
+  onChange,
   name,
-  inputRef,
-  type = "text", //default value is set to "text"
+  value,
+  type = "text",
   required = true,
 }) {
   return (
-    <div className="flex items-center">
-      <label className=" w-32 font-semibold" htmlFor={id}>
-        {label}{" "}
-      </label>
-      <input
-        ref={inputRef}
-        placeholder={placeholder}
-        className="w-52 rounded-md border-2 border-zinc-800 px-2 py-1"
-        id={id}
-        name={name}
-        type={type}
-        required={required}
-      />
-    </div>
+    <>
+      <div className="m-2 w-full ">
+        <label htmlFor={id} className="block text-xs font-medium text-gray-700">
+          {label}
+        </label>
+
+        <input
+          value={value}
+          name={name}
+          onChange={onChange}
+          type={type}
+          id={id}
+          className="mt-1 w-full rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
+          placeholder={placeholder}
+          required={required}
+        />
+      </div>
+      
+    </>
   );
 }
