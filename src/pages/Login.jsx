@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import InputLabelText from "../components/InputLabelText";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,20 +7,15 @@ import { AuthContext } from "../context/auth.context";
 
 const Login = () => {
   const navigate = useNavigate()
-  const username = useRef(null)
-  const password = useRef(null)
+  const [username,setUsername] = useState("")
+  const [password,setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
   const { storeToken, authenticateUser } = useContext(AuthContext)
 
   const handleSubmit = (e)=>{
     e.preventDefault()
 
-    const userToLogin = {
-      username: username.current.value,
-      password:password.current.value,
-    }
-
-    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,userToLogin)
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,{username ,password})
       .then(response=>{
         storeToken(response.data.authToken)
         authenticateUser()
@@ -35,12 +30,13 @@ const Login = () => {
   }
   return (
     <>
-      <form onSubmit={handleSubmit} className="m-8 flex flex-col items-center gap-8">
+      <form onSubmit={handleSubmit} className="mx-auto my-10 w-4/6 sm:w-2/5 lg:w-1/5 flex flex-col items-center gap-4 ">
         <InputLabelText
           id="username"
           label="Username"
           name="username"
-          inputRef={username}
+          value={username}
+          onChange={(e)=>{setUsername(e.target.value)}}
           placeholder="your username"
           type={"text"}
         />
@@ -48,19 +44,23 @@ const Login = () => {
           id="password"
           label="Password"
           name="password"
-          inputRef={password}
+          value={password}
+          onChange={(e)=>{setPassword(e.target.value)}}
           placeholder="your password"
           type={"password"}
         />
-        <button className="btn-primary px-4 py-2">
+        <p className="text-sm text-gray-500">
+        {"Don't have an account yet? "}
+        <Link to={"/signup"} className="font-bold underline">Sign Up</Link>
+      </p>
+        <button className="btn-primary">
           Login
         </button>
       </form>
 
       {errorMessage ? <p>{errorMessage}</p> : <></>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      
     </>
   );
 };
