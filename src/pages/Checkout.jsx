@@ -1,12 +1,7 @@
 import { useCart } from "../hooks/useCart";
 import { useEffect, useState } from "react";
 
-import {
-  getUserDetails,
-  startCheckout,
-  updateUserDetails,
-} from "../services/api";
-import InputLabelText from "../components/InputLabelText";
+import InputLabel from "../components/InputLabel";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Checkout() {
@@ -147,40 +142,51 @@ export default function Checkout() {
               <h2 className="mb-4 text-lg font-semibold">Your Details</h2>
               <div className="flex flex-wrap justify-evenly">
                 <div className="flex w-full">
-                  <InputLabelText
+                  <InputLabel
+                    id={"name"}
                     label={"Name"}
-                    id={"Name"}
-                    name={"firstName"}
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="John"
+                    input={{
+                      name: "firstName",
+                      value: firstName,
+                      onChange: (e) => setFirstName(e.target.value),
+                      placeholder: "John",
+                    }}
                   />
-                  <InputLabelText
+                  <InputLabel
                     label={"Last Name"}
                     id={"last-name"}
-                    name={"lastName"}
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    placeholder="Doe"
+                    input={{
+                      name: "lastName",
+                      value: lastName,
+                      onChange: (e) => setLastName(e.target.value),
+                      placeholder: "Doe",
+                    }}
                   />
                 </div>
-                <InputLabelText
+                <InputLabel
                   label={"Shipping address"}
                   id={"address-input"}
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Street, City, Country"
+                  input={{
+                    name:"address",
+                    value: address,
+                    onChange: (e) => setAddress(e.target.value),
+                    placeholder: "Street, City, Country",
+                  }}
                 />
-                <InputLabelText
+                <InputLabel
                   label={"Email"}
-                  value={email}
-                  name={"email"}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  placeholder="johnDoe@example.com"
-                  disabled={user ? true : false}
+                  id={"email"}
+                  input={{
+                    name: "email",
+                    value: email,
+                    onChange: (e) => setEmail(e.target.value),
+                    type: "email",
+                    placeholder: "johnDoe@example.com",
+                    disabled: user ? true : false,
+                  }}
                 />
               </div>
+
               <label className="mx-2 my-4 block text-right text-xs font-medium text-gray-700 ">
                 {"Remember my details "}
                 <input

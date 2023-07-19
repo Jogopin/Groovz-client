@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import InputLabelText from "../components/InputLabelText";
+import { useState } from "react";
+import InputLabel from "../components/InputLabel";
 import { plusIcon } from "../assets/icons";
 import { uploadImage } from "../services/api";
 
@@ -78,23 +78,27 @@ export default function AddProduct({ addProductAndUpdateState }) {
     <div className="m-4">
       <form
         onSubmit={handleSubmit}
-        className="mx-auto my-10 md:w-3/5 lg:w-2/5 flex flex-col items-center gap-4 "
+        className="mx-auto my-10 flex flex-col items-center gap-4 md:w-3/5 lg:w-2/5 "
       >
-        <InputLabelText
+        <InputLabel
+          input={{
+            name: "name",
+            value: formState.name,
+            onChange: handleOnChange,
+            placeholder: "Product's name",
+          }}
           id="name"
           label="Name"
-          name="name"
-          value={formState.name}
-          onChange={handleOnChange}
-          placeholder={"Product's name"}
         />
-        <InputLabelText
+        <InputLabel
+          input={{
+            name: "reference",
+            value: formState.reference,
+            onChange: handleOnChange,
+            placeholder: "Unique Reference",
+          }}
           id="reference"
           label="Reference"
-          name="reference"
-          value={formState.reference}
-          onChange={handleOnChange}
-          placeholder={"Unique Reference"}
         />
         <div className="m-2 w-full">
           <label
@@ -111,89 +115,76 @@ export default function AddProduct({ addProductAndUpdateState }) {
             placeholder="Description"
             rows="4"
             cols="50"
-            className="mt-1 h-60 rounded-md border-2 border-zinc-300 px-2 sm:h-full w-full"
+            className="mt-1 h-60 w-full rounded-md border-2 border-zinc-300 px-2 sm:h-full"
             required
           />
         </div>
         <div className="flex flex-row">
-        {/* Price & Discount */}
-        <div className="mx-auto flex flex-col">
-          <div className="m-2 w-full">
-            <label
-              className="block text-xs font-medium text-gray-700"
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
+          {/* Price & Discount */}
+          <div className="mx-auto flex flex-col">
+            <InputLabel
+              input={{
+                name: "price",
+                value: formState.reference,
+                onChange: handleOnChange,
+                placeholder: "Price",
+                type: "number",
+                step: "0.01",
+              }}
               id="price"
-              name="price"
-              onChange={handleOnChange}
-              placeholder="Price "
+              label="Price"
               className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
-              type="number"
-              step="0.01"
-              required
+              units="€"
             />
-            <span className="px-1 font-medium text-gray-700">€</span>
-          </div>
-          <div className="m-2 w-full ">
-            <label
-              className="block text-xs font-medium text-gray-700"
-              htmlFor="discount"
-            >
-              Discount
-            </label>
-            <input
+            <InputLabel
+              input={{
+                name: "discount",
+                value: formState.reference,
+                onChange: handleOnChange,
+                placeholder: "Discount (%)",
+                type: "number",
+              }}
               id="discount"
-              name="discount"
-              onChange={handleOnChange}
-              placeholder="Discount (%)"
+              label="Price"
               className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
-              type="number"
+              units="%"
             />
-            <span className="px-1 font-medium text-gray-700">%</span>
           </div>
-        </div>
-        
-        {/* Stock & category */}
-        <div className="mx-auto flex flex-col">
-          <div className="m-2 w-full">
-            <label
-              className="block text-xs font-medium text-gray-700"
-              htmlFor="stock"
-            >
-              Stock
-            </label>
-            <input
-              name="stock"
-              id="stock"
-              onChange={handleOnChange}
-              placeholder="Units in stock"
-              className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
-              type="number"
-              required
-            />
-            <span className="px-1 font-medium text-gray-700">u</span>
+
+          {/* Stock & category */}
+          <div className="mx-auto flex flex-col">
+              <InputLabel
+                input={{
+                  name: "stock",
+                  value: formState.reference,
+                  onChange: handleOnChange,
+                  placeholder: "Units in stock",
+                  type: "number",
+                }}
+                id="stock"
+                label="Stock"
+                className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
+                units="u"
+              />
+             
+            <div className="m-2 w-full">
+              <label
+                className="block text-xs font-medium text-gray-700"
+                htmlFor="category"
+              >
+                Category
+              </label>
+              <select
+                id="category"
+                name="category"
+                onChange={handleOnChange}
+                className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
+              >
+                <option value="headphones">Headphones</option>
+                <option value="speakers">Speakers</option>
+              </select>
+            </div>
           </div>
-          <div className="m-2 w-full">
-            <label
-              className="block text-xs font-medium text-gray-700"
-              htmlFor="category"
-            >
-              Category
-            </label>
-            <select
-              id="category"
-              name="category"
-              onChange={handleOnChange}
-              className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
-            >
-              <option value="headphones">Headphones</option>
-              <option value="speakers">Speakers</option>
-            </select>
-          </div>
-        </div>
         </div>
 
         <div className="m-2 w-full">
