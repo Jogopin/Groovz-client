@@ -11,6 +11,7 @@ import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
 import useProducts from "./hooks/useProducts";
 import Success from "./pages/Success";
+import Profile from "./pages/Profile";
 
 function App() {
   const { productsList,addProductAndUpdateState } = useProducts();
@@ -47,12 +48,13 @@ function App() {
           </Route>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
-
+          {/* Profile */}
+          <Route path="/profile" element={<Profile />} />
           {/* Admin routes */}
           <Route path="/add-product" element={<AddProduct addProductAndUpdateState={addProductAndUpdateState}/>} />
+        
         </Routes>
       </div>
-
       <Footer />
     </div>
   );
