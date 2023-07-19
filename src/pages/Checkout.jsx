@@ -1,12 +1,13 @@
 import { useCart } from "../hooks/useCart";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/auth.context";
+import { useEffect, useState } from "react";
+
 import {
   getUserDetails,
   startCheckout,
   updateUserDetails,
 } from "../services/api";
 import InputLabelText from "../components/InputLabelText";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Checkout() {
   const { cartProducts, totalPrice } = useCart();
@@ -15,7 +16,7 @@ export default function Checkout() {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(true);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth()
   const [canCheckout, setCanCheckout] = useState(false);
 
   const checkoutValidator = () => {

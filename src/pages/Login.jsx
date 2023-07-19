@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import InputLabelText from "../components/InputLabelText";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import { useAuth } from "../hooks/useAuth";
 
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
-  const { storeToken, authenticateUser } = useContext(AuthContext)
+  const { storeToken, authenticateUser } = useAuth()
 
   const handleSubmit = (e)=>{
     e.preventDefault()

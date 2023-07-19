@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ProductDetails from "../components/ProductDetails";
 import RatingReviewInput from "../components/RatingReviewInput";
 import ReviewsDisplay from "../components/ReviewsDisplay";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { AuthContext } from "../context/auth.context";
+
+import { getProductData, getReviewsFromProduct } from "../services/api";
+import { useAuth } from "../hooks/useAuth";
 
 const Product = () => {
   const { productId } = useParams();
@@ -12,7 +13,7 @@ const Product = () => {
   const [reviewsList, setReviewsList] = useState(null);
   const [numOfReviewsDisplayed, setNumOfReviewsDisplayed]= useState(3)
 
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user } = useAuth()
 
   useEffect(() => {
     axios

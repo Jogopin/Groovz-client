@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { AuthContext } from '../context/auth.context'
+import { useAuth } from '../hooks/useAuth'
 
 const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
 
-    const {isLoggedIn,user,logOutUser} = useContext(AuthContext)
+    const {isLoggedIn,user,logOutUser} = useAuth()
     if(!isMenuModalOn) return(<></>)
     
 
