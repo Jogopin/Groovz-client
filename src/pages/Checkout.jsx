@@ -1,8 +1,10 @@
 import { useCart } from "../hooks/useCart";
 import { useEffect, useState } from "react";
 
+import { startCheckout, updateUserDetails } from "../services/api";
 import InputLabel from "../components/InputLabel";
 import { useAuth } from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 
 export default function Checkout() {
   const { cartProducts, totalPrice } = useCart();
@@ -10,38 +12,20 @@ export default function Checkout() {
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
-  const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(true);
-  const { user } = useAuth()
-  const [canCheckout, setCanCheckout] = useState(false);
+  const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(false);
+  const { user } = useAuth();
 
-  const checkoutValidator = () => {
-    if (firstName && lastName && address && email && cartProducts.length > 0) {
-      setCanCheckout(true);
-    } else {
-      setCanCheckout(false);
-    }
-  };
+  const { userDetails } = useUser(user?._id);
+
+  const canCheckout =
+    firstName && lastName && address && email && cartProducts.length > 0;
 
   useEffect(() => {
-    if (!user) {
-      return;
-    }
-    (async () => {
-      try {
-        const userDetails = await getUserDetails(user._id);
-        setFirstName(userDetails.firstName ?? "");
-        setLastName(userDetails.lastName ?? "");
-        setAddress(userDetails.address ?? "");
-        setEmail(userDetails.email);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [user]);
-
-  useEffect(() => {
-    checkoutValidator();
-  }, [firstName, lastName, address, email, cartProducts]);
+    setFirstName(userDetails.firstName ?? "");
+    setLastName(userDetails.lastName ?? "");
+    setAddress(userDetails.address ?? "");
+    setEmail(userDetails.email ?? "");
+  }, [userDetails]);
 
   const saveAddressInDB = async () => {
     if (!isSaveAddressChecked) {
