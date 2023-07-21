@@ -63,7 +63,7 @@ const ProductDetails = ({ productData, rating }) => {
             </button>
           </div>
           {/* Add to cart button */}
-          <button onClick={handleAddToCart} className="btn-primary flex h-14  items-center justify-evenly">
+          <button onClick={handleAddToCart} className="btn-primary flex h-14  items-center justify-evenly" disabled={productData.stock<quantity || quantity===0}>
             <img src={addCartIcon} className="w-8 invert" alt="Cart-Icon"/>
             <span>Add to the cart</span>
           </button>
