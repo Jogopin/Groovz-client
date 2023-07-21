@@ -37,6 +37,10 @@ export default function AddProduct({ addProductAndUpdateState }) {
 
   const handleFileUpload = async (e) => {
     // console.log("The file to be uploaded is: ,"e.target.files[0])
+    if(e.target.files.length===0){
+      console.log("No file selected")
+      return
+    }    
     const file = e.target.files[0];
     const uploadData = new FormData();
 
