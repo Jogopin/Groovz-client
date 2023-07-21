@@ -21,7 +21,7 @@ const Cart = () => {
         />
       </button>
       {isCartDisplayed && (
-        <aside className="fixed  right-0 top-0 z-50 flex h-full w-96 flex-col bg-zinc-900/90">
+        <aside className="fixed  right-0 top-0 z-50 flex h-full w-96 flex-col bg-zinc-800/90">
           <button
             onClick={toggleCart}
             className="right-20 m-4 flex h-7 w-7  self-end"
@@ -30,7 +30,7 @@ const Cart = () => {
           </button>
 
           {/* Products in the cart */}
-          <ul className="flex max-h-[65%] flex-col gap-6 py-8">
+          <ul className="flex max-h-[65%] flex-col gap-6 py-8 overflow-y-auto">
             {cartProducts.length === 0 ? (
               <h2 className="self-center py-4 text-center">
                 0 items in the Cart
