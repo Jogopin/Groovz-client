@@ -132,7 +132,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
             <InputLabel
               input={{
                 name: "price",
-                value: formState.reference,
+                value: formState.price,
                 onChange: handleOnChange,
                 placeholder: "Price",
                 type: "number",
@@ -146,13 +146,13 @@ export default function AddProduct({ addProductAndUpdateState }) {
             <InputLabel
               input={{
                 name: "discount",
-                value: formState.reference,
+                value: formState.discount,
                 onChange: handleOnChange,
                 placeholder: "Discount (%)",
                 type: "number",
               }}
               id="discount"
-              label="Price"
+              label="Discount"
               className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
               units="%"
             />
@@ -163,7 +163,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
               <InputLabel
                 input={{
                   name: "stock",
-                  value: formState.reference,
+                  value: formState.stock,
                   onChange: handleOnChange,
                   placeholder: "Units in stock",
                   type: "number",
