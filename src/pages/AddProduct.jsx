@@ -51,6 +51,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
         ...prevState,
         { url: response.fileUrl, name: file.name },
       ]);
+      //reset the value of the file input field 
+      e.target.value = null
     } catch (error) {
       console.log("Error while uploading the file: ", error);
     }
@@ -68,6 +70,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
     try {
       await addProductAndUpdateState(newProduct);
       console.log("new product created");
+      resetForm()
     } catch (error) {
       console.log("error creating a product");
     }
