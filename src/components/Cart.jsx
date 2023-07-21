@@ -30,7 +30,7 @@ const Cart = () => {
           </button>
 
           {/* Products in the cart */}
-          <ul className="flex max-h-[65%] flex-col gap-6 py-8 overflow-y-auto">
+          <ul className="flex max-h-[65%] flex-col gap-6 overflow-y-auto py-8">
             {cartProducts.length === 0 ? (
               <h2 className="self-center py-4 text-center">
                 0 items in the Cart
@@ -41,11 +41,13 @@ const Cart = () => {
                 className="flex items-center justify-between px-8 "
                 key={item._id}
               >
-                <img
-                  className="w-24  rounded-md bg-zinc-300"
-                  src={item.images[0]}
-                  alt={item.name}
-                />
+                <Link to={`/store/${item._id}`}>
+                  <img
+                    className="w-24  rounded-md bg-zinc-300"
+                    src={item.images[0]}
+                    alt={item.name}
+                  />
+                </Link>
 
                 <section className="flex-cold flex h-20 w-48 justify-between ">
                   <div className="flex min-w-full flex-col justify-between text-xs">
