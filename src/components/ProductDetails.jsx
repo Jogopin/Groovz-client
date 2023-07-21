@@ -7,6 +7,7 @@ import { useCart } from "../hooks/useCart";
 const ProductDetails = ({ productData, rating }) => {
   const {addToCart}=useCart()
   const [quantity,setQuantity] =useState(1)
+  const inStock=productData.stock>0
 
   if (productData === null) {
     console.log("loading productData");
@@ -65,7 +66,8 @@ const ProductDetails = ({ productData, rating }) => {
           {/* Add to cart button */}
           <button onClick={handleAddToCart} className="btn-primary flex h-14  items-center justify-evenly" disabled={productData.stock<quantity || quantity===0}>
             <img src={addCartIcon} className="w-8 invert" alt="Cart-Icon"/>
-            <span>Add to the cart</span>
+            {inStock? <span>Add to the cart</span> : <span>Out of stock</span>}
+            
           </button>
         </div>
       </div>
