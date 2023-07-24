@@ -7,7 +7,7 @@ import { useAuth } from "../hooks/useAuth";
 import useUser from "../hooks/useUser";
 
 export default function Checkout() {
-  const { cartProducts, totalPrice } = useCart();
+  const { cartProducts, totalPrice,addToCart,removeProductFromCart } = useCart();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
@@ -65,6 +65,14 @@ export default function Checkout() {
     }
   };
 
+  const handleClickMinus =(productData)=>{
+    removeProductFromCart(productData.reference)
+  }
+  const handleClickPlus =(productData)=>{
+    addToCart(productData)
+
+   
+  }
   return (
     <>
       <div className="container mx-auto p-4">
@@ -102,13 +110,13 @@ export default function Checkout() {
                       <td className="py-4">
                         {/* Quantity Control */}
                         <div className="flex items-center justify-center">
-                          <button className="ml-3 rounded-md border px-4 py-2">
+                          <button onClick={e=>{handleClickMinus(prod)}} className="ml-3 rounded-md border px-4 py-2">
                             -
                           </button>
                           <span className="w-8 text-center">
                             {prod.quantity}
                           </span>
-                          <button className="mr-2 rounded-md border px-4 py-2">
+                          <button onClick={e=>{handleClickPlus(prod)}}  className="mr-2 rounded-md border px-4 py-2">
                             +
                           </button>
                         </div>
