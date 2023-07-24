@@ -14,27 +14,36 @@ const Product = () => {
   const [numOfReviewsDisplayed, setNumOfReviewsDisplayed]= useState(3)
 
   const { isLoggedIn, user } = useAuth()
-
+  const updateReviewsList = async () =>{
+    try{
+      const reviewsArray = await getReviewsFromProduct(productId)
+        setReviewsList(reviewsArray)
+    }catch(error){
+      console.error("Error updating the reviews")
+    }
+  }
+  
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/products/${productId}`)
-      .then((response) => setProductData(response.data))
-      .catch((error) => {
-        console.log(`Error getting the product "${productId}", `, error);
-      });
+    (async ()=>{
+      try{
+        const productObj = await getProductData(productId)
+        setProductData(productObj)
 
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/reviews/${productId}`)
-      .then((response) => {
-        setReviewsList(response.data);
-      })
-      .catch((error) => {
-        console.log("Error: getting the list of reviews", error);
-      });
+        await updateReviewsList()    
+
+      }catch(error){
+        
+        console.log(`Error getting the product "${productId}", `, error);
+      }
+    })()
   }, [productId]);
+
+  
   
   const reviewsDisplayed = reviewsList? reviewsList.slice(0, numOfReviewsDisplayed) : null
+
   const canShowMore = reviewsList && reviewsList.length > numOfReviewsDisplayed
+
   const handleShowMore = () => { 
     setNumOfReviewsDisplayed(prev => prev + 3);
   };
