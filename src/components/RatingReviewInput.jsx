@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import generateStarsArray from "../utils/generateStarsArray";
 import Star from "./Star";
-import axios from "axios";
+import { postReview } from "../services/api";
 
 
-const RatingReviewInput = ({productId,user,isLoggedIn}) => {
+const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
   const [hover, setHover] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -12,7 +12,7 @@ const RatingReviewInput = ({productId,user,isLoggedIn}) => {
 
   const starsArray = generateStarsArray(rating);
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault()
     if(!isLoggedIn){
       console.log("Error, only users can post reviews")
@@ -29,14 +29,13 @@ const RatingReviewInput = ({productId,user,isLoggedIn}) => {
       rating,
       reviewText
     }
-
-    axios.post(`${import.meta.env.VITE_API_URL}/reviews`,reviewData)
-    .then(response=>{
-        console.log("newReview",response.data)
-    })
-    .catch((error)=>{
-      console.log(`Error posting a new review`,error)
-    })
+    try{
+      await postReview(reviewData)
+      updateReviews()
+    }catch(error){
+      console.log("error in postReview",error)
+    }
+    
   }
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8 m-auto items-center border-2 rounded-md w-96 p-4">

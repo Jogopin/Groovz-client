@@ -14,6 +14,7 @@ const Product = () => {
   const [numOfReviewsDisplayed, setNumOfReviewsDisplayed]= useState(3)
 
   const { isLoggedIn, user } = useAuth()
+  
   const updateReviewsList = async () =>{
     try{
       const reviewsArray = await getReviewsFromProduct(productId)
@@ -74,6 +75,7 @@ const Product = () => {
           productId={productId}
           user={user}
           isLoggedIn={isLoggedIn}
+          updateReviewsList={updateReviewsList}
         />
       </div>
     </>
