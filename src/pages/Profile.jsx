@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import useUser from "../hooks/useUser";
 import InputLabel from "../components/InputLabel";
+import { updateUserDetails } from "../services/api";
 
 export default function Profile() {
   const [firstName, setFirstName] = useState("");
@@ -11,18 +12,42 @@ export default function Profile() {
   const userId = user ? user._id : null;
   const { userDetails } = useUser(userId);
   const [openTab, setOpenTab] = useState(1);
-  const isEditing = false;
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    setFirstName(userDetails.firstName);
-    setLastName(userDetails.lastName);
-    setAddress(userDetails.address);
+    setFirstName(userDetails.firstName ?? "");
+    setLastName(userDetails.lastName ?? "");
+    setAddress(userDetails.address ?? "");
+    console.log("userDetails", userDetails);
   }, [userDetails]);
-  console.log("userDetails", userDetails);
 
   const handleTabClick = (e, tabNum) => {
     e.preventDefault();
     setOpenTab(tabNum);
+  };
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+  const handleSaveClick = async () => {
+    try {
+      const userData = {
+        userId: user._id,
+        firstName,
+        lastName,
+        address,
+      };
+      await updateUserDetails(userData);
+    } catch (error) {
+      console.log("error in saving the user details", error);
+    } finally {
+      setIsEditing(false);
+    }
+  };
+  const handleCancelClick = () => {
+    setFirstName(userDetails.firstName);
+    setLastName(userDetails.lastName);
+    setAddress(userDetails.address);
+    setIsEditing(false);
   };
 
   return (
@@ -73,15 +98,16 @@ export default function Profile() {
             </button>
           </li>
         </ul>
-        <div className="w-full rounded-md border-b-4 border-l-2 border-zinc-400 bg-zinc-300 px-1 py-4 shadow-lg">
+        <div className="w-full  rounded-md border-b-4 border-l-2 border-zinc-400 bg-zinc-300 px-1 py-4 shadow-lg">
+          {/* Personal Details */}
           <section
             className={`${
               openTab === 1 ? "block" : "hidden"
-            } relative mx-auto my-4 flex w-5/6 flex-col`}
+            } relative my-4 flex flex-col items-center`}
           >
             {/* username & email */}
-            <div className="flex flex-col self-start rounded-md px-4 ">
-              <div className="my-2 w-full  rounded-md bg-zinc-700 p-2 text-zinc-50">
+            <div className="flex flex-col rounded-md">
+              <div className="w-full rounded-md bg-zinc-700 p-2 text-zinc-50">
                 <label className="block font-medium sm:text-xs">
                   {"Username"}
                 </label>
@@ -100,7 +126,7 @@ export default function Profile() {
               </div>
             </div>
             {/* Name & Address*/}
-            <div className="flex flex-col self-end">
+            <div className="my-10 flex flex-col gap-4 w-5/6 rounded-md  border-2 border-zinc-800 bg-white p-4">
               <InputLabel
                 id={"firstName"}
                 label={"First Name"}
@@ -123,26 +149,40 @@ export default function Profile() {
                   disabled: !isEditing,
                 }}
               />
-              <InputLabel
-                label={"Shipping address"}
-                id={"address-input"}
-                input={{
-                  name: "address",
-                  value: address,
-                  onChange: (e) => setAddress(e.target.value),
-                  placeholder: "Street, City, Country",
-                  disabled: !isEditing,
-                }}
-              />
+                <InputLabel
+                  label={"Shipping address"}
+                  id={"address-input"}
+                  input={{
+                    name: "address",
+                    value: address,
+                    onChange: (e) => setAddress(e.target.value),
+                    placeholder: "Street, City, Country",
+                    disabled: !isEditing,
+                  }}
+                />
+              
             </div>
-            <button className="btn-secundary absolute bottom-0 self-start">
-              Edit
-            </button>
+
+            {!isEditing ? (
+              <button onClick={handleEditClick} className="btn-secundary">
+                Edit
+              </button>
+            ) : (
+              <div className="flex gap-8">
+                <button onClick={handleSaveClick} className="btn-primary">
+                  Save
+                </button>
+                <button onClick={handleCancelClick} className="btn-secundary">
+                  Cancel
+                </button>
+              </div>
+            )}
           </section>
+          {/* Orders */}
           <section
             className={`${
               openTab === 2 ? "block" : "hidden"
-            } relative mx-auto my-4 flex w-5/6 flex-col min-h`}
+            } relative mx-auto my-4 flex w-5/6 flex-col`}
           >
             React JS with Tailwind CSS Tab 2 Content show
           </section>
