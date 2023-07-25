@@ -26,7 +26,7 @@ const callApi = async (apiMethod) => {
     const response = await apiMethod();
     return response.data;
   } catch (error) {
-    console.error(error);
+    console.error("error.message",error.response.data.message);
     throw error;
   }
 };
@@ -40,3 +40,4 @@ export const updateUserDetails = ({ userId, firstName, lastName, address }) => c
 export const getUserDetails = (userId) => callApi(() => privateAPI.get(`/auth/user/${userId}`));
 export const startCheckout = ({ productsToCheckout, customerData }) => callApi(() => publicAPI.post("/checkout", { productsToCheckout, customerData }));
 export const createProduct = ({name,reference,description,price,discount,stock,category,images}) => callApi(() => privateAPI.post("/products", {name,reference,description,price,discount,stock,category,images}));
+export const getOrdersFromUser = (userId)=> callApi(()=>privateAPI.get(`/orders/${userId}`))
