@@ -13,7 +13,7 @@ export default function Checkout() {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(false);
-  const { user } = useAuth();
+  const { user,isLoggedIn } = useAuth();
 
   const { userDetails } = useUser(user?._id);
 
@@ -21,13 +21,14 @@ export default function Checkout() {
     firstName && lastName && address && email && cartProducts.length > 0;
 
   useEffect(() => {
+    if(!isLoggedIn) return
     setFirstName(userDetails.firstName ?? "");
     setLastName(userDetails.lastName ?? "");
     setAddress(userDetails.address ?? "");
     setEmail(userDetails.email ?? "");
   }, [userDetails]);
 
-  const saveAddressInDB = async () => {
+  const saveUserDataInDB = async () => {
     if (!isSaveAddressChecked) {
       return;
     }
@@ -40,7 +41,7 @@ export default function Checkout() {
       };
       await updateUserDetails(userData);
     } catch (error) {
-      console.log("error in updateUserPersonalDetails", error);
+      console.log("error in saving the user details", error);
     }
   };
 
@@ -57,7 +58,7 @@ export default function Checkout() {
     };
 
     try {
-      await saveAddressInDB();
+      await saveUserDataInDB();
       const url = await startCheckout({ productsToCheckout, customerData });
       window.location.href = url;
     } catch (error) {
@@ -132,8 +133,8 @@ export default function Checkout() {
             {/* Customer Details */}
             <section className="mb-4 rounded-lg bg-white p-6 shadow-md">
               <h2 className="mb-4 text-lg font-semibold">Your Details</h2>
-              <div className="flex flex-wrap justify-evenly">
-                <div className="flex w-full">
+              <div className="flex flex-wrap justify-evenly gap-3">
+                <div className="flex w-full gap-2">
                   <InputLabel
                     id={"name"}
                     label={"Name"}
@@ -186,6 +187,7 @@ export default function Checkout() {
                   checked={isSaveAddressChecked}
                   onChange={() => setIsSaveAddressChecked((prev) => !prev)}
                   className="accent-red-700"
+                  disabled={!isLoggedIn}
                 />
               </label>
             </section>
