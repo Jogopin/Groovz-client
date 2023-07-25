@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import RatingDisplay from "./RatingDisplay";
 
 export default function ReviewsDisplay ({reviewsList, showMoreReviews, canShowMore}){
