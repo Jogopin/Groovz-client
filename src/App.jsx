@@ -11,7 +11,7 @@ import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
 import useProducts from "./hooks/useProducts";
 import Success from "./pages/Success";
-import Profile from "./pages/Profile";
+import Profile from "./pages/ProfilePage/Profile";
 
 function App() {
   const { productsList,addProductAndUpdateState } = useProducts();
