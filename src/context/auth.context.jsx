@@ -26,19 +26,20 @@ function AuthProviderWrapper(props) {
     const storedToken = localStorage.getItem("authToken");
 
     if (storedToken) {
-    try {
-        const response = verifyUser();
+      setTokenInHeaders(storedToken);
+      try {
+        const response = await verifyUser();
         //If the server verifies that the JWT token is valid
         setUser(response);
         setIsLoggedIn(true);
         setIsLoading(false);
-        setTokenInHeaders(storedToken);
       } catch (error) {
         // If the server sends an error response (invalid token)
         // Update state variables
         setIsLoggedIn(false);
         setIsLoading(false);
         setUser(null);
+        
       }
     }else{
        // If the token is not available (or is removed)
