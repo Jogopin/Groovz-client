@@ -26,18 +26,62 @@ const callApi = async (apiMethod) => {
     const response = await apiMethod();
     return response.data;
   } catch (error) {
-    console.error("error.message",error.response.data.message);
+    console.error("error.message", error.response.data.message);
     throw error;
   }
 };
 
-export const uploadImage = (file) => callApi(() => publicAPI.post("/upload", file));
+export const uploadImage = (file) =>
+  callApi(() => publicAPI.post("/upload", file));
+
 export const getProducts = () => callApi(() => publicAPI.get("/products"));
-export const getProductData = (productId) => callApi(() => publicAPI.get(`/products/${productId}`));
-export const getReviewsFromProduct = (productId) => callApi(() => publicAPI.get(`/reviews/${productId}`));
-export const postReview = ({user,product,rating,reviewText}) => callApi(() => privateAPI.post("/reviews", {user,product,rating,reviewText}));
-export const updateUserDetails = ({ userId, firstName, lastName, address }) => callApi(() => privateAPI.put(`/auth/user/${userId}`, { firstName, lastName, address }));
-export const getUserDetails = (userId) => callApi(() => privateAPI.get(`/auth/user/${userId}`));
-export const startCheckout = ({ productsToCheckout, customerData }) => callApi(() => publicAPI.post("/checkout", { productsToCheckout, customerData }));
-export const createProduct = ({name,reference,description,price,discount,stock,category,images}) => callApi(() => privateAPI.post("/products", {name,reference,description,price,discount,stock,category,images}));
-export const getOrdersFromUser = (userId)=> callApi(()=>privateAPI.get(`/orders/${userId}`))
+
+export const getProductData = (productId) =>
+  callApi(() => publicAPI.get(`/products/${productId}`));
+
+export const getReviewsFromProduct = (productId) =>
+  callApi(() => publicAPI.get(`/reviews/${productId}`));
+
+export const postReview = ({ user, product, rating, reviewText }) =>
+  callApi(() =>
+    privateAPI.post("/reviews", { user, product, rating, reviewText })
+  );
+
+export const updateUserDetails = ({ userId, firstName, lastName, address }) =>
+  callApi(() =>
+    privateAPI.put(`/auth/user/${userId}`, { firstName, lastName, address })
+  );
+export const getUserDetails = (userId) =>
+  callApi(() => privateAPI.get(`/auth/user/${userId}`));
+export const startCheckout = ({ productsToCheckout, customerData }) =>
+  callApi(() =>
+    publicAPI.post("/checkout", { productsToCheckout, customerData })
+  );
+export const createProduct = ({
+  name,
+  reference,
+  description,
+  price,
+  discount,
+  stock,
+  category,
+  images,
+}) =>
+  callApi(() =>
+    privateAPI.post("/products", {
+      name,
+      reference,
+      description,
+      price,
+      discount,
+      stock,
+      category,
+      images,
+    })
+  );
+export const getOrdersFromUser = (userId) =>
+  callApi(() => privateAPI.get(`/orders/${userId}`));
+
+export const signup =({username,email,password}) => callApi(() => publicAPI.post("/auth/signup",{username,email,password}))
+
+export const login = ({username,password}) => callApi(() => publicAPI.post("/auth/login",{username,password}))
