@@ -85,3 +85,5 @@ export const getOrdersFromUser = (userId) =>
 export const signup =({username,email,password}) => callApi(() => publicAPI.post("/auth/signup",{username,email,password}))
 
 export const login = ({username,password}) => callApi(() => publicAPI.post("/auth/login",{username,password}))
+
+export const verifyUser = () => callApi(()=>privateAPI.get("/auth/verify"))
