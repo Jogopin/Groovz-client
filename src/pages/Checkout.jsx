@@ -98,7 +98,7 @@ export default function Checkout() {
                       <td className="py-4">
                         <div className="flex flex-col  items-center sm:flex-row">
                           <img
-                            className="mr-4 h-16 w-16"
+                            className="mr-4 h-16 w-16 rounded-md"
                             src={prod.images[0]}
                             alt="Product image"
                           />
