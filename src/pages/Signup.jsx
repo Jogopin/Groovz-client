@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputLabel from "../components/InputLabel";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { signup } from "../services/api";
 
 
 const Signup = () => {
@@ -13,7 +13,7 @@ const Signup = () => {
   const [email,setEmail] = useState("")
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault()
 
     const newUser ={
@@ -21,17 +21,13 @@ const Signup = () => {
       email,
       password
     }
-
-    axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,newUser)
-      .then(response=>{
-        
-        navigate("/login")
-      })
-      .catch(error=>{
-        console.log("error signing up, ",error)
+    try{
+      await signup(newUser)
+      navigate("/login")
+    }catch(error){
+      console.log("error signing up, ",error)
         setErrorMessage(error.response.data.message)
-        
-      })
+    }
   }
   return (
     <>
