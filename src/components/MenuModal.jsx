@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 
 const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
 
-    const {isLoggedIn,user,logOutUser} = useAuth()
+    const {isLoggedIn,authUser,logOutUser} = useAuth()
     if(!isMenuModalOn) return(<></>)
     
 
@@ -41,7 +41,7 @@ const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
               className="px-1 pb-1"
               onClick={toggleMenuModal}
             >
-              {user.username}
+              {authUser.username}
             </NavLink>
           </li>
           <li className="w-[60%] text-center">

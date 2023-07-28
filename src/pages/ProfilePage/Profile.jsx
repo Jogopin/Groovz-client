@@ -4,8 +4,8 @@ import UserOrders from "./UserOrders";
 import ProfileDetails from "./ProfileDetails";
 
 export default function Profile() {
-  const { user } = useAuth();
-  const userId = user ? user._id : null;
+  const { authUser } = useAuth();
+  const authUserId = authUser ? authUser._id : null;
 
   const [openTab, setOpenTab] = useState(1);
 
@@ -59,8 +59,8 @@ export default function Profile() {
         </ul>
       </nav>
       <div className="mx-auto mt-10 sm:w-4/5 lg:w-2/5">
-        {openTab === 1 && <ProfileDetails userId={userId} />}
-        {openTab === 2 && <UserOrders userId={userId} />}
+        {openTab === 1 && <ProfileDetails userId={authUserId} />}
+        {openTab === 2 && <UserOrders userId={authUserId} />}
       </div>
     </>
   );

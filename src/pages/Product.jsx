@@ -13,7 +13,7 @@ const Product = () => {
   const [reviewsList, setReviewsList] = useState(null);
   const [numOfReviewsDisplayed, setNumOfReviewsDisplayed]= useState(3)
 
-  const { isLoggedIn, user } = useAuth()
+  const { isLoggedIn, authUser } = useAuth()
   
   const updateReviewsList = async () =>{
     try{
@@ -73,7 +73,7 @@ const Product = () => {
         />
         <RatingReviewInput
           productId={productId}
-          user={user}
+          user={authUser}
           isLoggedIn={isLoggedIn}
           updateReviewsList={updateReviewsList}
         />

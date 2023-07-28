@@ -11,7 +11,7 @@ const AuthContext = createContext();
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [authUser, setAuthUser] = useState(null)
 
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -30,7 +30,7 @@ function AuthProviderWrapper(props) {
       try {
         const response = await verifyUser();
         //If the server verifies that the JWT token is valid
-        setUser(response);
+        setAuthUser(response);
         setIsLoggedIn(true);
         setIsLoading(false);
       } catch (error) {
@@ -38,14 +38,14 @@ function AuthProviderWrapper(props) {
         // Update state variables
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUser(null);
+        setAuthUser(null);
         
       }
     }else{
        // If the token is not available (or is removed)
        setIsLoggedIn(false);
        setIsLoading(false);
-       setUser(null);
+       setAuthUser(null);
     }
   };
 
@@ -65,7 +65,7 @@ function AuthProviderWrapper(props) {
       value={{
         isLoggedIn,
         isLoading,
-        user,
+        authUser,
         storeToken,
         authenticateUser,
         logOutUser,

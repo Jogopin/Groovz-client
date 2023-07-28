@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
   
 
-  const { isLoggedIn, user, logOutUser } = useAuth();
+  const { isLoggedIn, authUser, logOutUser } = useAuth();
 
   
   const toggleMenuModal = (e) => {
@@ -93,7 +93,7 @@ const Navbar = () => {
                   className=" px-1 pb-1 hover:text-gray-300"
                   to={"/profile"}
                 >
-                  {user.username}
+                  {authUser.username}
                 </NavLink>
               </li>
               <li className="hidden lg:inline-block">

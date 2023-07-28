@@ -24,13 +24,13 @@ export default function ProfileDetails({ userId }) {
 
   const handleSaveClick = async () => {
     try {
-      const userData = {
+      const formUserData = {
         userId,
         firstName: profileUserDetails.firstName,
         lastName: profileUserDetails.lastName,
         address: profileUserDetails.address,
       };
-      await updateUserDetails(userData);
+      await updateUserDetails(formUserData);
     } catch (error) {
       console.log("error in saving the user details", error);
     } finally {

@@ -1,31 +1,42 @@
 import { useCart } from "../hooks/useCart";
 import { useEffect, useState } from "react";
-
 import { startCheckout, updateUserDetails } from "../services/api";
 import InputLabel from "../components/InputLabel";
 import { useAuth } from "../hooks/useAuth";
 import useUser from "../hooks/useUser";
+import EditableUserInfo from "../components/EditableUserInfo";
 
 export default function Checkout() {
-  const { cartProducts, totalPrice,addToCart,removeProductFromCart } = useCart();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
+  const { cartProducts, totalPrice, addToCart, removeProductFromCart } =
+    useCart();
+  const [checkoutUserDetails, setCheckoutUserDetails] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    email:""
+  });
+  
   const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(false);
-  const { user,isLoggedIn } = useAuth();
+  const { authUser, isLoggedIn } = useAuth();
 
-  const { userDetails } = useUser(user?._id);
+  const { userDetails } = useUser(authUser?._id);
 
   const canCheckout =
-    firstName && lastName && address && email && cartProducts.length > 0;
+    checkoutUserDetails.firstName &&
+    checkoutUserDetails.lastName &&
+    checkoutUserDetails.address &&
+    checkoutUserDetails.email &&
+    cartProducts.length > 0;
 
   useEffect(() => {
-    if(!isLoggedIn) return
-    setFirstName(userDetails.firstName ?? "");
-    setLastName(userDetails.lastName ?? "");
-    setAddress(userDetails.address ?? "");
-    setEmail(userDetails.email ?? "");
+    if (!isLoggedIn) return;
+    setCheckoutUserDetails({
+      firstName: userDetails.firstName ?? "",
+      lastName: userDetails.lastName ?? "",
+      address: userDetails.address ?? "",
+      email :userDetails.email ?? ""
+    });
+    
   }, [userDetails]);
 
   const saveUserDataInDB = async () => {
@@ -33,13 +44,13 @@ export default function Checkout() {
       return;
     }
     try {
-      const userData = {
-        userId: user._id,
-        firstName,
-        lastName,
-        address,
+      const formUserData = {
+        userId: authUser._id,
+        firstName: checkoutUserDetails.firstName,
+        lastName: checkoutUserDetails.lastName,
+        address: checkoutUserDetails.address,
       };
-      await updateUserDetails(userData);
+      await updateUserDetails(formUserData);
     } catch (error) {
       console.log("error in saving the user details", error);
     }
@@ -50,11 +61,11 @@ export default function Checkout() {
       return { reference: item.reference, quantity: item.quantity };
     });
     const customerData = {
-      firstName,
-      lastName,
-      address,
-      email,
-      userId: user ? user._id : null,
+      firstName: checkoutUserDetails.firstName,
+      lastName: checkoutUserDetails.lastName,
+      address: checkoutUserDetails.address,
+      email: checkoutUserDetails.email,
+      userId: authUser ? authUser._id : null,
     };
 
     try {
@@ -66,14 +77,12 @@ export default function Checkout() {
     }
   };
 
-  const handleClickMinus =(productData)=>{
-    removeProductFromCart(productData.reference)
-  }
-  const handleClickPlus =(productData)=>{
-    addToCart(productData)
-
-   
-  }
+  const handleClickMinus = (productData) => {
+    removeProductFromCart(productData.reference);
+  };
+  const handleClickPlus = (productData) => {
+    addToCart(productData);
+  };
   return (
     <>
       <div className="container mx-auto p-4">
@@ -111,13 +120,23 @@ export default function Checkout() {
                       <td className="py-4">
                         {/* Quantity Control */}
                         <div className="flex items-center justify-center">
-                          <button onClick={e=>{handleClickMinus(prod)}} className="ml-3 rounded-md border px-4 py-2">
+                          <button
+                            onClick={(e) => {
+                              handleClickMinus(prod);
+                            }}
+                            className="ml-3 rounded-md border px-4 py-2"
+                          >
                             -
                           </button>
                           <span className="w-8 text-center">
                             {prod.quantity}
                           </span>
-                          <button onClick={e=>{handleClickPlus(prod)}}  className="mr-2 rounded-md border px-4 py-2">
+                          <button
+                            onClick={(e) => {
+                              handleClickPlus(prod);
+                            }}
+                            className="mr-2 rounded-md border px-4 py-2"
+                          >
                             +
                           </button>
                         </div>
@@ -131,54 +150,25 @@ export default function Checkout() {
               </table>
             </section>
             {/* Customer Details */}
-            <section className="mb-4 rounded-lg bg-white p-6 shadow-md">
+            <section className="mb-4 flex flex-col gap-5 rounded-lg bg-white p-6 shadow-md">
               <h2 className="mb-4 text-lg font-semibold">Your Details</h2>
-              <div className="flex flex-wrap justify-evenly gap-3">
-                <div className="flex w-full gap-2">
-                  <InputLabel
-                    id={"name"}
-                    label={"Name"}
-                    input={{
-                      name: "firstName",
-                      value: firstName,
-                      onChange: (e) => setFirstName(e.target.value),
-                      placeholder: "John",
-                    }}
-                  />
-                  <InputLabel
-                    label={"Last Name"}
-                    id={"last-name"}
-                    input={{
-                      name: "lastName",
-                      value: lastName,
-                      onChange: (e) => setLastName(e.target.value),
-                      placeholder: "Doe",
-                    }}
-                  />
-                </div>
-                <InputLabel
-                  label={"Shipping address"}
-                  id={"address-input"}
-                  input={{
-                    name:"address",
-                    value: address,
-                    onChange: (e) => setAddress(e.target.value),
-                    placeholder: "Street, City, Country",
-                  }}
-                />
-                <InputLabel
-                  label={"Email"}
-                  id={"email"}
-                  input={{
-                    name: "email",
-                    value: email,
-                    onChange: (e) => setEmail(e.target.value),
-                    type: "email",
-                    placeholder: "johnDoe@example.com",
-                    disabled: user ? true : false,
-                  }}
-                />
-              </div>
+              <EditableUserInfo
+                authUserPersonalDetails={checkoutUserDetails}
+                setUserPersonalDetails={setCheckoutUserDetails}
+                isEditing={true}
+              />
+              <InputLabel
+                label={"Email"}
+                id={"email"}
+                input={{
+                  name: "email",
+                  value: checkoutUserDetails.email,
+                  onChange: setCheckoutUserDetails,
+                  type: "email",
+                  placeholder: "johnDoe@example.com",
+                  disabled: authUser ? true : false,
+                }}
+              />
 
               <label className="mx-2 my-4 block text-right text-xs font-medium text-gray-700 ">
                 {"Remember my details "}
