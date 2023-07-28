@@ -153,7 +153,7 @@ export default function Checkout() {
             <section className="mb-4 flex flex-col gap-5 rounded-lg bg-white p-6 shadow-md">
               <h2 className="mb-4 text-lg font-semibold">Your Details</h2>
               <EditableUserInfo
-                authUserPersonalDetails={checkoutUserDetails}
+                userPersonalDetails={checkoutUserDetails}
                 setUserPersonalDetails={setCheckoutUserDetails}
                 isEditing={true}
               />
