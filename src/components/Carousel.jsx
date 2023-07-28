@@ -46,7 +46,7 @@ const Carousel = ({ imagesList=[] }) => {
         {imagesList.map((img, imgIndex) => (
           <div
             className={`${
-              imgIndex === currentIndex ? `bg-red-700` : `bg-zinc-300`
+              imgIndex === currentIndex ? `bg-zinc-400` : `bg-zinc-300`
             } m-2 cursor-pointer rounded-md overflow-hidden`}
             key={imgIndex}
             onClick={() => {
