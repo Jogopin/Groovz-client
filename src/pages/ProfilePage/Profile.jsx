@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-
 import UserOrders from "./UserOrders";
 import ProfileDetails from "./ProfileDetails";
 
@@ -16,20 +15,17 @@ export default function Profile() {
   };
 
   return (
-    <div className="mx-auto mt-12">
-      <div className="m-auto flex max-w-xl flex-col items-center  text-zinc-800">
-        {/* TABS */}
-        <ul className="flex rounded-t-md bg-zinc-400 font-medium sm:text-base">
+    <>
+      <nav className="h-16 w-full bg-zinc-700">
+        <ul className="flex  h-full  items-center justify-evenly font-bold text-zinc-300">
           <li>
             <button
               onClick={(e) => {
                 handleTabClick(e, 1);
               }}
               className={` ${
-                openTab === 1
-                  ? "scale-105 rounded-t-md bg-zinc-300"
-                  : " rounded-bl-md rounded-tr-md "
-              }  flex space-x-2 px-4 py-2`}
+                openTab === 1 ? "active-white" : ""
+              }  flex space-x-2 p-2`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,34 +50,18 @@ export default function Profile() {
                 handleTabClick(e, 2);
               }}
               className={` ${
-                openTab === 2
-                  ? "scale-105 rounded-t-md bg-zinc-300"
-                  : " rounded-bl-md rounded-tr-md"
-              }  px-4 py-2`}
+                openTab === 2 ? "active-white" : ""
+              }  flex space-x-2 p-2`}
             >
               Orders
             </button>
           </li>
         </ul>
-        <div className="w-full  rounded-md border-b-4 border-l-2 border-zinc-400 bg-zinc-300 px-1 py-4 shadow-lg">
-          {/* Personal Details */}
-          <section
-            className={`${
-              openTab === 1 ? "block" : "hidden"
-            } relative my-4 flex flex-col items-center`}
-          >
-            <ProfileDetails userId={userId} />
-          </section>
-          {/* Orders */}
-          <section
-            className={`${
-              openTab === 2 ? "block" : "hidden"
-            } relative mx-auto my-4 flex w-5/6 flex-col`}
-          >
-            <UserOrders userId={userId} />
-          </section>
-        </div>
+      </nav>
+      <div className="mx-auto mt-10 sm:w-4/5 lg:w-2/5">
+        {openTab === 1 && <ProfileDetails userId={userId} />}
+        {openTab === 2 && <UserOrders userId={userId} />}
       </div>
-    </div>
+    </>
   );
 }
