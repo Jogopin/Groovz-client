@@ -18,8 +18,8 @@ const ProductCard = ({product}) => {
         {!inStock && <span className="absolute w-full flex items-center justify-center font-extrabold text-white text-xl bg-zinc-600/40 h-full">Out of Stock</span>}
       </Link>
       <div className="flex w-full items-center justify-between text-zinc-800">
-        <button onClick={()=>{addToCart(product)}} className="ease-in h-12 w-12 md:h-8 md:w-8 duration-200 hover:scale-125 disabled:cursor-not-allowed" disabled={!inStock}>
-          <img src={addCartIcon} />
+        <button onClick={()=>{addToCart(product)}} className="bg-red-700 p-1 rounded-md ease-in h-12 w-12 md:h-8 md:w-8 duration-200 hover:scale-125 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:bg-red-200" disabled={!inStock}>
+          <img className="invert " src={addCartIcon} alt="add-to-cart"/>
         </button>
         <div className="text-right">
           <h3 className="text-lg font-semibold ">{product.name}</h3>
