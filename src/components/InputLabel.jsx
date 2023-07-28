@@ -2,7 +2,7 @@ export default function InputLabel({
   input={},
   label,
   id,
-  className = "mt-1 w-full rounded-md border-2 border-zinc-300 px-2 py-1 sm:text-base disabled:border-none disabled:bg-white disabled:cursor-not-allowed",
+  className = "mt-1 w-full rounded-md border-2 border-zinc-300 px-2 py-1 sm:text-base disabled:border-transparent disabled:bg-white disabled:cursor-not-allowed disabled:font-medium",
   units = ""
 }) {
   const defaultInput ={
@@ -12,8 +12,8 @@ export default function InputLabel({
   const inputProperties={...defaultInput,...input}
 
   return (
-    <div className="m-2 w-full ">
-      <label htmlFor={id} className="block sm:text-xs font-medium text-zinc-700">
+    <div className="w-full">
+      <label htmlFor={id} className="block text-xs font-medium text-zinc-500">
         {label}
       </label>
 
@@ -22,7 +22,7 @@ export default function InputLabel({
         id={id}
         className={className}
       />
-      {units ? <span className="px-1 font-medium text-zinc-800">{units}</span> : null}
+      {units ? <span className="px-1 font-medium">{units}</span> : null}
     </div>
   );
 }
