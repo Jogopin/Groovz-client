@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import UserOrders from "./UserOrders";
 import ProfileDetails from "./ProfileDetails";
 
-export default function Profile() {
+export default function ProfilePage() {
   const { authUser } = useAuth();
   const authUserId = authUser ? authUser._id : null;
 
