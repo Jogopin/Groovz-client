@@ -1,9 +1,9 @@
 import { useCart } from "../hooks/useCart";
 import { useEffect, useState } from "react";
-import { startCheckout, updateUserDetails } from "../services/api";
+import { startCheckout } from "../services/api";
 import InputLabel from "../components/InputLabel";
 import { useAuth } from "../hooks/useAuth";
-import useUser from "../hooks/useUser";
+import useUserById from "../hooks/useUserById";
 import EditableUserInfo from "../components/EditableUserInfo";
 
 export default function Checkout() {
@@ -19,7 +19,7 @@ export default function Checkout() {
   const [isSaveAddressChecked, setIsSaveAddressChecked] = useState(false);
   const { authUser, isLoggedIn } = useAuth();
 
-  const { userDetails } = useUser(authUser?._id);
+  const { requestedUserDetails,saveUserDetails } = useUserById(authUser?._id);
 
   const canCheckout =
     checkoutUserDetails.firstName &&
@@ -31,13 +31,13 @@ export default function Checkout() {
   useEffect(() => {
     if (!isLoggedIn) return;
     setCheckoutUserDetails({
-      firstName: userDetails.firstName ?? "",
-      lastName: userDetails.lastName ?? "",
-      address: userDetails.address ?? "",
-      email :userDetails.email ?? ""
+      firstName: requestedUserDetails.firstName ?? "",
+      lastName: requestedUserDetails.lastName ?? "",
+      address: requestedUserDetails.address ?? "",
+      email :requestedUserDetails.email ?? ""
     });
     
-  }, [userDetails]);
+  }, [requestedUserDetails]);
 
   const saveUserDataInDB = async () => {
     if (!isSaveAddressChecked) {
@@ -50,7 +50,7 @@ export default function Checkout() {
         lastName: checkoutUserDetails.lastName,
         address: checkoutUserDetails.address,
       };
-      await updateUserDetails(formUserData);
+      await saveUserDetails(formUserData);
     } catch (error) {
       console.log("error in saving the user details", error);
     }

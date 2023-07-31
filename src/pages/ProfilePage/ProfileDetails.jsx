@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateUserDetails } from "../../services/api";
-import useUser from "../../hooks/useUser";
+import useUserById from "../../hooks/useUserById";
 import { doneIcon, editIcon, xIcon } from "../../assets/icons";
 import EditableUserInfo from "../../components/EditableUserInfo";
 import ButtonIcon from "../../components/ButtonIcon";
@@ -11,16 +10,16 @@ export default function ProfileDetails({ userId }) {
     lastName: "",
     address: "",
   });
-  const { userDetails } = useUser(userId);
+  const { requestedUserDetails,saveUserDetails } = useUserById(userId);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     setProfileUserDetails({
-      firstName: userDetails.firstName ?? "",
-      lastName: userDetails.lastName ?? "",
-      address: userDetails.address ?? "",
+      firstName: requestedUserDetails.firstName ?? "",
+      lastName: requestedUserDetails.lastName ?? "",
+      address: requestedUserDetails.address ?? "",
     });
-  }, [userDetails]);
+  }, [requestedUserDetails]);
 
   const handleSaveClick = async () => {
     try {
@@ -30,7 +29,8 @@ export default function ProfileDetails({ userId }) {
         lastName: profileUserDetails.lastName,
         address: profileUserDetails.address,
       };
-      await updateUserDetails(formUserData);
+      
+      await saveUserDetails(formUserData)
     } catch (error) {
       console.log("error in saving the user details", error);
     } finally {
@@ -53,7 +53,7 @@ export default function ProfileDetails({ userId }) {
             {"Username"}
           </label>
           <p className="mt-1 w-full px-2 py-1 font-medium sm:text-base">
-            {userDetails.username}
+            {requestedUserDetails.username}
           </p>
         </div>
         <div className="w-full">
@@ -61,17 +61,19 @@ export default function ProfileDetails({ userId }) {
             {"Email"}
           </label>
           <p className="mt-1 w-full px-2 py-1 font-medium sm:text-base">
-            {userDetails.email}
+            {requestedUserDetails.email}
           </p>
         </div>
       </section>
       {/* Name & Address*/}
       <section className="md:3/5 mx-auto mb-4 rounded-lg bg-white p-6 text-zinc-800 shadow-md">
+        {/* Input Form  Display*/}
         <EditableUserInfo
           userPersonalDetails={profileUserDetails}
           setUserPersonalDetails={setProfileUserDetails}
           isEditing={isEditing}
         />
+        {/* Edit Buttons */}
         <div className="mt-6 flex justify-end">
           {!isEditing ? (
             <ButtonIcon
