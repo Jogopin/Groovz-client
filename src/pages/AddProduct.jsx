@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputLabel from "../components/InputLabel";
 import { plusIcon } from "../assets/icons";
 import { uploadImage } from "../services/api";
+import { toast } from "react-hot-toast";
 
 export default function AddProduct({ addProductAndUpdateState }) {
   const [formState, setFormState] = useState({
@@ -14,6 +15,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
     category: "headphones",
   });
   const [imageUrlList, setImageUrlsList] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null)
 
   const handleOnChange = (e) => {
     setFormState((prevState) => ({
@@ -69,10 +71,12 @@ export default function AddProduct({ addProductAndUpdateState }) {
 
     try {
       await addProductAndUpdateState(newProduct);
-      console.log("new product created");
+      toast.success("Product created")
       resetForm()
     } catch (error) {
-      console.log("error creating a product");
+      
+      setErrorMessage(error.response.data.message)
+      toast.error("Error creating a product!")
     }
   };
 
@@ -87,6 +91,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
         onSubmit={handleSubmit}
         className="mx-auto my-10 flex flex-col items-center gap-4 md:w-3/5 lg:w-2/5 "
       >
+        {errorMessage ? <p className="text-sm text-red-500">{errorMessage}</p> : <></>}
+
         <InputLabel
           input={{
             name: "name",
@@ -128,7 +134,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
         </div>
         <div className="flex flex-row">
           {/* Price & Discount */}
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col gap-2">
             <InputLabel
               input={{
                 name: "price",
@@ -159,7 +165,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
           </div>
 
           {/* Stock & category */}
-          <div className="mx-auto flex flex-col">
+          <div className="mx-auto flex flex-col gap-2">
               <InputLabel
                 input={{
                   name: "stock",
@@ -174,9 +180,9 @@ export default function AddProduct({ addProductAndUpdateState }) {
                 units="u"
               />
              
-            <div className="m-2 w-full">
+            <div className="w-full">
               <label
-                className="block text-xs font-medium text-gray-700"
+                className="block text-xs font-medium text-zinc-500"
                 htmlFor="category"
               >
                 Category
@@ -212,6 +218,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
               </div>
             ))}
           </div>
+
         </div>
 
         <div className="m-auto flex gap-4">
