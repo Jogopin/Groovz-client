@@ -22,7 +22,7 @@ const Store = () => {
           </li>
         </ul>
       </nav>
-      {location.pathname === "/store" && <div className="flex justify-center items-center"> Still under construction </div>}
+      {/* {location.pathname === "/store" && <div className="flex justify-center items-center"> Still under construction </div>} */}
       <Outlet/>
       
       
