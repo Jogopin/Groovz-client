@@ -58,7 +58,7 @@ export default function ProfilePage() {
           </li>
         </ul>
       </nav>
-      <div className="mx-auto mt-10 sm:w-4/5 lg:w-2/5">
+      <div className="mx-auto mt-10 sm:w-4/5 lg:w-3/5 xl:w-32">
         {openTab === 1 && <ProfileDetails userId={authUserId} />}
         {openTab === 2 && <UserOrders userId={authUserId} />}
       </div>
