@@ -21,7 +21,6 @@ const Login = () => {
       authenticateUser()
       navigate("/")
     }catch(error){
-      console.log("error signing up, ",error)
       setErrorMessage(error.response.data.message)
     }
   }
@@ -52,6 +51,7 @@ const Login = () => {
             type:"password"
           }}
         />
+        {errorMessage ? <p className="text-sm text-red-500">{errorMessage}</p> : <></>}
         <p className="text-sm text-gray-500">
           {"Don't have an account yet? "}
           <Link to={"/signup"} className="font-bold underline">
@@ -60,8 +60,6 @@ const Login = () => {
         </p>
         <button className="btn-primary">Login</button>
       </form>
-
-      {errorMessage ? <p>{errorMessage}</p> : <></>}
     </>
   );
 };
