@@ -24,8 +24,7 @@ const Signup = () => {
     try{
       await signup(newUser)
       navigate("/login")
-    }catch(error){
-      console.log("error signing up, ",error)
+    }catch(error){      
         setErrorMessage(error.response.data.message)
     }
   }
@@ -64,8 +63,9 @@ const Signup = () => {
             type:"email"
           }}
         />
+      {errorMessage ? <p className="text-sm text-red-500">{errorMessage}</p> : <></>}
         <p className="text-sm text-gray-500">
-        {"Already have account? "}
+        {"Already have an account? "}
         <Link to={"/login"} className="font-bold underline">Login</Link> 
         </p>
         <button  className="btn-primary px-4 py-2">
@@ -73,7 +73,6 @@ const Signup = () => {
         </button>
       </form>
 
-      {errorMessage ? <p>{errorMessage}</p> : <></>}
       
     </>
   );
