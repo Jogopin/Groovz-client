@@ -10,6 +10,8 @@ import githubIcon from "./githubIcon.png"
 import linkedinIcon from "./linkedinIcon.png"
 import plusIcon from "./plusIcon.png"
 import editIcon from "./ediitIcon.png"
-
 import doneIcon from "./doneIcon.png"
-export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon, lessThanIcon, moreThanIcon, githubIcon, linkedinIcon,plusIcon, editIcon,doneIcon } 
+import orderDetailsIcon from "./orderDetailsIcon.png"
+import infoIcon from "./infoIcon.png"
+import upIcon from "./upIcon.png"
+export { cartIcon, searchIcon, logoIcon, menuIcon, xIcon, addCartIcon, lessThanIcon, moreThanIcon, githubIcon, linkedinIcon,plusIcon, editIcon,doneIcon,orderDetailsIcon,infoIcon,upIcon } 
