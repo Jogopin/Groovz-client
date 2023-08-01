@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import generateStarsArray from "../utils/generateStarsArray";
-import Star from "./Star";
-import { postReview } from "../services/api";
+import generateStarsArray from "../../utils/generateStarsArray";
+import Star from "../../components/RatingDisplay/Star";
+import { postReview } from "../../services/api";
 
 
 const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {

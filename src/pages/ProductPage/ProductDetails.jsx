@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Carousel from "./Carousel";
-import { addCartIcon } from "../assets/icons";
-import RatingDisplay from "./RatingDisplay";
-import { useCart } from "../hooks/useCart";
+import Carousel from "../../components/Carousel";
+import { addCartIcon } from "../../assets/icons";
+import RatingDisplay from "../../components/RatingDisplay/RatingDisplay";
+import { useCart } from "../../hooks/useCart";
 
 const ProductDetails = ({ productData, rating }) => {
   const {addToCart}=useCart()

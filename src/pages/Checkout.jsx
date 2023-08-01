@@ -124,7 +124,7 @@ export default function Checkout() {
                             onClick={(e) => {
                               handleClickMinus(prod);
                             }}
-                            className="ml-3 rounded-md border px-4 py-2"
+                            className="ml-3 rounded-md border px-3 py-1 hover:bg-zinc-300"
                           >
                             -
                           </button>
@@ -135,7 +135,7 @@ export default function Checkout() {
                             onClick={(e) => {
                               handleClickPlus(prod);
                             }}
-                            className="mr-2 rounded-md border px-4 py-2"
+                            className="mr-2 rounded-md border px-3 py-1 hover:bg-zinc-300"
                           >
                             +
                           </button>

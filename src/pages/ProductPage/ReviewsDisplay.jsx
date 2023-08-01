@@ -1,4 +1,4 @@
-import RatingDisplay from "./RatingDisplay";
+import RatingDisplay from "../../components/RatingDisplay/RatingDisplay";
 
 export default function ReviewsDisplay ({reviewsList, showMoreReviews, canShowMore}){
 

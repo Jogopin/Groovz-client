@@ -4,18 +4,18 @@ import Home from "./pages/Home";
 import Store from "./pages/Store";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Product from "./pages/Product";
+import ProductPage from "./pages/ProductPage/ProductPage";
 import ProductsList from "./pages/ProductsList";
 import AboutUs from "./pages/AboutUs";
 import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
-import useProducts from "./hooks/useProducts";
+import useProductLists from "./hooks/useProductList";
 import Success from "./pages/Success";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import IsPrivate from "./components/IsPrivate";
 
 function App() {
-  const { productsList,addProductAndUpdateState } = useProducts();
+  const { productsList,addProductAndUpdateState } = useProductLists();
 
   const headphonesList = productsList.filter(
     (item) => item.category === "headphones"
@@ -36,7 +36,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           {/* STORE */}
           <Route path="/store" element={<Store />}>
-            <Route index element={<ProductsList productsList={productsList} />}/>
+            <Route
+              index
+              element={<ProductsList productsList={productsList} />}
+            />
             <Route
               path="headphones"
               element={<ProductsList productsList={headphonesList} />}
@@ -45,16 +48,27 @@ function App() {
               path="speakers"
               element={<ProductsList productsList={speakersList} />}
             />
-            <Route path=":productId" element={<Product />} />
+            <Route path=":productId" element={<ProductPage />} />
           </Route>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
           {/* Profile */}
-          
-          <Route path="/profile" element={<IsPrivate><ProfilePage/></IsPrivate>} />
+
+          <Route
+            path="/profile"
+            element={
+              <IsPrivate>
+                <ProfilePage />
+              </IsPrivate>
+            }
+          />
           {/* Admin routes */}
-          <Route path="/add-product" element={<AddProduct addProductAndUpdateState={addProductAndUpdateState}/>} />
-        
+          <Route
+            path="/add-product"
+            element={
+              <AddProduct addProductAndUpdateState={addProductAndUpdateState} />
+            }
+          />
         </Routes>
       </div>
       <Footer />
