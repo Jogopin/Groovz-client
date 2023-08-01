@@ -36,9 +36,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           {/* STORE */}
           <Route path="/store" element={<Store />}>
+            <Route index element={<ProductsList productsList={productsList} />}/>
             <Route
               path="headphones"
-              index
               element={<ProductsList productsList={headphonesList} />}
             />
             <Route
@@ -50,6 +50,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
           {/* Profile */}
+          
           <Route path="/profile" element={<IsPrivate><ProfilePage/></IsPrivate>} />
           {/* Admin routes */}
           <Route path="/add-product" element={<AddProduct addProductAndUpdateState={addProductAndUpdateState}/>} />
