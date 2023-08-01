@@ -1,22 +1,17 @@
-import React from 'react'
-import ProductCard from '../components/ProductCard'
+import React from "react";
+import ProductCard from "../components/ProductCard";
 
-
-const ProductsList = ({productsList}) => {
-    
-  if (!productsList) return null
-  return (<div className='m-4 flex gap-y-8 gap-x-8 justify-center flex-wrap mt-8 xl:w-[1200px] lg:mx-auto'>
-  
-
-    {productsList.map(product=>(
-        <div key={product._id} className='w-8/12 md:w-3/12'>
-            <ProductCard product={product}/>
-
+const ProductsList = ({ productsList }) => {
+  if (!productsList) return null;
+  return (
+    <div className="m-4 mt-8 flex flex-wrap justify-center gap-x-8 gap-y-8 lg:mx-auto xl:w-[1200px]">
+      {productsList.map((product) => (
+        <div key={product._id} className="w-8/12 md:w-3/12">
+          <ProductCard product={product} />
         </div>
+      ))}
+    </div>
+  );
+};
 
-    ))}
-  </div>
-  )
-}
-
-export default ProductsList
+export default ProductsList;
