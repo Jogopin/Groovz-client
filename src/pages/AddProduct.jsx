@@ -56,7 +56,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
       //reset the value of the file input field 
       e.target.value = null
     } catch (error) {
-      console.log("Error while uploading the file: ", error);
+      // Errors comming from the api  are handled in the callApi function from api.js
     }
   };
 
@@ -70,13 +70,11 @@ export default function AddProduct({ addProductAndUpdateState }) {
     
 
     try {
-      await addProductAndUpdateState(newProduct);
-      toast.success("Product created")
+      await addProductAndUpdateState(newProduct);      
       resetForm()
-    } catch (error) {
-      
+      setErrorMessage(null)
+    } catch (error) {      
       setErrorMessage(error.response.data.message)
-      toast.error("Error creating a product!")
     }
   };
 
