@@ -1,10 +1,10 @@
-import { FooterBanner, HeroBanner } from "../components";
-import defImg from "../assets/imgs/defImg.webp";
-import defImgRed from "../assets/imgs/defImgRed.png"
-import PopularProducts from "../components/PopularProducts";
+import HeroBanner  from "./HeroBanner";
+import defImg from "../../assets/imgs/defImg.webp"
+import defImgRed from "../../assets/imgs/defImgRed.png"
+import PopularProducts from "./PopularProducts";
 
 
-const Home = ({productsList}) => {
+export default function HomePage({productsList}){
 
   const heroProduct = productsList.filter(item=>item.isHeroProduct===true)
   const demoProducts = [
@@ -33,10 +33,8 @@ const Home = ({productsList}) => {
       <HeroBanner heroProduct={heroProduct[0]}/>
 
       <PopularProducts productsList={demoProducts} />
-
-      <FooterBanner />
     </>
   );
 };
 
-export default Home;
+

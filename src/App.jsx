@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Footer, Navbar } from "./components";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage/HomePage";
 import Store from "./pages/Store";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -29,7 +29,7 @@ function App() {
       <div className="flex-grow">
         <Routes>
           {/* HOMEPAGE */}
-          <Route path="/" element={<Home productsList={productsList} />} />
+          <Route path="/" element={<HomePage productsList={productsList} />} />
           <Route path="/about-us" element={<AboutUs />} />
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
