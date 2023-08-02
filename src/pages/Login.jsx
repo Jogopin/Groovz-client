@@ -3,6 +3,8 @@ import InputLabel from "../components/InputLabel";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { login } from "../services/api";
+import { toast } from "react-hot-toast";
+import capitalize from "../utils/capitalize";
 
 
 const Login = () => {
@@ -19,6 +21,7 @@ const Login = () => {
       const response = await login({username,password})
       storeToken(response.authToken)
       authenticateUser()
+      toast.success(`Welcome ${capitalize(username)}!`);
       navigate("/")
     }catch(error){
       setErrorMessage(error.response.data.message)
