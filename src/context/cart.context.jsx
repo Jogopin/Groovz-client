@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+
 
 export const CartContext = createContext();
 
@@ -46,7 +48,9 @@ export function CartProviderWrapper({ children }) {
 
       if (newQuantity > MAX_QUANTITY) {
         newQuantity = MAX_QUANTITY;
-        console.log(`max ${MAX_QUANTITY} units in the cart`);
+        toast(`max ${MAX_QUANTITY} units in the cart`,{
+          icon:"⛔",
+        })
       }
 
       const productToCartUpdated = { ...productInCart, quantity: newQuantity };
