@@ -12,6 +12,7 @@ import Checkout from "./pages/Checkout";
 import useProductLists from "./hooks/useProductList";
 import Success from "./pages/Success";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import { Toaster } from "react-hot-toast";
 import IsPrivate from "./components/IsPrivate";
 
 function App() {
@@ -72,6 +73,12 @@ function App() {
         </Routes>
       </div>
       <Footer />
+      <Toaster 
+        toastOptions={{
+          duration:5000,
+          
+        }}
+      />
     </div>
   );
 }
