@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import InputLabel from "../components/InputLabel";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/api";
+import { Toaster, toast } from "react-hot-toast";
+import capitalize from "../utils/capitalize";
 
 
 const Signup = () => {
-
   const navigate = useNavigate()
   
   const [username,setUsername] = useState("")
@@ -23,6 +24,7 @@ const Signup = () => {
     }
     try{
       await signup(newUser)
+      toast.success(`Welcome, ${capitalize(username)}! Your account has been created successfully.`);
       navigate("/login")
     }catch(error){      
         setErrorMessage(error.response.data.message)
