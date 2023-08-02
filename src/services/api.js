@@ -1,5 +1,6 @@
 // api.js
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 // create a public axios instance for making requests that don't require authentication
 const publicAPI = axios.create({
@@ -20,14 +21,21 @@ export const setTokenInHeaders = (token) => {
 export const clearTokenHeaders = () => {
   delete privateAPI.defaults.headers.common["Authorization"];
 };
+const handleError = (error) => {
+  const errorMessage =
+    error.response?.data?.message ||
+    "Ups! Something has happened, please try again later.";
+  // console.error("toast", errorMessage);
+  toast.error(errorMessage);
+  throw error;
+};
 
 const callApi = async (apiMethod) => {
   try {
     const response = await apiMethod();
     return response.data;
   } catch (error) {
-    console.error("error.message", error.response.data.message);
-    throw error;
+    handleError(error);
   }
 };
 
