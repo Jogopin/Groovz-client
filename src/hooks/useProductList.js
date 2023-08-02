@@ -27,12 +27,11 @@ export default function useProductList(){
         setIsLoading(true)
         await createProduct(newProduct)
         await fetchProducts()
-        toast.success("Product added correctly")
+        toast.success("Product created")
         
       }catch(error){
         const message = error.response?.data?.message || "An error occurred while adding the product, please try again."
-        setErrorMessage(error)
-        toast.error(message)
+        setErrorMessage(message)
         throw error 
         
       }finally{
