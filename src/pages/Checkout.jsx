@@ -52,7 +52,7 @@ export default function Checkout() {
       };
       await saveUserDetails(formUserData);
     } catch (error) {
-      console.log("error in saving the user details", error);
+      // Errors comming from the api  are handled in the callApi function from api.js
     }
   };
 
@@ -73,7 +73,7 @@ export default function Checkout() {
       const url = await startCheckout({ productsToCheckout, customerData });
       window.location.href = url;
     } catch (error) {
-      console.log(error);
+      // Errors comming from the api  are handled in the callApi function from api.js
     }
   };
 
