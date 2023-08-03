@@ -15,6 +15,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { Toaster } from "react-hot-toast";
 import IsPrivate from "./components/IsPrivate";
 import IsAdmin from "./components/IsAdmin";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const { productsList, addProductAndUpdateState } = useProductLists();
@@ -75,6 +76,7 @@ function App() {
               </IsAdmin>
             }
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       <Footer />
