@@ -3,6 +3,7 @@ import useUserById from "../../hooks/useUserById";
 import { doneIcon, editIcon, xIcon } from "../../assets/icons";
 import EditableUserInfo from "../../components/EditableUserInfo";
 import ButtonIcon from "../../components/ButtonIcon";
+import { toast } from "react-hot-toast";
 
 export default function ProfileDetails({ userId }) {
   const [profileUserDetails, setProfileUserDetails] = useState({
@@ -22,6 +23,7 @@ export default function ProfileDetails({ userId }) {
   }, [requestedUserDetails]);
 
   const handleSaveClick = async () => {
+    
     try {
       const formUserData = {
         userId,
@@ -31,13 +33,14 @@ export default function ProfileDetails({ userId }) {
       };
       
       await saveUserDetails(formUserData)
+      toast.success("Great! Your profile is now up to date.");
     } catch (error) {
-      console.log("error in saving the user details", error);
+      // Errors comming from the api  are handled in the callApi function from api.js
     } finally {
       setIsEditing(false);
     }
   };
-
+  
   const handleEditClick = () => {
     setIsEditing(true);
   };
