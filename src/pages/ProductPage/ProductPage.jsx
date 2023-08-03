@@ -5,7 +5,7 @@ import ReviewsDisplay from "./ReviewsDisplay";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
-import { useProductData } from "../../hooks/useProductData"; // Update the path
+import { useProductData } from "../../hooks/useProductData";
 
 export default function ProductPage(){
   const { productId } = useParams();
