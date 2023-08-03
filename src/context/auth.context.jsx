@@ -11,6 +11,7 @@ const AuthContext = createContext();
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin,setIsAdmin]= useState(false)
   const [authUser, setAuthUser] = useState(null)
 
   const storeToken = (token) => {
@@ -29,16 +30,20 @@ function AuthProviderWrapper(props) {
       setTokenInHeaders(storedToken);
       try {
         const response = await verifyUser();
+        const {isAdmin} = response
         //If the server verifies that the JWT token is valid
         setAuthUser(response);
         setIsLoggedIn(true);
         setIsLoading(false);
+        setIsAdmin(isAdmin)
+
       } catch (error) {
         // If the server sends an error response (invalid token)
         // Update state variables
         setIsLoggedIn(false);
         setIsLoading(false);
         setAuthUser(null);
+        setIsAdmin(false)
         removeToken()
         
       }
@@ -47,6 +52,7 @@ function AuthProviderWrapper(props) {
        setIsLoggedIn(false);
        setIsLoading(false);
        setAuthUser(null);
+       setIsAdmin(false)
     }
   };
 
@@ -70,6 +76,7 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logOutUser,
+        isAdmin,
       }}
     >
       {props.children}

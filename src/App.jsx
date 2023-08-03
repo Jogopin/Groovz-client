@@ -14,9 +14,10 @@ import Success from "./pages/Success";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import { Toaster } from "react-hot-toast";
 import IsPrivate from "./components/IsPrivate";
+import IsAdmin from "./components/IsAdmin";
 
 function App() {
-  const { productsList,addProductAndUpdateState } = useProductLists();
+  const { productsList, addProductAndUpdateState } = useProductLists();
 
   const headphonesList = productsList.filter(
     (item) => item.category === "headphones"
@@ -67,16 +68,19 @@ function App() {
           <Route
             path="/add-product"
             element={
-              <AddProduct addProductAndUpdateState={addProductAndUpdateState} />
+              <IsAdmin>
+                <AddProduct
+                  addProductAndUpdateState={addProductAndUpdateState}
+                />
+              </IsAdmin>
             }
           />
         </Routes>
       </div>
       <Footer />
-      <Toaster 
+      <Toaster
         toastOptions={{
-          duration:5000,
-          
+          duration: 5000,
         }}
       />
     </div>
