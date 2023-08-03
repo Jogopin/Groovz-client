@@ -13,7 +13,7 @@ export default function useUserById(userId) {
         const response = await getUserDetails(userId);
         setRequestedUserDetails(response);
       } catch (error) {
-        console.error(error);
+        // Errors comming from the api  are handled in the callApi function from api.js
       }
     };
     loadUserDetails();
@@ -26,7 +26,8 @@ export default function useUserById(userId) {
         return response
 
     }catch(error){
-        console.error("Error updating the user",error)
+      // Propagate the error to the caller
+      throw error
     }    
 
   }
