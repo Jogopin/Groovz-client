@@ -5,7 +5,7 @@ import { postReview } from "../../services/api";
 import { toast } from "react-hot-toast";
 
 
-const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
+const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
   const [hover, setHover] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -32,7 +32,7 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
     }
     try{
       await postReview(reviewData)
-      updateReviews()
+      updateReviewsList()
       toast.success("Thank you for your review! Your feedback helps us and others.")
     }catch(error){
       // Errors comming from the api  are handled in the callApi function from api.js
