@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import generateStarsArray from "../../utils/generateStarsArray";
 import Star from "../../components/RatingDisplay/Star";
 import { postReview } from "../../services/api";
+import { toast } from "react-hot-toast";
 
 
 const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
@@ -15,11 +16,11 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
   const handleSubmit = async (e)=>{
     e.preventDefault()
     if(!isLoggedIn){
-      console.log("Error, only users can post reviews")
+      toast.error("Only users can post reviews")
       return
     }
     if( rating===0 ) {
-      console.log("Error, please select a rating 1-5")
+      toast.error("Please select a rating before posting a review")
       return
     }
     
@@ -32,8 +33,10 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviews}) => {
     try{
       await postReview(reviewData)
       updateReviews()
+      toast.success("Thank you for your review! Your feedback helps us and others.")
     }catch(error){
-      console.log("error in postReview",error)
+      // Errors comming from the api  are handled in the callApi function from api.js
+
     }
     
   }
