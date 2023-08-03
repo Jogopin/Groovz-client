@@ -39,6 +39,7 @@ function AuthProviderWrapper(props) {
         setIsLoggedIn(false);
         setIsLoading(false);
         setAuthUser(null);
+        removeToken()
         
       }
     }else{
