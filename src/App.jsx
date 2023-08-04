@@ -27,9 +27,10 @@ function App() {
     (item) => item.category === "speakers"
   );
   return (
-    <div className="App flex min-h-screen flex-col">
+    <div className="Apsp flex min-h-screen flex-col">
       <Navbar />
-      <div className="flex-grow">
+      <div className="flex-grow flex flex-col">
+     
         <Routes>
           {/* HOMEPAGE */}
           <Route path="/" element={<HomePage productsList={productsList} />} />
@@ -78,7 +79,9 @@ function App() {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+      
       </div>
+      
       <Footer />
       <Toaster
         toastOptions={{
