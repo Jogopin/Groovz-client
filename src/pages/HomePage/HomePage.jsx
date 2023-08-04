@@ -1,38 +1,18 @@
 import HeroBanner  from "./HeroBanner";
 import defImg from "../../assets/imgs/defImg.webp"
 import defImgRed from "../../assets/imgs/defImgRed.png"
-import PopularProducts from "./PopularProducts";
+import FavoriteProducts from "./FavoriteProducts";
 
 
 export default function HomePage({productsList}){
 
   const heroProduct = productsList.filter(item=>item.isHeroProduct===true)
-  const demoProducts = [
-    {
-      _id: 1,
-      name: "Lorem Ipsum HQ",
-      price: "99",
-      images:[defImg,defImgRed],
-    },
-    {
-      _id: 2,
-      name: "Lorem Ipsum HQ",
-      price: "199",
-      images:[defImg,defImgRed],
-    },
-    {
-      _id: 3,
-      name: "Lorem Ipsum HQ",
-      price: "250",
-      images:[defImg,defImgRed],
-      
-    },
-  ];
+  const favoriteProducts = productsList.filter(item=>item.isFavorite === true)
   return (
     <>
       <HeroBanner heroProduct={heroProduct[0]}/>
 
-      <PopularProducts productsList={demoProducts} />
+      <FavoriteProducts productsList={favoriteProducts} />
     </>
   );
 };
