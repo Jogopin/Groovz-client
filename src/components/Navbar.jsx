@@ -7,13 +7,14 @@ import SearchBar from "./SearchBar";
 
 import Cart from "./Cart";
 import { useAuth } from "../hooks/useAuth";
+import capitalize from "../utils/capitalize";
 
 
 const Navbar = () => {
   const [isMenuModalOn, setIsMenuModalOn] = useState(false);
   const [isSearchBarOn, setIsSearchBarOn] = useState(false);
   
-
+  
   const { isLoggedIn, authUser, logOutUser } = useAuth();
 
   
@@ -93,7 +94,7 @@ const Navbar = () => {
                   className=" px-1 pb-1 hover:text-gray-300"
                   to={"/profile"}
                 >
-                  {authUser.username}
+                  {capitalize(authUser.username)}
                 </NavLink>
               </li>
               <li className="hidden lg:inline-block">
