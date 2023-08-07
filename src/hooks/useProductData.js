@@ -11,8 +11,7 @@ export const useProductData = (productId) => {
       const reviewsArray = await getReviewsFromProduct(productId);
       setReviewsList(reviewsArray);
     } catch (error) {
-      console.error("Error updating the reviews");
-      
+      // Errors comming from the api  are handled in the callApi function from api.js    
     }
   };
 
