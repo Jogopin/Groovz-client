@@ -10,6 +10,9 @@ const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
 
 
   return (
+    <>
+    <div className="fixed inset-0 bg-zinc-800/50 z-20" onClick={toggleMenuModal}></div>
+
     <nav className="fixed right-0 top-0 z-30 flex h-[500px] w-[330px] flex-col justify-between rounded-md bg-zinc-800 pb-10 pt-16 text-white lg:hidden">
       {/* Hidden NavLinks */}
       <ul className="flex w-full flex-col items-center gap-12">
@@ -80,6 +83,7 @@ const MenuModal = ({ isMenuModalOn, toggleMenuModal }) => {
         </ul>
       )}
     </nav>
+    </>
   );
 }
 
