@@ -25,6 +25,12 @@
     color: white;
     background: #b91c1c;
 }
+@media (max-width: 768px) {
+    :hover {
+      transform: none !important;
+      box-shadow: none !important;
+    }
+  }
 /* :focus{
    border-color: #b91c1c;
 } */
