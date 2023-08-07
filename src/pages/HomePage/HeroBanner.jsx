@@ -22,7 +22,7 @@ const HeroBanner = ({heroProduct}) => {
         <span className="text-xl font-bold uppercase tracking-tight text-red-700">
           lorem ipsum
         </span>
-        <h1 className="-ml-1 mb-2 text-7xl font-bold tracking-tight">
+        <h1 className="-ml-1 mb-2 text-7xl font-bold tracking-tight break-words">
         {heroProduct.name}
         </h1>
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
