@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { Footer, Navbar } from "./components";
+import { Footer } from "./components";
+
 import HomePage from "./pages/HomePage/HomePage";
 import Store from "./pages/Store";
 import Login from "./pages/Login";
@@ -16,6 +17,7 @@ import { Toaster } from "react-hot-toast";
 import IsPrivate from "./components/IsPrivate";
 import IsAdmin from "./components/IsAdmin";
 import NotFoundPage from "./pages/NotFoundPage";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { productsList, addProductAndUpdateState } = useProductLists();

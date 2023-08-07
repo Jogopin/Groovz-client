@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { logoIcon, menuIcon, searchIcon, xIcon } from "../assets/icons";
+import { logoIcon, menuIcon, searchIcon, xIcon } from "../../assets/icons";
 import MenuModal from "./MenuModal";
 import SearchBar from "./SearchBar";
 
-import Cart from "./Cart";
-import { useAuth } from "../hooks/useAuth";
-import capitalize from "../utils/capitalize";
+import Cart from "../Cart";
+import { useAuth } from "../../hooks/useAuth";
+import capitalize from "../../utils/capitalize";
 
 
 const Navbar = () => {
