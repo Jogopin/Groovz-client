@@ -20,7 +20,7 @@ const Cart = () => {
           className="object-contain invert hover:invert-[70%]"
         />
         {cartProducts.length === 0 ? null :
-        <span class="absolute -right-2 -top-2 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{cartProducts.length}</span>
+        <span className="absolute -right-2 -top-2 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{cartProducts.length}</span>
         
         }
       </button>
