@@ -18,6 +18,7 @@ import IsPrivate from "./components/IsPrivate";
 import IsAdmin from "./components/IsAdmin";
 import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar/Navbar";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   const { productsList, addProductAndUpdateState } = useProductLists();
@@ -58,6 +59,7 @@ function App() {
           </Route>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
+          <Route path="/contact" element ={<ContactPage/>} />
           {/* Profile */}
 
           <Route
@@ -87,7 +89,7 @@ function App() {
       <Footer />
       <Toaster
         toastOptions={{
-          duration: 5000,
+          duration: 4000,
         }}
       />
     </div>
