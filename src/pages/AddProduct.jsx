@@ -3,6 +3,7 @@ import InputLabel from "../components/InputLabel";
 import { plusIcon } from "../assets/icons";
 import { uploadImage } from "../services/api";
 import { toast } from "react-hot-toast";
+import ButtonText from "../components/ButtonText";
 
 export default function AddProduct({ addProductAndUpdateState }) {
   const [formState, setFormState] = useState({
@@ -221,10 +222,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
         </div>
 
         <div className="m-auto flex gap-4">
-          <button className="btn-primary m-auto">Add Product</button>
-          <button onClick={handleCancel} className="btn-primary m-auto">
-            Cancel
-          </button>
+          <ButtonText  text={"Add Product"}/>
+          <ButtonText handleClick={handleCancel} text={"Cancel"} variant={"secondary"}/>
         </div>
       </form>
     </div>

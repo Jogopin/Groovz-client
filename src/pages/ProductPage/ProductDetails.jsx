@@ -3,6 +3,7 @@ import Carousel from "../../components/Carousel";
 import { addCartIcon } from "../../assets/icons";
 import RatingDisplay from "../../components/RatingDisplay/RatingDisplay";
 import { useCart } from "../../hooks/useCart";
+import ButtonText from "../../components/ButtonText";
 
 const ProductDetails = ({ productData, rating }) => {
   const {addToCart}=useCart()
@@ -64,11 +65,8 @@ const ProductDetails = ({ productData, rating }) => {
             </button>
           </div>
           {/* Add to cart button */}
-          <button onClick={handleAddToCart} className="btn-primary flex h-14  items-center justify-evenly" disabled={productData.stock<quantity || quantity===0}>
-            <img src={addCartIcon} className="w-8 invert" alt="Cart-Icon"/>
-            {inStock ? <span>Add to the cart</span> : <span>Out of stock</span>}
-            
-          </button>
+          <ButtonText handleClick={handleAddToCart} text={inStock ? "Add to the cart" :"Out of stock"} iconImage={addCartIcon}/>
+          
         </div>
       </div>
     </div>

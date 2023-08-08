@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ButtonText from "../../components/ButtonText";
 
 const HeroBanner = ({heroProduct}) => {
-   
+   const navigate = useNavigate()
   if(!heroProduct){
     
     return <p>"Loading"</p>
@@ -27,11 +28,7 @@ const HeroBanner = ({heroProduct}) => {
         </h1>
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
 
-        <Link to={`/store/${heroProduct._id}`}>
-          <button className="mt-5 rounded-[30px] bg-zinc-800 px-8 py-4 font-bold text-white hover:bg-red-700">
-           SHOP
-          </button>
-        </Link>
+        <ButtonText text={"SHOP"} handleClick={()=>{navigate(`/store/${heroProduct._id}`)}} />
       </div>
     </section>
   );

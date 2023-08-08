@@ -3,6 +3,7 @@ import InputLabel from "../components/InputLabel";
 import { sendContactMessage } from "../services/api";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../hooks/useAuth";
+import ButtonText from "../components/ButtonText";
 
 export default function ContactPage() {
   const { authUser, isLoggedIn } = useAuth();
@@ -101,8 +102,9 @@ export default function ContactPage() {
         ) : (
           <></>
         )} */}
-
-          <button className="btn-primary px-4 py-2">Send message</button>
+        
+            <ButtonText text={"Send message"}/>
+          
         </form>
       </section>
     </>
