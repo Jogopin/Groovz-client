@@ -40,6 +40,7 @@ export function CartProviderWrapper({ children }) {
       setCartProducts((prevState) => {
         return [...prevState, {...productToCart,quantity}];
       });
+      toast.success(`added to the cart`)
       
     // if the product is in the cart
     } else {
@@ -47,10 +48,11 @@ export function CartProviderWrapper({ children }) {
       let newQuantity = productInCart.quantity + quantity;
 
       if (newQuantity > MAX_QUANTITY) {
-        newQuantity = MAX_QUANTITY;
+        
         toast(`max ${MAX_QUANTITY} units in the cart`,{
           icon:"⛔",
         })
+        return
       }
 
       const productToCartUpdated = { ...productInCart, quantity: newQuantity };
@@ -60,7 +62,9 @@ export function CartProviderWrapper({ children }) {
         newCart[indexOfProduct] = productToCartUpdated;
         return newCart;
       });
+      
     }
+    toast.success(`added to the cart`)
   };
 
   const removeProductFromCart = (productRef) => {
