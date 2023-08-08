@@ -9,12 +9,12 @@ const ReviewDetails = ({ review, closeReview }) =>
         onClick={closeReview}
       ></div>
       <div
-        className="absolute z-30 flex flex-col items-center gap-4 border-2 bg-white p-10 px-2 md:w-3/4"
+        className="absolute z-30 flex flex-col items-center gap-4 rounded-md border-2 bg-white p-10 px-2 md:w-3/4"
         key={review._id}
       >
         <span className="text-lg font-semibold">{review.user.username}</span>
         <RatingDisplay rating={review.rating} />
-        <p className="w-3/5 text-center text-zinc-500">{review.reviewText}</p>
+        <p className="px-5 text-center text-zinc-500">{review.reviewText}</p>
       </div>
     </>
   );
@@ -22,7 +22,7 @@ const ReviewDetails = ({ review, closeReview }) =>
 const ReviewItem = ({ review, onClick }) => (
   <div
     onClick={onClick}
-    className="flex flex-col items-center gap-4 px-2 md:w-1/4"
+    className="flex flex-col items-center gap-4 px-2 hover:cursor-pointer md:w-1/4"
   >
     <span className="text-lg font-semibold">{review.user.username}</span>
     <RatingDisplay rating={review.rating} />
