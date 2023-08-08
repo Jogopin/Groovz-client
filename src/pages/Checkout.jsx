@@ -163,7 +163,7 @@ export default function Checkout() {
                 input={{
                   name: "email",
                   value: checkoutUserDetails.email,
-                  onChange: setCheckoutUserDetails,
+                  onChange: (e)=>setCheckoutUserDetails(prevState=>({...prevState,[e.target.name]:e.target.value})),
                   type: "email",
                   placeholder: "johnDoe@example.com",
                   disabled: authUser ? true : false,
