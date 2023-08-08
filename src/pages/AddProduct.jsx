@@ -71,6 +71,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
 
     try {
       await addProductAndUpdateState(newProduct);      
+      toast.success(`${formState.name} created correctly`)
       resetForm()
       setErrorMessage(null)
     } catch (error) {      
