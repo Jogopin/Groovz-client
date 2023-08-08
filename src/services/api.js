@@ -97,3 +97,6 @@ export const login = ({ username, password }) =>
   callApi(() => publicAPI.post("/auth/login", { username, password }));
 
 export const verifyUser = () => callApi(() => privateAPI.get("/auth/verify"));
+
+export const sendContactMessage= ({email,subject,message}) =>callApi(()=>publicAPI.post("/contact",{email,subject,message}))
+
