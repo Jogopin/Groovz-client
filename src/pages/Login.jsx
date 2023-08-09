@@ -5,6 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 import { login } from "../services/api";
 import { toast } from "react-hot-toast";
 import capitalize from "../utils/capitalize";
+import ButtonText from "../components/ButtonText";
 
 
 const Login = () => {
@@ -61,7 +62,8 @@ const Login = () => {
             Sign Up
           </Link>
         </p>
-        <button className="btn-primary">Login</button>
+        <ButtonText text={"Login"}/>
+        
       </form>
     </>
   );

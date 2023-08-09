@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ButtonText from "../../components/ButtonText";
 
-const HeroBanner = ({heroProduct}) => {
-   
-  if(!heroProduct){
-    
-    return <p>"Loading"</p>
+const HeroBanner = ({ heroProduct }) => {
+  const navigate = useNavigate();
+  if (!heroProduct) {
+    return <p>"Loading"</p>;
   }
   return (
     <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
@@ -18,20 +18,24 @@ const HeroBanner = ({heroProduct}) => {
       </div>
 
       {/* TEXT */}
-      <div className="pb-10 pl-10 ">
+      <div className="pb-10 pl-10 flex flex-col ">
         <span className="text-xl font-bold uppercase tracking-tight text-red-700">
           lorem ipsum
         </span>
-        <h1 className="-ml-1 mb-2 text-7xl font-bold tracking-tight break-words">
-        {heroProduct.name}
+        <h1 className="-ml-1 mb-2 break-words text-7xl font-bold tracking-tight">
+          {heroProduct.name}
         </h1>
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
+        <div className="self-start mt-3">
+          <ButtonText
+            text={"Shop"}
+            handleClick={() => {
+              navigate(`/store/${heroProduct._id}`);
+            }}
+          />
 
-        <Link to={`/store/${heroProduct._id}`}>
-          <button className="mt-5 rounded-[30px] bg-zinc-800 px-8 py-4 font-bold text-white hover:bg-red-700">
-           SHOP
-          </button>
-        </Link>
+        </div>
+        
       </div>
     </section>
   );

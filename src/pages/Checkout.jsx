@@ -5,6 +5,7 @@ import InputLabel from "../components/InputLabel";
 import { useAuth } from "../hooks/useAuth";
 import useUserById from "../hooks/useUserById";
 import EditableUserInfo from "../components/EditableUserInfo";
+import ButtonText from "../components/ButtonText";
 
 export default function Checkout() {
   const { cartProducts, totalPrice, addToCart, removeProductFromCart } =
@@ -199,13 +200,7 @@ export default function Checkout() {
                 <span className="font-semibold">Total</span>
                 <span className="font-semibold">€{totalPrice}</span>
               </div>
-              <button
-                className="btn-primary mt-4 w-full"
-                onClick={handleCheckOut}
-                disabled={!canCheckout}
-              >
-                Checkout
-              </button>
+              <ButtonText text={"Checkout"} onClick={handleCheckOut} disabled={!canCheckout}/>
             </div>
           </section>
         </div>

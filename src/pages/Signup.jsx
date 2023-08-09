@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/api";
 import { Toaster, toast } from "react-hot-toast";
 import capitalize from "../utils/capitalize";
+import ButtonText from "../components/ButtonText";
 
 
 const Signup = () => {
@@ -70,9 +71,7 @@ const Signup = () => {
         {"Already have an account? "}
         <Link to={"/login"} className="font-bold underline">Login</Link> 
         </p>
-        <button  className="btn-primary px-4 py-2">
-          Sign up
-        </button>
+        <ButtonText text={"Sign up"}/>
       </form>
 
       

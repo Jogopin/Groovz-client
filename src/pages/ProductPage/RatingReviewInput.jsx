@@ -3,6 +3,7 @@ import generateStarsArray from "../../utils/generateStarsArray";
 import Star from "../../components/RatingDisplay/Star";
 import { postReview } from "../../services/api";
 import { toast } from "react-hot-toast";
+import ButtonText from "../../components/ButtonText";
 
 
 const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
@@ -78,8 +79,8 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
         ))}
         {/* <span className="ml-2 font-semibold">{rating ? rating : null}</span> */}
       </div>
-
-      <button className="h-14 w-2/4 md:w-1/4 lg:w-[10rem] btn-primary">Submit</button>
+        <ButtonText text={"Submit"} />
+    
     </form>
   );
 };
