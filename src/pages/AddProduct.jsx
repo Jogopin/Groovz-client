@@ -184,7 +184,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
                 }}
                 id="stock"
                 label="Stock"
-                className="mt-1 w-40 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
+                className="mt-1 w-36 rounded-md border-2 border-zinc-300 px-2 sm:text-sm"
                 units="u"
               />
              
