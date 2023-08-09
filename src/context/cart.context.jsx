@@ -40,7 +40,7 @@ export function CartProviderWrapper({ children }) {
       setCartProducts((prevState) => {
         return [...prevState, {...productToCart,quantity}];
       });
-      toast.success(`added to the cart`)
+      
       
     // if the product is in the cart
     } else {
