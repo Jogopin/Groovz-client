@@ -4,7 +4,7 @@ import ButtonText from "../../components/ButtonText";
 
 const HeroBanner = ({ heroProduct}) => {
   const navigate = useNavigate();
-
+  if(!heroProduct)return 
   return (
     <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
       {/* IMAGE */}
