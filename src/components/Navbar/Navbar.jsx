@@ -1,30 +1,18 @@
 import React, { useState } from "react";
-
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import { logoIcon, menuIcon, searchIcon, xIcon } from "../../assets/icons";
 import MenuModal from "./MenuModal";
-import SearchBar from "./SearchBar";
-
 import Cart from "../Cart";
 import { useAuth } from "../../hooks/useAuth";
 import capitalize from "../../utils/capitalize";
 
 
 const Navbar = () => {
-  const [isMenuModalOn, setIsMenuModalOn] = useState(false);
-  const [isSearchBarOn, setIsSearchBarOn] = useState(false);
-  
-  
+  const [isMenuModalOn, setIsMenuModalOn] = useState(false);  
   const { isLoggedIn, authUser, logOutUser } = useAuth();
-
   
   const toggleMenuModal = (e) => {
     setIsMenuModalOn((prevState) => !prevState);
-  };
-
-  const toggleSearchBar = (e) => {
-    e.preventDefault();
-    setIsSearchBarOn((prevState) => !prevState);
   };
 
   return (
@@ -49,32 +37,7 @@ const Navbar = () => {
           </NavLink>
         </li>
       </ul>
-
-      {/* Right Side */}
-      {isSearchBarOn ? (
         <ul className="flex flex-1 items-center justify-end gap-5 lg:gap-4">
-          <li>
-            <SearchBar
-              isSearchBarOn={isSearchBarOn}
-              toggleSearchBar={toggleSearchBar}
-            />
-          </li>
-          <li className="flex h-7 w-7">
-            <button onClick={toggleSearchBar} className="h-6 w-6">
-              <img src={xIcon} className="invert hover:invert-[70%]" />
-            </button>
-          </li>
-        </ul>
-      ) : (
-        <ul className="flex flex-1 items-center justify-end gap-5 lg:gap-4">
-          <li className="flex h-7 w-7">
-            <button onClick={toggleSearchBar} className="m-auto h-7 w-6">
-              <img
-                src={searchIcon}
-                className="object-contain invert hover:invert-[70%]"
-              />
-            </button>
-          </li>
           <li>
             <Cart />
           </li>
@@ -127,7 +90,7 @@ const Navbar = () => {
             </>
           )}
         </ul>
-      )}
+      
 
       <MenuModal
         isMenuModalOn={isMenuModalOn}

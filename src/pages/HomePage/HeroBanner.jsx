@@ -6,7 +6,7 @@ const HeroBanner = ({ heroProduct}) => {
   const navigate = useNavigate();
   if(!heroProduct)return 
   return (
-    <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
+    <section className="flex w-full flex-col  space-y-5 rounded-b-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
       {/* IMAGE */}
       <div className="flex flex-col items-center ">
         <img src={heroProduct.images[0]} alt="headphones" className="mr-0" />
