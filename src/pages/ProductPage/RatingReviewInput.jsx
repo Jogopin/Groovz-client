@@ -46,14 +46,14 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
     
   }
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8 m-auto items-center border-2 rounded-md w-96 p-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-8 m-auto items-center border-2 rounded-md w-96 p-8">
 
       {/* reviewText input */}
       <label>
         <textarea
           placeholder="Enter your review"
           rows="4"
-          cols="40"
+          cols="36"
           className="rounded-md border-2 p-2"
           value={reviewText}
           onChange={(e) => {
