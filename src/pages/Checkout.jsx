@@ -200,7 +200,7 @@ export default function Checkout() {
                 <span className="font-semibold">Total</span>
                 <span className="font-semibold">€{totalPrice}</span>
               </div>
-              <ButtonText text={"Checkout"} onClick={handleCheckOut} disabled={!canCheckout}/>
+              <ButtonText text={"Checkout"} handleClick={handleCheckOut} disabled={!canCheckout}/>
             </div>
           </section>
         </div>
