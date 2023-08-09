@@ -2,11 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ButtonText from "../../components/ButtonText";
 
-const HeroBanner = ({heroProduct}) => {
-   const navigate = useNavigate()
-  if(!heroProduct){
-    
-    return <p>"Loading"</p>
+const HeroBanner = ({ heroProduct }) => {
+  const navigate = useNavigate();
+  if (!heroProduct) {
+    return <p>"Loading"</p>;
   }
   return (
     <section className="flex w-full flex-col  space-y-5 rounded-lg  bg-zinc-300 md:flex-row-reverse md:items-center md:justify-center">
@@ -23,12 +22,18 @@ const HeroBanner = ({heroProduct}) => {
         <span className="text-xl font-bold uppercase tracking-tight text-red-700">
           lorem ipsum
         </span>
-        <h1 className="-ml-1 mb-2 text-7xl font-bold tracking-tight break-words">
-        {heroProduct.name}
+        <h1 className="-ml-1 mb-2 break-words text-7xl font-bold tracking-tight">
+          {heroProduct.name}
         </h1>
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
-
-        <ButtonText text={"SHOP"} handleClick={()=>{navigate(`/store/${heroProduct._id}`)}} />
+       
+          <ButtonText
+            text={"Shop"}
+            handleClick={() => {
+              navigate(`/store/${heroProduct._id}`);
+            }}
+          />
+        
       </div>
     </section>
   );
