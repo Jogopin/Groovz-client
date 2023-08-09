@@ -1,8 +1,9 @@
 import React from "react";
 import ProductCard from "../components/ProductCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
-const ProductsList = ({ productsList }) => {
-  if (!productsList) return null;
+const ProductsList = ({ productsList,isLoading }) => {
+  if (isLoading) return <LoadingSpinner/>;
   return (
     <div className="m-4 mt-8 flex flex-wrap justify-center gap-x-8 gap-y-8 lg:mx-auto xl:w-[1200px]">
       {productsList.map((product) => (

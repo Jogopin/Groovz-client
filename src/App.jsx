@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { Footer } from "./components";
-
 import HomePage from "./pages/HomePage/HomePage";
 import Store from "./pages/Store";
 import Login from "./pages/Login";
@@ -21,7 +20,7 @@ import Navbar from "./components/Navbar/Navbar";
 import ContactPage from "./pages/ContactPage";
 
 function App() {
-  const { productsList, addProductAndUpdateState } = useProductLists();
+  const { productsList, addProductAndUpdateState,isLoading } = useProductLists();
 
   const headphonesList = productsList.filter(
     (item) => item.category === "headphones"
@@ -36,7 +35,7 @@ function App() {
      
         <Routes>
           {/* HOMEPAGE */}
-          <Route path="/" element={<HomePage productsList={productsList} />} />
+          <Route path="/" element={<HomePage productsList={productsList} isLoading={isLoading}/>} />
           <Route path="/about-us" element={<AboutUs />} />
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
@@ -45,15 +44,15 @@ function App() {
           <Route path="/store" element={<Store />}>
             <Route
               index
-              element={<ProductsList productsList={productsList} />}
+              element={<ProductsList productsList={productsList} isLoading={isLoading} />}
             />
             <Route
               path="headphones"
-              element={<ProductsList productsList={headphonesList} />}
+              element={<ProductsList productsList={headphonesList} isLoading={isLoading} />}
             />
             <Route
               path="speakers"
-              element={<ProductsList productsList={speakersList} />}
+              element={<ProductsList productsList={speakersList} isLoading={isLoading} />}
             />
             <Route path=":productId" element={<ProductPage />} />
           </Route>

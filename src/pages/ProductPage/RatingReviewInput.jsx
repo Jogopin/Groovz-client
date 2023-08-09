@@ -10,6 +10,7 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
   const [hover, setHover] = useState(null);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
  
 
   const starsArray = generateStarsArray(rating);
@@ -32,12 +33,15 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
       reviewText
     }
     try{
+      setIsLoading(true)
       await postReview(reviewData)
       updateReviewsList()
       toast.success("Thank you for your review! Your feedback helps us and others.")
     }catch(error){
       // Errors comming from the api  are handled in the callApi function from api.js
 
+    }finally{
+      setIsLoading(false)
     }
     
   }
@@ -79,7 +83,7 @@ const RatingReviewInput = ({productId,user,isLoggedIn,updateReviewsList}) => {
         ))}
         {/* <span className="ml-2 font-semibold">{rating ? rating : null}</span> */}
       </div>
-        <ButtonText text={"Submit"} />
+        <ButtonText text={"Submit"} disabled={isLoading}/>
     
     </form>
   );

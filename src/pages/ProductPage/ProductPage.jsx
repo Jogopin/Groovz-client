@@ -6,10 +6,11 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { useProductData } from "../../hooks/useProductData";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function ProductPage(){
   const { productId } = useParams();
-  const { productData, reviewsList, updateReviewsList, errorMessage } = useProductData(productId);
+  const { productData, reviewsList, updateReviewsList, errorMessage,isLoading } = useProductData(productId);
   const { isLoggedIn, authUser } = useAuth();
   const [numOfReviewsDisplayed, setNumOfReviewsDisplayed] = useState(3);
 
@@ -26,6 +27,9 @@ export default function ProductPage(){
   if (errorMessage) {
     toast.error(errorMessage);
     return <div>Error loading product data</div>;
+  }
+  if(isLoading){
+    return <LoadingSpinner/>
   }
 
   return (
