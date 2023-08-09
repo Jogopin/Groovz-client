@@ -4,6 +4,7 @@ import { plusIcon } from "../assets/icons";
 import { uploadImage } from "../services/api";
 import { toast } from "react-hot-toast";
 import ButtonText from "../components/ButtonText";
+import SpinIcon from "../assets/svgIcons/SpinIcon";
 
 export default function AddProduct({ addProductAndUpdateState }) {
   const [formState, setFormState] = useState({
@@ -17,6 +18,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
   });
   const [imageUrlList, setImageUrlsList] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleOnChange = (e) => {
     setFormState((prevState) => ({
@@ -49,6 +51,7 @@ export default function AddProduct({ addProductAndUpdateState }) {
 
     uploadData.append("imageUrl", file);
     try {
+      setIsLoading(true)
       const response = await uploadImage(uploadData);
       setImageUrlsList((prevState) => [
         ...prevState,
@@ -58,6 +61,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
       e.target.value = null
     } catch (error) {
       // Errors comming from the api  are handled in the callApi function from api.js
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -71,12 +76,15 @@ export default function AddProduct({ addProductAndUpdateState }) {
     
 
     try {
+      setIsLoading(true)
       await addProductAndUpdateState(newProduct);      
       toast.success(`${formState.name} created correctly`)
       resetForm()
       setErrorMessage(null)
     } catch (error) {      
       setErrorMessage(error.response.data.message)
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -205,8 +213,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
           <div className="mt-1 flex flex-wrap justify-center gap-2 rounded-xl border-2 border-zinc-300 bg-zinc-100  p-2 shadow-inner sm:w-full">
             <div className="w-32 ">
               <label className="flex h-32  items-center justify-center rounded-2xl  bg-zinc-300 duration-300 ease-in-out hover:scale-105 hover:drop-shadow-lg">
-                <input type="file" onChange={handleFileUpload} hidden />
-                <img className="h-max" src={plusIcon} />
+                <input type="file" onChange={handleFileUpload} hidden disabled={isLoading} />
+                {isLoading? <SpinIcon/> : <img className="h-max" src={plusIcon} />}
               </label>
             </div>
             {imageUrlList.map((item, i) => (
@@ -222,8 +230,8 @@ export default function AddProduct({ addProductAndUpdateState }) {
         </div>
 
         <div className="m-auto flex gap-4">
-          <ButtonText  text={"Add Product"}/>
-          <ButtonText handleClick={handleCancel} text={"Cancel"} variant={"secondary"}/>
+          <ButtonText  text={"Add Product"} disabled={isLoading}/>
+          <ButtonText handleClick={handleCancel} text={"Cancel"} variant={"secondary"} disabled={isLoading}/>
         </div>
       </form>
     </div>
