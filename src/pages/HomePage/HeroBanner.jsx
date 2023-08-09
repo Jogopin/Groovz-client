@@ -18,7 +18,7 @@ const HeroBanner = ({ heroProduct }) => {
       </div>
 
       {/* TEXT */}
-      <div className="pb-10 pl-10 ">
+      <div className="pb-10 pl-10 flex flex-col ">
         <span className="text-xl font-bold uppercase tracking-tight text-red-700">
           lorem ipsum
         </span>
@@ -26,13 +26,15 @@ const HeroBanner = ({ heroProduct }) => {
           {heroProduct.name}
         </h1>
         <h2 className="text-2xl font-bold tracking-wide">Luctus sit amet</h2>
-       
+        <div className="self-start mt-3">
           <ButtonText
             text={"Shop"}
             handleClick={() => {
               navigate(`/store/${heroProduct._id}`);
             }}
           />
+
+        </div>
         
       </div>
     </section>
