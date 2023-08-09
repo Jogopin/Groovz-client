@@ -4,6 +4,7 @@ import { doneIcon, editIcon, xIcon } from "../../assets/icons";
 import EditableUserInfo from "../../components/EditableUserInfo";
 import ButtonIcon from "../../components/ButtonIcon";
 import { toast } from "react-hot-toast";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 export default function ProfileDetails({ userId }) {
   const [profileUserDetails, setProfileUserDetails] = useState({
@@ -11,7 +12,7 @@ export default function ProfileDetails({ userId }) {
     lastName: "",
     address: "",
   });
-  const { requestedUserDetails,saveUserDetails } = useUserById(userId);
+  const { requestedUserDetails,saveUserDetails,isLoading } = useUserById(userId);
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -47,6 +48,10 @@ export default function ProfileDetails({ userId }) {
   const handleCancelClick = () => {
     setIsEditing(false);
   };
+
+  if (isLoading){
+    return <LoadingSpinner />
+  }
   return (
     <>
       {/* username & email */}
