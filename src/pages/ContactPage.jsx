@@ -51,7 +51,7 @@ export default function ContactPage() {
   };
   return (
     <>
-      <section className="mb-4  gap-5 rounded-lg bg-white p-6 text-zinc-800 shadow-md">
+      <section className="m-4 mx-auto md:w-3/4 gap-5 rounded-lg bg-white p-6 text-zinc-800 shadow-md">
         <h2 className="m-4 text-lg font-semibold text-center">Contact us</h2>
         <form
           onSubmit={handleSubmit}
