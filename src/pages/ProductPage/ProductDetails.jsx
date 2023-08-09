@@ -11,8 +11,7 @@ const ProductDetails = ({ productData, rating }) => {
   const inStock=productData?.stock>0
 
   if (productData === null) {
-    console.log("loading productData");
-    return "loading";
+    return;
   }
   const handleAddToCart =()=>{
     if(quantity<=0) return
