@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { cartIcon, xIcon } from "../assets/icons";
 import { useCart } from "../hooks/useCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ButtonText from "./ButtonText";
 
 const Cart = () => {
   const { cartProducts, totalPrice, removeProductFromCart, clearCart } =
     useCart();
   const [isCartDisplayed, setIsCartDisplayed] = useState(false);
-
+  const navigate = useNavigate()
+  
+  const handleGoToCheckout = ()=>{
+    navigate(`/checkout`)
+    toggleCart()
+  }
   const toggleCart = (e) => {
     setIsCartDisplayed((prevState) => !prevState);
   };
@@ -19,10 +25,11 @@ const Cart = () => {
           src={cartIcon}
           className="object-contain invert hover:invert-[70%]"
         />
-        {cartProducts.length === 0 ? null :
-        <span className="absolute -right-2 -top-2 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">{cartProducts.reduce((acc,curr)=>(acc+curr.quantity),0)}</span>
-        
-        }
+        {cartProducts.length === 0 ? null : (
+          <span className="top right absolute -right-2 -top-2 m-0 h-4 w-4 rounded-full bg-red-600 p-0 text-center font-mono text-sm  leading-tight text-white">
+            {cartProducts.reduce((acc, curr) => acc + curr.quantity, 0)}
+          </span>
+        )}
       </button>
       {isCartDisplayed && (
         <>
@@ -87,16 +94,16 @@ const Cart = () => {
             </h2>
 
             <div className="my-12 flex w-80 justify-evenly gap-4 self-center">
-              <Link
-                to={"/checkout"}
-                onClick={toggleCart}
-                className="btn-primary"
-              >
-                Go to Checkout
-              </Link>
-              <button onClick={clearCart} className="btn-secondary">
-                Clear Cart
-              </button>
+              <ButtonText
+                text={"Go to Checkout"}
+                handleClick={handleGoToCheckout}
+              />
+              <ButtonText
+                text={"Clear Cart"}
+                variant={"secondary"}
+                handleClick={clearCart}
+              />
+              
             </div>
           </aside>
         </>
