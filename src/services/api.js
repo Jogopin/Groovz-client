@@ -25,8 +25,10 @@ const handleError = (error) => {
   const errorMessage =
     error.response?.data?.message ||
     "Ups! Something has happened, please try again later.";
-  // console.error("toast", errorMessage);
-  toast.error(errorMessage);
+    
+    if(errorMessage!=="Unauthorized token"){
+      toast.error(errorMessage)      
+    };
   throw error;
 };
 
