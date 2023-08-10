@@ -14,7 +14,7 @@ const ProductCard = ({product}) => {
         // key={product._id}
         className="relative flex  items-center justify-center rounded-lg bg-zinc-300 duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl overflow-hidden"
       >
-        <img className="h-full" src={product.images[0]} alt="product-image"/>     
+        <img className="max-h-80" src={product.images[0]} alt="product-image"/>     
         {!inStock && <span className="absolute w-full flex items-center justify-center font-extrabold text-white text-xl bg-zinc-600/40 h-full">Out of Stock</span>}
       </Link>
       <div className="flex w-full items-center justify-between text-zinc-800">

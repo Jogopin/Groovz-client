@@ -62,7 +62,7 @@ const Navbar = () => {
               </li>
               <li className="hidden lg:inline-block">
                 <button
-                  className=" px-1 pb-1 hover:text-gray-300"
+                  className="px-1 pb-1 hover:text-gray-300 mt-1"
                   onClick={logOutUser}
                 >
                   Log Out
