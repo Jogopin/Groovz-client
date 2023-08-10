@@ -98,7 +98,7 @@ export function CartProviderWrapper({ children }) {
   const totalPrice = cartProducts.reduce(
     (acc, curr) => curr.price * curr.quantity + acc,
     0
-  );
+  ).toFixed(2);
 
   return (
     <CartContext.Provider
