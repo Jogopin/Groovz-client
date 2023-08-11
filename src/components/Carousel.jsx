@@ -29,14 +29,14 @@ const Carousel = ({ imagesList=[] }) => {
         {/* left arrow */}
         <div
           onClick={prevSlide}
-          className="absolute  left-5 top-[50%] -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-zinc-400 p-2 lg:hidden lg:group-hover:block"
+          className="absolute preserve-hover left-5 top-[50%]  translate-y-[-50%] cursor-pointer rounded-full bg-zinc-800/20 p-2 lg:hidden lg:group-hover:block"
         >
           <img className="h-8 w-8" src={lessThanIcon} />
         </div>
         {/* right arrow */}
         <div
           onClick={nextSlide}
-          className="absolute right-5 top-[50%] -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-2 lg:hidden  lg:group-hover:block"
+          className="absolute preserve-hover  right-5 top-[50%] translate-y-[-50%] cursor-pointer rounded-full bg-zinc-800/20 p-2 lg:hidden  lg:group-hover:block"
         >
           <img className="h-8 w-8" src={moreThanIcon} />
         </div>
