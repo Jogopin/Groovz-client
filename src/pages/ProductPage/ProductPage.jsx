@@ -4,9 +4,9 @@ import RatingReviewInput from "./RatingReviewInput";
 import ReviewsDisplay from "./ReviewsDisplay";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { toast } from "react-hot-toast";
 import { useProductData } from "../../hooks/useProductData";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import NotFoundPage from "../NotFoundPage";
 
 export default function ProductPage(){
   const { productId } = useParams();
@@ -25,8 +25,7 @@ export default function ProductPage(){
   );
 
   if (errorMessage) {
-    toast.error(errorMessage);
-    return <div>Error loading product data</div>;
+    return <NotFoundPage errorMessage={errorMessage}/>;
   }
   if(isLoading){
     return <LoadingSpinner/>
