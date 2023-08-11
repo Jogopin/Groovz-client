@@ -26,6 +26,7 @@ const Carousel = ({ imagesList=[] }) => {
         style={{ backgroundImage: `url(${imagesList[currentIndex]})` }}
         className="h-96 aspect-square relative w-full rounded-lg bg-zinc-300 bg-contain  bg-center bg-no-repeat duration-500 lg:aspect-square"
       >
+      {imagesList.length > 1 ? <>
         {/* left arrow */}
         <div
           onClick={prevSlide}
@@ -40,6 +41,8 @@ const Carousel = ({ imagesList=[] }) => {
         >
           <img className="h-8 w-8" src={moreThanIcon} />
         </div>
+
+      </>:<></>}
       </div>
       {/* small imgs */}
       <div className="mx-4 hidden py-2 md:flex   md:justify-center">
