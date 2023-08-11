@@ -14,10 +14,10 @@ export default function OrderDisplay({order}){
     return<>
        <section
             key={order._id}
-            className="md:3/5 mx-auto mb-4 rounded-lg bg-white p-6 text-zinc-800 shadow-md"
+            className="mx-auto mb-4 rounded-lg bg-white p-6 text-zinc-800 shadow-md w-screen sm:w-full"
           >
             {/* Order Overview */}
-            <section className="flex justify-between">
+            <section className="flex justify-between w-full">
               <div className=" flex flex-col gap-8 text-left">
                 <h2 className="font-medium">
                   {dayjs(order.createdAt).format("DD/MM/YY")}
@@ -44,8 +44,8 @@ export default function OrderDisplay({order}){
             </section>
             {/* List Of Products */}
             {isShowingMore && 
-              <section className="mt-4 rounded-md border-2 p-4">
-              <table className="w-full ">
+              <section className="mt-4 rounded-md border-2 p-4 mx-auto overflow-auto max-w-full sm:max-w-none">
+              <table className="w-full">
                 <thead>
                   <tr className="">
                     <th></th>
