@@ -27,7 +27,7 @@ export const useProductData = (productId) => {
       await updateReviewsList();
     } catch (error) {
       setErrorMessage(error.response.data.message);
-      console.log(`Error getting the product "${productId}", `, error);
+      
     } finally {
       setIsLoading(false);
     }
