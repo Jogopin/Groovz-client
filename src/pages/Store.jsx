@@ -11,7 +11,7 @@ const Store = () => {
       }
       
   return (
-    <div>
+    <div className="flex flex-col h-full  flex-grow">
       <nav className="h-16 w-full bg-zinc-700">
         <ul className="flex  h-full  items-center justify-evenly font-bold text-zinc-300">
           <li>
@@ -23,8 +23,7 @@ const Store = () => {
         </ul>
       </nav>
       {/* {location.pathname === "/store" && <div className="flex justify-center items-center"> Still under construction </div>} */}
-      <Outlet/>
-      
+      <Outlet/>    
       
     </div>
   );};

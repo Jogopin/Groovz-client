@@ -29,7 +29,7 @@ function App() {
     (item) => item.category === "speakers"
   );
   return (
-    <div className="Apsp flex min-h-screen flex-col">
+    <div className="App flex min-h-screen flex-col">
       <Navbar />
       <div className="flex-grow flex flex-col">
      
