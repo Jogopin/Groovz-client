@@ -53,9 +53,12 @@ export default function ContactPage() {
     <>
       <section className="m-4 mx-auto md:w-3/4 gap-5 rounded-lg bg-white p-6 text-zinc-800 shadow-md">
         <h2 className="m-4 text-lg font-semibold text-center">Contact us</h2>
+        <p className="mb-6 text-zinc-800 text-center">
+          We value your feedback and questions. If you have any inquiries or just want to say hello, drop us a message! We aim to respond within 24 hours.
+        </p>
         <form
           onSubmit={handleSubmit}
-          className="mx-auto my-10 flex w-4/6 flex-col items-center gap-4 sm:w-2/5 lg:w-2/5 "
+          className="mx-auto my-10 flex flex-col w-full sm:w-4/6 lg:w-1/2 items-center gap-4"
         >
           <InputLabel
             id={"email"}
