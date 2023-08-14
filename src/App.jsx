@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import ProductsList from "./pages/ProductsList";
-import AboutUs from "./pages/AboutUs";
+import AboutUsPage from "./pages/AboutUsPage";
 import AddProduct from "./pages/AddProduct";
 import Checkout from "./pages/Checkout";
 import useProductLists from "./hooks/useProductList";
@@ -36,7 +36,7 @@ function App() {
         <Routes>
           {/* HOMEPAGE */}
           <Route path="/" element={<HomePage productsList={productsList} isLoading={isLoading}/>} />
-          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
           {/* Authentication */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
