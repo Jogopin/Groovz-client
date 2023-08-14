@@ -18,6 +18,7 @@ import IsAdmin from "./components/IsAdmin";
 import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar/Navbar";
 import ContactPage from "./pages/ContactPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 function App() {
   const { productsList, addProductAndUpdateState,isLoading } = useProductLists();
@@ -59,6 +60,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
           <Route path="/contact" element ={<ContactPage/>} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage/>} />
           {/* Profile */}
 
           <Route
