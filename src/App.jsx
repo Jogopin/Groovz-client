@@ -18,6 +18,7 @@ import IsAdmin from "./components/IsAdmin";
 import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar/Navbar";
 import ContactPage from "./pages/ContactPage";
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/success" element={<Success />} />
           <Route path="/contact" element ={<ContactPage/>} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage/>} />
           {/* Profile */}
 
