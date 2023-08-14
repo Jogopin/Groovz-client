@@ -52,7 +52,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="m-4 mx-auto md:w-3/4 gap-5 rounded-lg bg-white p-6 text-zinc-800 shadow-md">
-        <h2 className="m-4 text-lg font-semibold text-center">Contact us</h2>
+      <h1 className="text-3xl font-bold mb-4 text-center">Contact us</h1>
         <p className="mb-6 text-zinc-800 text-center">
           We value your feedback and questions. If you have any inquiries or just want to say hello, drop us a message! We aim to respond within 24 hours.
         </p>
