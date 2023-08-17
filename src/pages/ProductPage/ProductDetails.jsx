@@ -40,7 +40,7 @@ const ProductDetails = ({ productData, rating }) => {
         <div className="flex">
           <RatingDisplay rating={rating} />
           <span className="ml-2 font-semibold">
-            {rating ? rating : "0 Reviews"}
+            {rating ? rating.toFixed(1) : "0 Reviews"}
           </span>
         </div>
 
