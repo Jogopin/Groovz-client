@@ -23,7 +23,7 @@ export default function TermsAndConditionsPage() {
             <h1 className="text-3xl font-bold mb-4 text-center">Terms & Conditions</h1>
 
             <p className="text-zinc-700 mb-6 mx-auto w-full sm:w-4/6 lg:w-1/2">
-            Welcome to [Your Store Name]. The following terms and conditions guide the use of and commerce in our online store. By using our store, you accept these terms and conditions in full; accordingly, if you disagree with these terms and conditions or any part of these terms and conditions, you must not use our online store.
+            Welcome to Groovz. The following terms and conditions guide the use of and commerce in our online store. By using our store, you accept these terms and conditions in full; accordingly, if you disagree with these terms and conditions or any part of these terms and conditions, you must not use our online store.
             </p>
 
             {sections.map((section, index) => (
