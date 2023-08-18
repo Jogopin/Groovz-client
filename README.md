@@ -18,7 +18,9 @@ Welcome to the Groovz client repository! This project is an e-commerce applicati
 - **Responsive Design**: Groovz is designed to be fully responsive across devices.
 - **Notifications**: Efficient error handling with toast notifications.
 - **Code Architecture**: The project showcases custom hooks, reusable components, centralized API calls file, and context usage for JWT authorization and the cart component.
-
+<p align="center">
+  <img src="https://res.cloudinary.com/dnvhmjaoc/image/upload/v1692358960/307shots_so_yutmwc.png" alt="Logo">
+</p>
 
 
 ## Tech Stack
